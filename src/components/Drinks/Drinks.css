@@ -1,0 +1,7 @@
+.drink {
+    overflow: auto;
+    background: hsl(220, 13%, 23%);
+    border-radius: 10px;
+    width: 30em;
+    min-height: 30em;
+}
