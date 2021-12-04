@@ -1,7 +1,6 @@
 .App {
   text-align: center;
   min-height: 100vh;
-  background-color: hsl(220, 13%, 18%);
   color: white;
 }
 
@@ -13,12 +12,17 @@
   font-size: calc(10px + 2vmin);
 }
 
-.App-link {
-  color: #61dafb;
+#list>div {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 0.5rem;
 }
 
-section>div {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1em;
+#list>div>* {
+  flex-basis: 30rem;
+}
+
+#search>* {
+  height: 1rem;
 }

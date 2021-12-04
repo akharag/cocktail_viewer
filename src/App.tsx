@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
+import styles from "./styles.module.css";
+import "./styles/variables.css";
 import Drink from './components/Drinks/Drink';
 
 
@@ -24,18 +26,39 @@ function App() {
   return (
     <div className="App">
       <header className="App-header">
-        <h1>Bartender's Viewer</h1>
-        <p>Looking to discover a new drink? Come see what options you have!</p>
-      </header>
-      <section>
+        <nav>
+          <ul>
+            <li>Item 1</li>
+            <li>Item 2</li>
+            <li>Item 3</li>
+          </ul>
+        </nav>
         <div>
-          {
-            loading ? <p>Loading...</p> :
-              (drinkList?.length > 0 ? drinkList.map((drink, i) => <Drink key={'drink' + i} name={drink.strDrink} />) : <p>No Drink Found :(</p>)
-          }
+          <h1>Bartender's Viewer</h1>
+          <p>Looking to discover a new drink? See what options you have!</p>
         </div>
-      </section>
-    </div>
+      </header>
+
+      <main>
+        <div>
+          <section id="search">
+            <select>
+              <option value="drink">Drink</option>
+              <option value="ingredient">Ingredient</option>
+            </select>
+            <label><input type="search" /></label>
+          </section>
+        </div>
+        <section id="list">
+          <div>
+            {
+              loading ? <p>Loading...</p> :
+                (drinkList?.length > 0 ? drinkList.map((drink, i) => <Drink key={'drink' + i} name={drink.strDrink} />) : <p>No Drink Found :(</p>)
+            }
+          </div>
+        </section>
+      </main>
+    </div >
   );
 }
 
