@@ -12,6 +12,27 @@
   font-size: calc(10px + 2vmin);
 }
 
+section+section {
+  margin-block: 1rem;
+}
+
+.filters {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.filters>img {
+  display: block;
+  width: 2em;
+  aspect-ratio: 1/1;
+  margin: max(10px, 3vw);
+}
+
+.filters>img:hover {
+  transform: scale(1.5);
+}
+
 #list>div {
   display: flex;
   flex-wrap: wrap;
@@ -21,8 +42,4 @@
 
 #list>div>* {
   flex-basis: 30rem;
-}
-
-#search>* {
-  height: 1rem;
 }
