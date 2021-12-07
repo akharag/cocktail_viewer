@@ -1,21 +1,19 @@
 import './Drinks.css';
 
 type DrinkProps = {
-    id?: string,
-    name: string,
-    ingredients?: Array<string>
+    drink: {
+        idDrink: number,
+        strDrink: string,
+        strDrinkThumb: string
+    }
 }
 
-
-
-function Drink({ name, ingredients }: DrinkProps) {
+function Drink({ drink: { idDrink, strDrink, strDrinkThumb } }: DrinkProps) {
     return (
-        <div className="drink">
-            <h3>{name}</h3>
-            {/* <ul>
-                {ingredients?.map((ingredient) => (<li>{ingredient}</li>))}
-            </ul> */}
-        </div>
+        <a className="drink" href={strDrink}>
+            <h3>{strDrink}</h3>
+            <img src={strDrinkThumb} alt={strDrink + 'thumbnail'} />
+        </a>
     );
 }
 

@@ -1,7 +1,18 @@
 .drink {
     overflow: auto;
+    color: inherit;
+    text-decoration: none;
     background: hsl(220, 13%, 23%);
     border-radius: 10px;
-    width: 30em;
-    min-height: 30em;
+    aspect-ratio: 1/1;
+}
+
+.drink>img {
+    margin: 0 auto;
+    width: calc(100% - 5rem);
+    border-radius: 10px;
+}
+
+.drink:is(:hover, :active) {
+    transform: scale(1.05);
 }

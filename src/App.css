@@ -16,30 +16,54 @@ section+section {
   margin-block: 1rem;
 }
 
-.filters {
+section#search_filters>div+div {
+  margin-top: 1rem;
+}
+
+#filters img {
+  height: 5rem;
+  cursor: pointer;
+}
+
+#filters span.selected>img {
+  filter: brightness(125%)
+}
+
+#filters span:not(.selected)>img {
+  filter: brightness(75%) saturate(50%);
+}
+
+#filters span>img:is(:hover, :active) {
+  transform: scale(1.25);
+}
+
+#drink {
+  margin: 0 auto;
+  padding: 0 2em;
+}
+
+#drink>span {
+  flex: 1;
   display: flex;
+  flex-wrap: wrap;
+}
+
+#drink>span>span {
+  flex: 1 0 0;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-.filters>img {
-  display: block;
-  width: 2em;
-  aspect-ratio: 1/1;
-  margin: max(10px, 3vw);
-}
-
-.filters>img:hover {
-  transform: scale(1.5);
-}
-
-#list>div {
+section#list>div {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 0.5rem;
+  justify-content: space-evenly;
+  padding: 0 1rem;
+  gap: 2rem;
 }
 
-#list>div>* {
-  flex-basis: 30rem;
+#list>div>.drink {
+  flex: 1 0 22rem;
 }
