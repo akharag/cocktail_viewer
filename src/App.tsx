@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import "./styles/variables.css";
-import Drink from './components/Drinks/Drink';
 
 import vodka from "./assets/icons/alcohol/vodka.svg";
 import light_rum from './assets/icons/alcohol/light_rum.svg';
@@ -13,6 +12,7 @@ import wine from "./assets/icons/alcohol/wine.svg";
 import white_wine from './assets/icons/alcohol/white_wine.svg';
 import beer from './assets/icons/alcohol/beer.svg';
 import Filter from './components/Filter/Filter';
+import DrinksList from './components/DrinksList/DrinksList';
 
 // const filterList = ['vodka', 'light_rum', 'dark_rum', 'gin', 'whiskey', 'tequila', 'wine', 'white_white', 'beer'];
 // const filterPath = './assets/icons/alcohol/';
@@ -20,7 +20,9 @@ import Filter from './components/Filter/Filter';
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [drinkList, setDrinkList] = useState<Array<any>>([]);
+  const [drinksList, setDrinkList] = useState<Array<any>>([]);
+  const [filteredDrinkList, setfilteredDrinkList] = useState<Array<any> | null>(null);
+  // const [prevoiusFilteredDrinkList, setPreviousFilteredDrinkList] = useState<Array<any>>([]);
   const [filters, setFilters] = useState<{ drink: Array<string> }>({ drink: [] });
   // const [searchHistory, setSearchHistory] = useState<Array<string>>([]);
   const [keepFilterOnSearch] = useState(true);
@@ -44,8 +46,29 @@ function App() {
   const FilterList = (category: string, filter_str: string) => {
     const arr = filters['drink'];
     if (category.length < 1 || filter_str.length < 1) { return; }
-    if (arr.includes(filter_str)) { arr.splice(arr.indexOf(filter_str), 1) }
-    else { arr.push(filter_str); }
+    if (arr.includes(filter_str)) {
+      arr.splice(arr.indexOf(filter_str), 1)
+      if (arr.length < 1) {
+        setfilteredDrinkList(null);
+      }
+    }
+    else {
+      arr.push(filter_str);
+      // setPreviousFilteredDrinkList(filteredDrinkList.length > 0 ? filteredDrinkList : drinksList);
+      const new_drink_list = drinksList.filter((drink) => {
+        console.log(drink);
+        for (let i = 1; i < 16; i++) {
+          if (i === 1) console.log(`strIngredient${i}`, drink[`strIngredient${i}`])
+          if (drink[`strIngredient${i}`] && drink[`strIngredient${i}`].toLowerCase().includes(filter_str.toLowerCase())) {
+            console.log(`Ingredient was found at strIngredient${i}`);
+            return true;
+          }
+        }
+        return false;
+      })
+      console.log(new_drink_list.length);
+      setfilteredDrinkList(new_drink_list);
+    }
     setFilters({ drink: arr });
 
   }
@@ -59,7 +82,7 @@ function App() {
 
   useEffect(() => {
     if (!keepFilterOnSearch) setDrinkList([]);
-  }, [drinkList, keepFilterOnSearch])
+  }, [drinksList, keepFilterOnSearch])
 
   //On Inital Render
   useEffect(() => {
@@ -83,12 +106,11 @@ function App() {
     }
 
     const fetchDrinks = async () => {
-      const response = await fetch(url + 'filter.php?a=Alcoholic');
+      const response = await fetch(url + 'search.php?s=a');
       const data = await response.json();
       if (data) {
         let drinks = shuffle(data.drinks);
         setDrinkList(drinks);
-        // setDrinkList(shuffle(data.drinks));
         setLoading(false);
       }
     }
@@ -123,13 +145,13 @@ function App() {
                   name={'vodka'}
                   src={vodka}
                   SelectFilter={() => FilterList("drink", "vodka")} />
-                <Filter name={'light rum'} src={light_rum} SelectFilter={() => FilterList("drink", "light_rum")} />
-                <Filter name={'dark rum'} src={dark_rum} SelectFilter={() => FilterList("drink", "dark_rum")} />
+                <Filter name={'rum'} src={light_rum} SelectFilter={() => FilterList("drink", "rum")} />
+                <Filter name={'dark rum'} src={dark_rum} SelectFilter={() => FilterList("drink", "dark rum")} />
                 <Filter name={'gin'} src={gin} SelectFilter={() => FilterList("drink", "gin")} />
                 <Filter name={'whiskey'} src={whiskey} SelectFilter={() => FilterList("drink", "whiskey")} />
                 <Filter name={'tequila'} src={tequila} SelectFilter={() => FilterList("drink", "tequila")} />
-                <Filter name={'wine'} src={wine} SelectFilter={() => FilterList("drink", "wine")} />
-                <Filter name={'white wine'} src={white_wine} SelectFilter={() => FilterList("drink", "white_wine")} />
+                <Filter name={'wine'} src={wine} SelectFilter={() => FilterList("drink", "red wine")} />
+                <Filter name={'white wine'} src={white_wine} SelectFilter={() => FilterList("drink", "white wine")} />
                 <Filter name={'beer'} src={beer} SelectFilter={() => FilterList("drink", "beer")} />
               </span>
             </div>
@@ -142,7 +164,7 @@ function App() {
           <div>
             {
               loading ? <p>Loading...</p> :
-                (drinkList?.length > 0 ? drinkList.map((drink, i) => <Drink key={'drink' + i} drink={drink} />) : <p>No Drink Found :(</p>)
+                <DrinksList drinks={filteredDrinkList ?? drinksList} />
             }
           </div>
         </section>
