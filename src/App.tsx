@@ -18,9 +18,8 @@ import DrinksList from './components/DrinksList/DrinksList';
 function App() {
   const [loading, setLoading] = useState(true);
   const [drinksList, setDrinkList] = useState<Array<any>>([]);
-  const [filteredDrinkList, setfilteredDrinkList] = useState<Array<any> | null>(null);
+  const [filteredDrinkList, setFilteredDrinkList] = useState<Array<any> | null>(null);
   const [removedFilteredItems, setRemovedFilteredItems] = useState<{ drinks: { [key: string]: Array<any> } }>({ drinks: {} });
-  // const [prevoiusFilteredDrinkList, setPreviousFilteredDrinkList] = useState<Array<any>>([]);
   const [filters, setFilters] = useState<{ drink: Array<string> }>({ drink: [] });
   // const [searchHistory, setSearchHistory] = useState<Array<string>>([]);
   const [keepFilterOnSearch] = useState(true);
@@ -44,15 +43,21 @@ function App() {
   const FilterList = (category: string, filter_str: string) => {
     const arr = filters['drink'];
     if (category.length < 1 || filter_str.length < 1) { return; }
+    //toggle filter off
     if (arr.includes(filter_str)) {
       arr.splice(arr.indexOf(filter_str), 1)
       if (arr.length < 1) {
-        setfilteredDrinkList(null);
+        setFilteredDrinkList(null);
       } else {
-
+        //concat removed items back to filtered list
+        const removed = removedFilteredItems.drinks[filter_str];
+        setFilteredDrinkList(filteredDrinkList!.concat(removed));
+        setRemovedFilteredItems({ drinks: { [filter_str]: [] } });
       }
     }
+    //toggle filter on
     else {
+      let removed_items: any[] = [];
       arr.push(filter_str);
       const new_drink_list = drinksList.filter((drink) => {
         console.log(drink);
@@ -63,21 +68,17 @@ function App() {
             return true;
           }
         }
+        removed_items.push(drink);
         return false;
       })
+      console.log('removed items:', removed_items);
       console.log(new_drink_list.length);
-      setfilteredDrinkList(new_drink_list);
+      setFilteredDrinkList(new_drink_list);
+      setRemovedFilteredItems({ drinks: { [filter_str]: removed_items } });
     }
     setFilters({ drink: arr });
 
   }
-
-  // useEffect(() => {
-  //   let filterd_list = [];
-  //   filterList.forEach((filter) => {
-  //     let filterd_list = drinkList.filter();
-  //   });
-  // }, [fitlerList])
 
   useEffect(() => {
     if (!keepFilterOnSearch) setDrinkList([]);
@@ -105,7 +106,9 @@ function App() {
     }
 
     const fetchDrinks = async () => {
-      const response = await fetch(url + 'search.php?s=a');
+      const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
+      const randomLetter = characters.charAt(Math.floor(Math.random() * characters.length))
+      const response = await fetch(url + 'search.php?s=' + randomLetter);
       const data = await response.json();
       if (data) {
         let drinks = shuffle(data.drinks);
@@ -113,6 +116,7 @@ function App() {
         setLoading(false);
       }
     }
+
     fetchDrinks();
 
   }, []);
