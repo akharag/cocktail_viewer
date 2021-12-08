@@ -25,6 +25,13 @@ img, picture {
   max-width: 100%;
 }
 
+input,
+button,
+textarea,
+select {
+  font: inherit;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }

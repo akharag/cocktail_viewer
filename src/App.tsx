@@ -14,14 +14,12 @@ import beer from './assets/icons/alcohol/beer.svg';
 import Filter from './components/Filter/Filter';
 import DrinksList from './components/DrinksList/DrinksList';
 
-// const filterList = ['vodka', 'light_rum', 'dark_rum', 'gin', 'whiskey', 'tequila', 'wine', 'white_white', 'beer'];
-// const filterPath = './assets/icons/alcohol/';
-
 
 function App() {
   const [loading, setLoading] = useState(true);
   const [drinksList, setDrinkList] = useState<Array<any>>([]);
   const [filteredDrinkList, setfilteredDrinkList] = useState<Array<any> | null>(null);
+  const [removedFilteredItems, setRemovedFilteredItems] = useState<{ drinks: { [key: string]: Array<any> } }>({ drinks: {} });
   // const [prevoiusFilteredDrinkList, setPreviousFilteredDrinkList] = useState<Array<any>>([]);
   const [filters, setFilters] = useState<{ drink: Array<string> }>({ drink: [] });
   // const [searchHistory, setSearchHistory] = useState<Array<string>>([]);
@@ -50,11 +48,12 @@ function App() {
       arr.splice(arr.indexOf(filter_str), 1)
       if (arr.length < 1) {
         setfilteredDrinkList(null);
+      } else {
+
       }
     }
     else {
       arr.push(filter_str);
-      // setPreviousFilteredDrinkList(filteredDrinkList.length > 0 ? filteredDrinkList : drinksList);
       const new_drink_list = drinksList.filter((drink) => {
         console.log(drink);
         for (let i = 1; i < 16; i++) {
