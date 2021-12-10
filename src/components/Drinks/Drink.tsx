@@ -10,7 +10,7 @@ type DrinkProps = {
 
 function Drink({ drink: { idDrink, strDrink, strDrinkThumb } }: DrinkProps) {
     return (
-        <a className="drink" href={strDrink}>
+        <a className="drink" href="test">
             <h3>{strDrink}</h3>
             <img src={strDrinkThumb} alt={strDrink + 'thumbnail'} />
         </a>

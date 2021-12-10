@@ -20,40 +20,15 @@ section#search_filters>div+div {
   margin-top: 1rem;
 }
 
-#filters img {
-  height: 5rem;
-  cursor: pointer;
-}
-
-#filters span.selected>img {
-  filter: brightness(125%)
-}
-
-#filters span:not(.selected)>img {
-  filter: brightness(75%) saturate(50%);
-}
-
-#filters span>img:is(:hover, :active) {
-  transform: scale(1.25);
-}
-
-#drink {
+#filters>div {
   margin: 0 auto;
   padding: 0 2em;
 }
 
-#drink>span {
+#filters>div>span {
   flex: 1;
   display: flex;
   flex-wrap: wrap;
-}
-
-#drink>span>span {
-  flex: 1 0 0;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 section#list>div {

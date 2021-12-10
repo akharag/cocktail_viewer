@@ -1,0 +1,38 @@
+.filter {
+    flex: 1 0 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.filter button {
+    background: none;
+    border: none;
+}
+
+.filter img {
+    height: 5rem;
+    cursor: pointer;
+}
+
+.filter button {
+    transition: 200ms ease-in;
+}
+
+.filter.selected img {
+    filter: brightness(125%);
+}
+
+.filter:not(.selected) img {
+    filter: brightness(75%) saturate(50%);
+}
+
+.filter button:is(:hover, :focus-visible) {
+    transform: scale(1.35);
+    outline: white;
+}
+
+.filter button:is(:hover, :focus-visible) img {
+    filter: drop-shadow(0 0 1rem hsl(0 0% 100% / 50%));
+}

@@ -5,14 +5,18 @@
     background: hsl(220, 13%, 23%);
     border-radius: 10px;
     aspect-ratio: 1/1;
+    transition: transform ease-in 100ms;
+}
+
+
+.drink:is(:hover, :focus) {
+    transform: scale(1.05);
+    outline: none;
+    box-shadow: 0 0 1rem white;
 }
 
 .drink>img {
     margin: 0 auto;
     width: calc(100% - 5rem);
     border-radius: 10px;
-}
-
-.drink:is(:hover, :active) {
-    transform: scale(1.05);
 }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 import './App.css';
 import "./styles/variables.css";
 
@@ -18,9 +18,15 @@ import DrinksList from './components/DrinksList/DrinksList';
 function App() {
   const [loading, setLoading] = useState(true);
   const [drinksList, setDrinkList] = useState<Array<any>>([]);
-  const [filteredDrinkList, setFilteredDrinkList] = useState<Array<any> | null>(null);
-  const [removedFilteredItems, setRemovedFilteredItems] = useState<{ drinks: { [key: string]: Array<any> } }>({ drinks: {} });
-  const [filters, setFilters] = useState<{ drink: Array<string> }>({ drink: [] });
+  const [filteredDrinkList, setFilteredDrinkList] = useState<Array<any>>([]);
+  // const [filteredItems, setFilteredItems] = useState<{ [key: string]: { [key: string]: Array<any> } }>({});
+  // const [filteredItems, setFilteredItems] = useState<{
+  //   [category: string]: {
+  //     [filter: string]: Array<any>
+  //   }
+  // }>({});
+  const [filters, setFilters] = useState<{ [field: string]: Array<string> }>({});
+  const [filtersArray, setFiltersArray] = useState<Array<string>>([]);
   // const [searchHistory, setSearchHistory] = useState<Array<string>>([]);
   const [keepFilterOnSearch] = useState(true);
 
@@ -40,45 +46,67 @@ function App() {
 
   // }
 
-  const FilterList = (category: string, filter_str: string) => {
-    const arr = filters['drink'];
-    if (category.length < 1 || filter_str.length < 1) { return; }
-    //toggle filter off
-    if (arr.includes(filter_str)) {
-      arr.splice(arr.indexOf(filter_str), 1)
-      if (arr.length < 1) {
-        setFilteredDrinkList(null);
-      } else {
-        //concat removed items back to filtered list
-        const removed = removedFilteredItems.drinks[filter_str];
-        setFilteredDrinkList(filteredDrinkList!.concat(removed));
-        setRemovedFilteredItems({ drinks: { [filter_str]: [] } });
-      }
-    }
-    //toggle filter on
-    else {
-      let removed_items: any[] = [];
-      arr.push(filter_str);
-      const new_drink_list = drinksList.filter((drink) => {
-        console.log(drink);
-        for (let i = 1; i < 16; i++) {
-          if (i === 1) console.log(`strIngredient${i}`, drink[`strIngredient${i}`])
-          if (drink[`strIngredient${i}`] && drink[`strIngredient${i}`].toLowerCase().includes(filter_str.toLowerCase())) {
-            console.log(`Ingredient was found at strIngredient${i}`);
-            return true;
-          }
-        }
-        removed_items.push(drink);
-        return false;
-      })
-      console.log('removed items:', removed_items);
-      console.log(new_drink_list.length);
-      setFilteredDrinkList(new_drink_list);
-      setRemovedFilteredItems({ drinks: { [filter_str]: removed_items } });
-    }
-    setFilters({ drink: arr });
-
+  //! Bug 
+  const FilterList = (field_str: string, filter_str: string) => {
+    UpdateFilters(field_str, filter_str);
+    // UpdateDrinkList();
   }
+
+  const UpdateFilters = (field_str: string, filter_str: string) => {
+    if (field_str.length < 1 || filter_str.length < 1) { return; }
+    let new_filters = filters;
+    if (!new_filters[field_str]) {
+      new_filters[field_str] = [];
+    }
+    //check if filter exists
+    const index = new_filters[field_str].indexOf(filter_str);
+    console.log(index);
+    if (index < 0) {
+      console.log("toggle on");
+      new_filters[field_str].push(filter_str);
+    } else {
+      console.log("toggle off");
+      new_filters[field_str].splice(index, 1)
+    }
+    console.log("new filters:", field_str, new_filters[field_str]);
+    setFilters(new_filters);
+    // console.log(filters);
+  }
+
+  const UpdateDrinkList = () => {
+    let new_drink_list = drinksList;
+    const fields = Object.keys(filters);
+    console.log(fields);
+    // categories.forEach(category => {
+    //   const list = [];
+    //   filters[category].forEach(filter => {
+    //     const list = new_drink_list.filter(drink => {
+
+    //     })
+    //   })
+    // })
+  }
+
+  // useEffect(() => {
+  //   let dl = drinksList;
+  //   Object.values(filters).forEach(category => {
+  //     if (category.length > 0) {
+  //       category.forEach(filter_str => {
+  //         dl = dl.filter(drink => {
+  //           for (let i = 1; i < 16; i++) {
+  //             if (drink[`strIngredient${i}`] && drink[`strIngredient${i}`].toLowerCase().includes(filter_str.toLowerCase())) {
+  //               return true;
+  //             }
+  //           }
+  //           return false;
+  //         })
+  //       })
+  //     }
+  //     console.log(dl);
+  //     setFilteredDrinkList(dl);
+  //   })
+
+  // }, [filters, drinksList])
 
   useEffect(() => {
     if (!keepFilterOnSearch) setDrinkList([]);
@@ -118,7 +146,6 @@ function App() {
     }
 
     fetchDrinks();
-
   }, []);
 
   return (
@@ -144,18 +171,15 @@ function App() {
             <div id="drink">
               <h2>Drinks</h2>
               <span>
-                <Filter
-                  name={'vodka'}
-                  src={vodka}
-                  SelectFilter={() => FilterList("drink", "vodka")} />
-                <Filter name={'rum'} src={light_rum} SelectFilter={() => FilterList("drink", "rum")} />
-                <Filter name={'dark rum'} src={dark_rum} SelectFilter={() => FilterList("drink", "dark rum")} />
-                <Filter name={'gin'} src={gin} SelectFilter={() => FilterList("drink", "gin")} />
-                <Filter name={'whiskey'} src={whiskey} SelectFilter={() => FilterList("drink", "whiskey")} />
-                <Filter name={'tequila'} src={tequila} SelectFilter={() => FilterList("drink", "tequila")} />
-                <Filter name={'wine'} src={wine} SelectFilter={() => FilterList("drink", "red wine")} />
-                <Filter name={'white wine'} src={white_wine} SelectFilter={() => FilterList("drink", "white wine")} />
-                <Filter name={'beer'} src={beer} SelectFilter={() => FilterList("drink", "beer")} />
+                <Filter id={'vodka'} src={vodka} SelectFilter={() => FilterList("strIngredient", "vodka")} />
+                <Filter id={'rum'} src={light_rum} SelectFilter={() => FilterList("strIngredient", "rum")} />
+                <Filter id={'dark rum'} src={dark_rum} SelectFilter={() => FilterList("strIngredient", "dark rum")} />
+                <Filter id={'gin'} src={gin} SelectFilter={() => FilterList("strIngredient", "gin")} />
+                <Filter id={'whiskey'} src={whiskey} SelectFilter={() => FilterList("strIngredient", "whiskey")} />
+                <Filter id={'tequila'} src={tequila} SelectFilter={() => FilterList("strIngredient", "tequila")} />
+                <Filter id={'wine'} src={wine} SelectFilter={() => FilterList("strIngredient", "red wine")} />
+                <Filter id={'white wine'} src={white_wine} SelectFilter={() => FilterList("strIngredient", "white wine")} />
+                <Filter id={'beer'} src={beer} SelectFilter={() => FilterList("strIngredient", "beer")} />
               </span>
             </div>
             <div id="glass"><h2>Glasses</h2></div>
@@ -167,7 +191,7 @@ function App() {
           <div>
             {
               loading ? <p>Loading...</p> :
-                <DrinksList drinks={filteredDrinkList ?? drinksList} />
+                <DrinksList drinks={filteredDrinkList.length > 0 ? filteredDrinkList : drinksList} />
             }
           </div>
         </section>

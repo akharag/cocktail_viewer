@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import './Filter.css';
 
-type FilterProps = {
-    id?: string; //will derive from name when empty
-    name: string;
+export type FilterProps = {
+    id: string;
+    name?: string;
     src?: string;
-    alt?: string;//will derive from name when empty
+    alt?: string;
     SelectFilter?: () => void;
 }
 
@@ -29,12 +29,15 @@ const Fitler = ({ id, name, src, alt, SelectFilter }: FilterProps) => {
     }
 
     return (
-        <span className={`${selected ? 'selected' : ''}`} onClick={ClickHandler}>
-            {src && <img
-                id={id || name.toLowerCase()}
-                src={src} alt={alt || `${name.toLowerCase()} thumbnail`}
-            />}
-            <h3>{CapitalFirstLetter(name)}</h3>
+        <span
+            id={id}
+            className={`filter ${selected ? 'selected' : ''}`}
+            onClick={ClickHandler}
+        >
+            <button>
+                {src && <img src={src} alt={alt || `${(name || id).toLowerCase()} thumbnail`} />}
+            </button>
+            <h3>{CapitalFirstLetter(name || id)}</h3>
         </span>
     );
 }
