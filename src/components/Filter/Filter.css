@@ -17,7 +17,7 @@
 }
 
 .filter button {
-    transition: 200ms ease-in;
+    transition: 100ms ease-in;
 }
 
 .filter.selected img {
@@ -31,8 +31,4 @@
 .filter button:is(:hover, :focus-visible) {
     transform: scale(1.35);
     outline: white;
-}
-
-.filter button:is(:hover, :focus-visible) img {
-    filter: drop-shadow(0 0 1rem hsl(0 0% 100% / 50%));
 }

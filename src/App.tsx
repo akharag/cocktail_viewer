@@ -17,8 +17,8 @@ import DrinksList from './components/DrinksList/DrinksList';
 
 function App() {
   const [loading, setLoading] = useState(true);
-  const [drinksList, setDrinkList] = useState<Array<any>>([]);
-  const [filteredDrinkList, setFilteredDrinkList] = useState<Array<any>>([]);
+  const [drinksList, setDrinkList] = useState<Array<{ [key: string]: string | null }>>([]);
+  const [filteredDrinkList, setFilteredDrinkList] = useState<Array<{ [key: string]: string | null }>>([]);
   // const [filteredItems, setFilteredItems] = useState<{ [key: string]: { [key: string]: Array<any> } }>({});
   // const [filteredItems, setFilteredItems] = useState<{
   //   [category: string]: {
@@ -36,7 +36,6 @@ function App() {
   //   //Check if string was previously searched for
   //   //if found filter drinks based on search string
   //   //else api call and set drinkList
-  //   //! Only searches names for now
   //   //Todo Add changing search based on select
   //   const response = await fetch(url + "search.php?s=" + search_str);
   //   const data = await response.json();
@@ -46,10 +45,9 @@ function App() {
 
   // }
 
-  //! Bug 
   const FilterList = (field_str: string, filter_str: string) => {
     UpdateFilters(field_str, filter_str);
-    // UpdateDrinkList();
+    UpdateDrinkList();
   }
 
   const UpdateFilters = (field_str: string, filter_str: string) => {
@@ -60,53 +58,47 @@ function App() {
     }
     //check if filter exists
     const index = new_filters[field_str].indexOf(filter_str);
-    console.log(index);
     if (index < 0) {
-      console.log("toggle on");
       new_filters[field_str].push(filter_str);
     } else {
-      console.log("toggle off");
       new_filters[field_str].splice(index, 1)
     }
-    console.log("new filters:", field_str, new_filters[field_str]);
     setFilters(new_filters);
-    // console.log(filters);
+  }
+
+  const CheckDrinkForFilter = (drink: { [key: string]: string | null }, filter_field: string, filter: string) => {
+    for (const [key, value] of Object.entries(drink)) {
+      if (key.includes(filter_field)) {
+        if (value && value.toLowerCase().includes(filter.toLowerCase())) {
+          return true;
+        }
+      }
+
+    }
+    return false;
   }
 
   const UpdateDrinkList = () => {
+    let buffer: Array<any> = [];
     let new_drink_list = drinksList;
     const fields = Object.keys(filters);
-    console.log(fields);
-    // categories.forEach(category => {
-    //   const list = [];
-    //   filters[category].forEach(filter => {
-    //     const list = new_drink_list.filter(drink => {
-
-    //     })
-    //   })
-    // })
+    fields.forEach(filter_field => {
+      console.log(filter_field);
+      filters[filter_field].forEach(filter => {
+        const b = new_drink_list.filter(drink => CheckDrinkForFilter(drink, filter_field, filter));
+        console.log(b);
+        buffer = [...buffer, ...b];
+      })
+      new_drink_list = buffer;
+      buffer = [];
+    })
+    setFilteredDrinkList(new_drink_list);
   }
 
-  // useEffect(() => {
-  //   let dl = drinksList;
-  //   Object.values(filters).forEach(category => {
-  //     if (category.length > 0) {
-  //       category.forEach(filter_str => {
-  //         dl = dl.filter(drink => {
-  //           for (let i = 1; i < 16; i++) {
-  //             if (drink[`strIngredient${i}`] && drink[`strIngredient${i}`].toLowerCase().includes(filter_str.toLowerCase())) {
-  //               return true;
-  //             }
-  //           }
-  //           return false;
-  //         })
-  //       })
-  //     }
-  //     console.log(dl);
-  //     setFilteredDrinkList(dl);
-  //   })
-
-  // }, [filters, drinksList])
+  const DoFiltersExist = () => {
+    if (Object.keys(filters).length < 1) { return false; }
+    return Object.values(filters).some(filter_array => filter_array.length > 0);
+  }
 
   useEffect(() => {
     if (!keepFilterOnSearch) setDrinkList([]);
@@ -191,7 +183,8 @@ function App() {
           <div>
             {
               loading ? <p>Loading...</p> :
-                <DrinksList drinks={filteredDrinkList.length > 0 ? filteredDrinkList : drinksList} />
+                <DrinksList
+                  drinks={DoFiltersExist() ? filteredDrinkList : drinksList} />
             }
           </div>
         </section>
