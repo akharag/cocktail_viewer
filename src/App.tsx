@@ -19,14 +19,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const [drinksList, setDrinkList] = useState<Array<{ [key: string]: string | null }>>([]);
   const [filteredDrinkList, setFilteredDrinkList] = useState<Array<{ [key: string]: string | null }>>([]);
-  // const [filteredItems, setFilteredItems] = useState<{ [key: string]: { [key: string]: Array<any> } }>({});
-  // const [filteredItems, setFilteredItems] = useState<{
-  //   [category: string]: {
-  //     [filter: string]: Array<any>
-  //   }
-  // }>({});
-  const [filters, setFilters] = useState<{ [field: string]: Array<string> }>({});
-  const [filtersArray, setFiltersArray] = useState<Array<string>>([]);
+  const [filters, setFilters] = useState<{ [filter_type: string]: Array<string> }>({});
   // const [searchHistory, setSearchHistory] = useState<Array<string>>([]);
   const [keepFilterOnSearch] = useState(true);
 
@@ -45,30 +38,30 @@ function App() {
 
   // }
 
-  const FilterList = (field_str: string, filter_str: string) => {
-    UpdateFilters(field_str, filter_str);
+  const FilterList = (filter_type: string, filter_str: string) => {
+    UpdateFilters(filter_type, filter_str);
     UpdateDrinkList();
   }
 
-  const UpdateFilters = (field_str: string, filter_str: string) => {
-    if (field_str.length < 1 || filter_str.length < 1) { return; }
+  const UpdateFilters = (filter_type: string, filter_str: string) => {
+    if (filter_type.length < 1 || filter_str.length < 1) { return; }
     let new_filters = filters;
-    if (!new_filters[field_str]) {
-      new_filters[field_str] = [];
+    if (!new_filters[filter_type]) {
+      new_filters[filter_type] = [];
     }
     //check if filter exists
-    const index = new_filters[field_str].indexOf(filter_str);
+    const index = new_filters[filter_type].indexOf(filter_str);
     if (index < 0) {
-      new_filters[field_str].push(filter_str);
+      new_filters[filter_type].push(filter_str);
     } else {
-      new_filters[field_str].splice(index, 1)
+      new_filters[filter_type].splice(index, 1)
     }
     setFilters(new_filters);
   }
 
-  const CheckDrinkForFilter = (drink: { [key: string]: string | null }, filter_field: string, filter: string) => {
+  const CheckDrinkForFilter = (drink: { [key: string]: string | null }, filter_type: string, filter: string) => {
     for (const [key, value] of Object.entries(drink)) {
-      if (key.includes(filter_field)) {
+      if (key.includes(filter_type)) {
         if (value && value.toLowerCase().includes(filter.toLowerCase())) {
           return true;
         }
@@ -82,12 +75,10 @@ function App() {
     let buffer: Array<any> = [];
     let new_drink_list = drinksList;
     const fields = Object.keys(filters);
-    fields.forEach(filter_field => {
-      console.log(filter_field);
-      filters[filter_field].forEach(filter => {
-        const b = new_drink_list.filter(drink => CheckDrinkForFilter(drink, filter_field, filter));
-        console.log(b);
-        buffer = [...buffer, ...b];
+    fields.forEach(filter_type => {
+      filters[filter_type].forEach(filter => {
+        const b = new_drink_list.filter(drink => CheckDrinkForFilter(drink, filter_type, filter));
+        buffer = [...b, ...buffer];
       })
       new_drink_list = buffer;
       buffer = [];
@@ -160,6 +151,7 @@ function App() {
             <button>Search</button>
           </div>
           <div id="filters">
+            {/* TODO Replace With Filter Type Componenet */}
             <div id="drink">
               <h2>Drinks</h2>
               <span>
