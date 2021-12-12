@@ -20,6 +20,7 @@ function App() {
   const [drinksList, setDrinkList] = useState<Array<{ [key: string]: string | null }>>([]);
   const [filteredDrinkList, setFilteredDrinkList] = useState<Array<{ [key: string]: string | null }>>([]);
   const [filters, setFilters] = useState<{ [filter_type: string]: Array<string> }>({});
+  const [glasses, setGlasses] = useState<Array<string>>([]);
   // const [searchHistory, setSearchHistory] = useState<Array<string>>([]);
   const [keepFilterOnSearch] = useState(true);
 
@@ -116,6 +117,14 @@ function App() {
       return arr;
     }
 
+    const fetchGlasses = async () => {
+      let g: Array<string> = [];
+      const response = await fetch(url + 'list.php?g=list');
+      const data: { drinks: [{ strGlass: string }] } = await response.json();
+      data.drinks.forEach(entry => g.push(entry.strGlass.replace('glass', '').replace('Glass', '')));
+      setGlasses([...g]);
+    }
+
     const fetchDrinks = async () => {
       const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz';
       const randomLetter = characters.charAt(Math.floor(Math.random() * characters.length))
@@ -129,6 +138,7 @@ function App() {
     }
 
     fetchDrinks();
+    fetchGlasses();
   }, []);
 
   return (
@@ -166,7 +176,17 @@ function App() {
                 <Filter id={'beer'} src={beer} SelectFilter={() => FilterList("strIngredient", "beer")} />
               </span>
             </div>
-            <div id="glass"><h2>Glasses</h2></div>
+            <div id="glass">
+              <h2>Glasses</h2>
+              <span>
+                {glasses.map(glass_type => (<Filter
+                  key={glass_type}
+                  id={glass_type.replace(' ', "_").toLowerCase()}
+                  name={glass_type}
+                  SelectFilter={() => FilterList("strGlass", glass_type)}
+                />))}
+              </span>
+            </div>
             <div id="category"><h2>Category</h2></div>
             <div id="alcoholic"><h2>Alcoholic</h2></div>
           </div>

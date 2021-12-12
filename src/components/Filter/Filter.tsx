@@ -29,16 +29,14 @@ const Fitler = ({ id, name, src, alt, SelectFilter }: FilterProps) => {
     }
 
     return (
-        <span
+
+        <button
             id={id}
-            className={`filter ${selected ? 'selected' : ''}`}
-            onClick={ClickHandler}
-        >
-            <button>
-                {src && <img src={src} alt={alt || `${(name || id).toLowerCase()} thumbnail`} />}
-            </button>
+            className={`filter${selected ? ' selected' : ''}`}
+            onClick={ClickHandler}>
+            {src && <img src={src} alt={alt || `${(name || id).toLowerCase()} thumbnail`} />}
             <h3>{CapitalFirstLetter(name || id)}</h3>
-        </span>
+        </button>
     );
 }
 

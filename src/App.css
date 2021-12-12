@@ -1,7 +1,7 @@
 .App {
   text-align: center;
   min-height: 100vh;
-  color: white;
+  overflow-x: hidden;
 }
 
 .App-header {
@@ -29,9 +29,15 @@ section#search_filters>div+div {
   flex: 1;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
-section#list>div {
+#filters>div#glass>span {
+  gap: 2rem;
+}
+
+#list>div {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-evenly;

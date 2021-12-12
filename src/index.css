@@ -1,5 +1,6 @@
 * {
   box-sizing: border-box;
+  color: var(--clr-txt);
 }
 
 html, body, body>* {
@@ -30,6 +31,17 @@ button,
 textarea,
 select {
   font: inherit;
+}
+
+button, input[type="submit"], input[type="reset"] {
+  background: var(--clr-button-bg);
+  color: inherit;
+  border: none;
+  padding: 0;
+  border-radius: var(--border-radius-md);
+  font: inherit;
+  cursor: pointer;
+  outline: inherit;
 }
 
 @media (prefers-reduced-motion: reduce) {

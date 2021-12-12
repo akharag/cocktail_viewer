@@ -1,3 +1,7 @@
 * {
     --clr-bg: hsl(220, 13%, 18%);
+    --clr-txt: hsl(220, 13%, 90%);
+    --clr-outline: hsla(220, 13%, 46%);
+    --clr-button-bg: hsl(220, 13%, 25%);
+    --border-radius-md: 10px;
 }

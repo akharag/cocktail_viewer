@@ -1,14 +1,26 @@
-.filter {
-    flex: 1 0 5rem;
+button.filter {
+    flex: 1 0 auto;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
+    background: none;
+    transition: 100ms ease-in;
 }
 
-.filter button {
-    background: none;
-    border: none;
+.filter h3 {
+    margin: 0;
+}
+
+.filter h3:only-child {
+    border: 0.2rem solid var(--clr-outline);
+    border-radius: var(--border-radius-md);
+    padding: 1em;
+    background: var(--clr-button-bg);
+}
+
+.filter img~h3 {
+    margin-top: 1em;
 }
 
 .filter img {
@@ -16,19 +28,15 @@
     cursor: pointer;
 }
 
-.filter button {
-    transition: 100ms ease-in;
-}
-
 .filter.selected img {
     filter: brightness(125%);
 }
 
-.filter:not(.selected) img {
+.filter:not(.selected) * {
     filter: brightness(75%) saturate(50%);
 }
 
-.filter button:is(:hover, :focus-visible) {
+.filter:is(:hover, :focus-visible) {
     transform: scale(1.35);
     outline: white;
 }

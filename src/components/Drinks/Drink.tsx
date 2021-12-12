@@ -10,7 +10,7 @@ type DrinkProps = {
 
 function Drink({ drink: { idDrink, strDrink, strDrinkThumb } }: DrinkProps) {
     return (
-        <a className="drink" href="test">
+        <a className="drink" href={`/${idDrink}_${strDrink.replace(' ', '_').toLowerCase()}`}>
             <h3>{strDrink}</h3>
             <img src={strDrinkThumb} alt={strDrink + 'thumbnail'} />
         </a>
