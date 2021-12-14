@@ -20,6 +20,31 @@ section#search_filters>div+div {
   margin-top: 1rem;
 }
 
+#search {
+  display: flex;
+  justify-content: space-around;
+  margin: 0 auto;
+  column-gap: 1rem;
+  width: min(100%, 30rem);
+}
+
+#search>select {
+  flex: 0 1 10ch;
+}
+
+#search>label {
+  flex: 2;
+}
+
+#search>label>input {
+  width: 100%;
+}
+
+#search select {
+  background: var(--clr-button-bg);
+}
+
+
 #filters>div {
   margin: 0 auto;
   padding: 0 2em;

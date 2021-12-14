@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import { Link, Outlet } from 'react-router-dom';
 import './App.css';
 import "./styles/variables.css";
 
@@ -77,12 +78,14 @@ function App() {
     let new_drink_list = drinksList;
     const fields = Object.keys(filters);
     fields.forEach(filter_type => {
-      filters[filter_type].forEach(filter => {
-        const b = new_drink_list.filter(drink => CheckDrinkForFilter(drink, filter_type, filter));
-        buffer = [...b, ...buffer];
-      })
-      new_drink_list = buffer;
-      buffer = [];
+      if (filters[filter_type].length > 0) {
+        filters[filter_type].forEach(filter => {
+          const b = new_drink_list.filter(drink => CheckDrinkForFilter(drink, filter_type, filter));
+          buffer = [...b, ...buffer];
+        })
+        new_drink_list = buffer;
+        buffer = [];
+      }
     })
     setFilteredDrinkList(new_drink_list);
   }
@@ -133,12 +136,11 @@ function App() {
       if (data) {
         let drinks = shuffle(data.drinks);
         setDrinkList(drinks);
-        setLoading(false);
       }
     }
-
     fetchDrinks();
     fetchGlasses();
+    setLoading(false);
   }, []);
 
   return (
@@ -152,7 +154,8 @@ function App() {
 
       <main>
         <section id="search_filters">
-          <div id="search">
+          <Outlet />
+          {/*  <div id="search">
             <select>
               <option value="drink">Name</option>
               <option value="ingredient">Ingredient</option>
@@ -161,7 +164,6 @@ function App() {
             <button>Search</button>
           </div>
           <div id="filters">
-            {/* TODO Replace With Filter Type Componenet */}
             <div id="drink">
               <h2>Drinks</h2>
               <span>
@@ -198,7 +200,7 @@ function App() {
                 <DrinksList
                   drinks={DoFiltersExist() ? filteredDrinkList : drinksList} />
             }
-          </div>
+          </div>*/}
         </section>
       </main>
     </div >
