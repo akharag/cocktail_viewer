@@ -3,13 +3,17 @@
   color: var(--clr-txt);
 }
 
-html, body, body>* {
+html,
+body,
+body > * {
   margin: 0;
   padding: 0;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: var(--clr-bg);
@@ -21,7 +25,8 @@ a:not([class]) {
   text-decoration-skip-ink: auto;
 }
 
-img, picture {
+img,
+picture {
   display: block;
   max-width: 100%;
 }
@@ -33,12 +38,12 @@ select {
   font: inherit;
 }
 
-button, input[type="submit"], input[type="reset"] {
+button,
+input[type='submit'],
+input[type='reset'] {
   background: var(--clr-button-bg);
   color: inherit;
   border: none;
-  padding: 0;
-  border-radius: var(--border-radius-md);
   font: inherit;
   cursor: pointer;
   outline: inherit;
@@ -59,9 +64,9 @@ button, input[type="submit"], input[type="reset"] {
   }
 }
 
-
 code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
 }
 
 #root {

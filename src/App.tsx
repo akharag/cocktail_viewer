@@ -5,6 +5,7 @@ import './styles/variables.css';
 import { fetchDrinks, fetchGlasses } from './controllers/fetchData';
 
 import DrinksList from './components/DrinksList/DrinksList';
+import Search from './components/Search/Search';
 import Filters from './components/Filters/Filters';
 
 function App() {
@@ -29,16 +30,10 @@ function App() {
 
       <main>
         <section id="search_filters">
-          <div id="search">
-            <select>
-              <option value="drink">Name</option>
-              <option value="ingredient">Ingredient</option>
-            </select>
-            <label>
-              <input type="search" />
-            </label>
-            <button>Search</button>
-          </div>
+          <Search
+            select={['Name', 'Alcohol', 'Ingredient']}
+            onSearch={() => console.log('Search')}
+          />
           <Filters />
         </section>
 

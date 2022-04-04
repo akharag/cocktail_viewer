@@ -1,0 +1,28 @@
+.search {
+  --search-padding: 0.5em;
+  --search-border: 2px solid var(--neutral-300);
+  margin-inline: auto;
+  border: var(--search-border);
+  border-radius: 100vmax;
+  overflow: hidden;
+  width: fit-content;
+}
+
+.search * {
+  margin: 0;
+  border: none;
+  padding-block: var(--search-padding);
+  height: calc(2em + var(--search-padding) * 2);
+  background-color: var(--neutral-200);
+  font-size: 1em;
+}
+
+.search > *:is(:first-child) {
+  border-inline-end: var(--search-border);
+  padding-inline-start: var(--search-padding);
+}
+
+.search > *:is(:last-child) {
+  border-inline-start: var(--search-border);
+  padding-inline-end: var(--search-padding);
+}

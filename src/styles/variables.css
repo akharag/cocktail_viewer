@@ -12,6 +12,8 @@
   --clr-bg: var(--neutral-100);
   --clr-txt: var(--neutral-800);
   --clr-outline: var(--neutral-400);
-  --clr-button-bg: var(--neutral-200);
+  --clr-button-bg: var(--neutral-300);
+  --border-radius-sm: 6px;
   --border-radius-md: 10px;
+  --border-radius-lg: 16px;
 }

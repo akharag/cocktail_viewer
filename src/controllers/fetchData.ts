@@ -6,7 +6,7 @@ export const fetchDrinks = async (): Promise<
   }[]
 > => {
   try {
-    const response = await fetch(URL + 'search.php?s=a');
+    const response = await fetch(URL + 'search.php?s=j');
     const data = await response.json();
     if (data?.drinks) {
       return data.drinks;
