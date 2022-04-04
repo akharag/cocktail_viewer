@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import './App.css';
 import './styles/variables.css';
 
@@ -8,16 +8,13 @@ import DrinksList from './components/DrinksList/DrinksList';
 import Filters from './components/Filters/Filters';
 
 function App() {
-  const [loading, setLoading] = useState(true);
   const [drinksList, setDrinkList] = useState<
-    Array<{ [key: string]: string | null }>
+    Array<{ [key: string]: string | null } | null>
   >([]);
 
   //On Inital Render
   useEffect(() => {
-    fetchDrinks()
-      .then((drinks) => setDrinkList(drinks))
-      .then(() => setLoading(false));
+    fetchDrinks().then((drinks) => setDrinkList(drinks));
     fetchGlasses();
   }, []);
 
@@ -44,11 +41,10 @@ function App() {
           </div>
           <Filters />
         </section>
-        <section id="list">
-          <div>
-            {loading ? <p>Loading...</p> : <DrinksList drinks={drinksList} />}
-          </div>
-        </section>
+
+        <Suspense fallback={<p>Loading...</p>}>
+          <DrinksList drinks={drinksList} />
+        </Suspense>
       </main>
     </div>
   );

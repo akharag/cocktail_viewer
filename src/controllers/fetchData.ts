@@ -5,12 +5,16 @@ export const fetchDrinks = async (): Promise<
     [key: string]: string | null;
   }[]
 > => {
-  const response = await fetch(URL + 'search.php?s=a');
-  const data = await response.json();
-  if (data) {
-    return data.drinks;
+  try {
+    const response = await fetch(URL + 'search.php?s=a');
+    const data = await response.json();
+    if (data?.drinks) {
+      return data.drinks;
+    }
+    return [];
+  } catch (e) {
+    return [];
   }
-  return [];
 };
 
 export const fetchGlasses = async () => {

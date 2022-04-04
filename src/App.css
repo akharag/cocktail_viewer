@@ -12,20 +12,20 @@
   font-size: calc(10px + 2vmin);
 }
 
-section+section {
+section + section {
   margin-block: 1rem;
 }
 
-section#search_filters>div+div {
+section#search_filters > div + div {
   margin-top: 1rem;
 }
 
-#filters>div {
+#filters > div {
   margin: 0 auto;
   padding: 0 2em;
 }
 
-#filters>div>span {
+#filters > div > span {
   flex: 1;
   display: flex;
   flex-wrap: wrap;
@@ -33,18 +33,6 @@ section#search_filters>div+div {
   align-items: flex-start;
 }
 
-#filters>div#glass>span {
+#filters > div#glass > span {
   gap: 2rem;
-}
-
-#list>div {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
-  padding: 0 1rem;
-  gap: 2rem;
-}
-
-#list>div>.drink {
-  flex: 0.1 0 22rem;
 }

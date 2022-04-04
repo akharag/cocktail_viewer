@@ -1,7 +1,17 @@
 * {
-    --clr-bg: hsl(220, 13%, 18%);
-    --clr-txt: hsl(220, 13%, 90%);
-    --clr-outline: hsla(220, 13%, 46%);
-    --clr-button-bg: hsl(220, 13%, 25%);
-    --border-radius-md: 10px;
+  --neutral-100: hsl(220, 13%, 18%);
+  --neutral-200: hsl(220, 13%, 28%);
+  --neutral-300: hsl(220, 13%, 38%);
+  --neutral-400: hsl(220, 13%, 48%);
+  --neutral-500: hsl(220, 13%, 58%);
+  --neutral-600: hsl(220, 13%, 68%);
+  --neutral-700: hsl(220, 13%, 78%);
+  --neutral-800: hsl(220, 13%, 88%);
+  --neutral-900: hsl(220, 13%, 98%);
+
+  --clr-bg: var(--neutral-100);
+  --clr-txt: var(--neutral-800);
+  --clr-outline: var(--neutral-400);
+  --clr-button-bg: var(--neutral-200);
+  --border-radius-md: 10px;
 }
