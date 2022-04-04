@@ -4,7 +4,6 @@
   margin-inline: auto;
   border: var(--search-border);
   border-radius: 100vmax;
-  overflow: hidden;
   width: fit-content;
 }
 
@@ -17,12 +16,19 @@
   font-size: 1em;
 }
 
+.search *:is(:focus, :focus-within, :focus-visible) {
+  outline: none;
+  box-shadow: 0 0 0.5em var(--neutral-800) inset;
+}
+
 .search > *:is(:first-child) {
   border-inline-end: var(--search-border);
+  border-radius: 100vmax 0 0 100vmax;
   padding-inline-start: var(--search-padding);
 }
 
 .search > *:is(:last-child) {
   border-inline-start: var(--search-border);
+  border-radius: 0 100vmax 100vmax 0;
   padding-inline-end: var(--search-padding);
 }

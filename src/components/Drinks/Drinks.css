@@ -7,6 +7,10 @@
   transition: transform ease-in 100ms;
 }
 
+.drink h3 {
+  margin-top: 0;
+}
+
 .drink:is(:hover, :focus, :focus-within, :focus-visible) {
   transform: scale(1.05);
   outline: none;
