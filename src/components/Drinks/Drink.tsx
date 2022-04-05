@@ -1,4 +1,5 @@
 import './Drinks.css';
+import { updateUrl } from '../../hooks/url';
 
 type DrinkProps = {
   drink: {
@@ -10,7 +11,7 @@ type DrinkProps = {
 
 function Drink({ drink: { idDrink, strDrink, strDrinkThumb } }: DrinkProps) {
   return (
-    <button className="drink">
+    <button key={idDrink} className="drink" onClick={() => updateUrl(strDrink)}>
       <h3>{strDrink}</h3>
       <img src={strDrinkThumb} alt={strDrink + 'thumbnail'} />
     </button>

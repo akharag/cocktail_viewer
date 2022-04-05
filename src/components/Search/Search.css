@@ -1,3 +1,8 @@
+[type='search']::-webkit-search-cancel-button {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
 .search {
   --search-padding: 0.5em;
   --search-border: 2px solid var(--neutral-300);
@@ -14,11 +19,13 @@
   height: calc(2em + var(--search-padding) * 2);
   background-color: var(--neutral-200);
   font-size: 1em;
+  z-index: 0;
 }
 
-.search *:is(:focus, :focus-within, :focus-visible) {
+.search *:focus {
   outline: none;
-  box-shadow: 0 0 0.5em var(--neutral-800) inset;
+  box-shadow: 0 0 0.4em var(--neutral-900) inset;
+  overflow: visible;
 }
 
 .search > *:is(:first-child) {
@@ -31,4 +38,8 @@
   border-inline-start: var(--search-border);
   border-radius: 0 100vmax 100vmax 0;
   padding-inline-end: var(--search-padding);
+}
+
+.search input {
+  padding-inline: 1em;
 }
