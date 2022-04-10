@@ -26,6 +26,7 @@ export const DrinkListContext = createContext<{
 });
 
 export const DrinkListProvider: FC = ({ children }) => {
+	const [initialLoad, setIntialLoad] = useState(true);
 	const [currentDrink, setCurrentDrink] = useState<DrinkType | null>(null);
 	const [drinkList, setDrinkList] =
 		useState<OptionalType<DrinkType[]>>(undefined);
@@ -38,9 +39,14 @@ export const DrinkListProvider: FC = ({ children }) => {
 	};
 
 	useEffect(() => {
+		if (initialLoad) {
+			setIntialLoad(false);
+			setCurrentDrink(null);
+			return;
+		}
 		if (currentDrink === null) updateUrl('');
 		if (drinkList && currentDrink) updateUrl(currentDrink.strDrink);
-	}, [currentDrink, drinkList]);
+	}, [currentDrink, drinkList, initialLoad]);
 
 	return (
 		<DrinkListContext.Provider value={value}>

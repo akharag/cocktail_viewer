@@ -11,7 +11,7 @@ const DrinksList = () => {
 
 	useEffect(() => {
 		fetchDrinks().then((drinks) => setDrinkList?.(drinks));
-	}, []);
+	}, [setDrinkList]);
 
 	return (
 		<section id='list'>

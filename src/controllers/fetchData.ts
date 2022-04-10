@@ -19,7 +19,7 @@ export const fetchSingleDrink = async (
 
 export const fetchDrinks = async (): Promise<DrinkType[]> => {
 	try {
-		const response = await fetch(URL + 'search.php?s=j');
+		const response = await fetch(URL + 'search.php?s=w');
 		const data = await response.json();
 		if (data?.drinks) {
 			return data.drinks;

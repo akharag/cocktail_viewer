@@ -17,6 +17,10 @@ section + section {
 	margin-block: 1rem;
 }
 
+section#search_filters {
+	margin-bottom: 3rem;
+}
+
 section#search_filters > div + div {
 	margin-top: 1rem;
 }
@@ -36,4 +40,15 @@ section#search_filters > div + div {
 
 #filters > div#glass > span {
 	gap: 2rem;
+}
+
+section#drinks {
+	display: flex;
+	justify-content: space-between;
+	width: 97%;
+	margin-inline: auto;
+}
+
+section#drinks > * {
+	flex: 1 0 0;
 }

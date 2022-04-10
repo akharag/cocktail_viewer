@@ -1,8 +1,7 @@
 #list {
-  display: flex;
-  justify-content: center;
-  flex-wrap: wrap;
-  gap: 3rem;
-  margin-top: 5rem;
-  margin-inline: 3rem;
+	display: flex;
+	justify-content: center;
+	flex-wrap: wrap;
+	gap: 3rem;
+	margin-inline: 3rem;
 }

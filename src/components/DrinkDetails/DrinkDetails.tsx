@@ -16,7 +16,7 @@ function DrinkDetails() {
 		if (path !== '') {
 			setHide(false);
 		}
-		if (currentDrink === null) {
+		if (currentDrink === null && path !== '') {
 			const fetchDrink = async () => {
 				const drinkName = path;
 				const drink: DrinkType | null = await fetchSingleDrink(drinkName);
@@ -59,14 +59,16 @@ function DrinkDetails() {
 
 	return (
 		<div className={`drink-details ${hide ? 'animate-exit' : 'animate-enter'}`}>
-			<h1>{currentDrink.strDrink}</h1>
-			<img
-				src={currentDrink.strDrinkThumb}
-				alt={`${currentDrink.strDrink} detail thumbnail`}
-			/>
-			<button className='close' onClick={() => setHide(true)}>
-				{icon}
-			</button>
+			<div aria-hidden>
+				<h1>{currentDrink.strDrink}</h1>
+				<img
+					src={currentDrink.strDrinkThumb}
+					alt={`${currentDrink.strDrink} detail thumbnail`}
+				/>
+				<button className='close' onClick={() => setHide(true)}>
+					{icon}
+				</button>
+			</div>
 		</div>
 	);
 }

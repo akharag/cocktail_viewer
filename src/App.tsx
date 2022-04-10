@@ -2,8 +2,6 @@ import { Suspense } from 'react';
 import './App.css';
 import './styles/variables.css';
 
-import { useReactPath } from './hooks/url';
-
 import DrinksList from './components/DrinksList/DrinksList';
 import Search from './components/Search/Search';
 import Filters from './components/Filters/Filters';
@@ -11,10 +9,6 @@ import DrinkDetails from './components/DrinkDetails/DrinkDetails';
 import { DrinkListProvider } from './hooks/contexts';
 
 function App() {
-	const path = useReactPath()
-		.split('/')
-		[useReactPath().split('/').length - 1].replace('%20', ' ');
-
 	return (
 		<DrinkListProvider>
 			<div className='App'>
@@ -33,10 +27,12 @@ function App() {
 						/>
 						<Filters />
 					</section>
-					<Suspense fallback={<p>Loading...</p>}>
-						<DrinksList />
-					</Suspense>
-					<DrinkDetails />
+					<section id='drinks'>
+						<Suspense fallback={<p>Loading...</p>}>
+							<DrinksList />
+						</Suspense>
+						<DrinkDetails />
+					</section>
 				</main>
 			</div>
 		</DrinkListProvider>
