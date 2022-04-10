@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react';
 import './DrinkDetails.css';
 import { fetchSingleDrink } from '../../controllers/fetchData';
-import { useReactPath } from '../../hooks/url';
+import { updateUrl, useReactPath } from '../../hooks/url';
 import { DrinkListContext } from '../../hooks/contexts';
 import { DrinkType } from '../../utils/types';
 
@@ -19,7 +19,6 @@ function DrinkDetails() {
 		if (currentDrink === null) {
 			const fetchDrink = async () => {
 				const drinkName = path;
-				console.log(drinkName);
 				const drink: DrinkType | null = await fetchSingleDrink(drinkName);
 				if (drink) setCurrentDrink?.({ ...drink });
 				else {
@@ -32,13 +31,8 @@ function DrinkDetails() {
 	}, [currentDrink, path, setCurrentDrink]);
 
 	useEffect(() => {
-		console.log(hide);
-		// if (hide) {
-		// 	setCurrentDrink?.(null);
-		// } else {
-		// 	setHide(false);
-		// }
-	}, [hide, setCurrentDrink]);
+		if (hide) updateUrl('/');
+	}, [hide]);
 
 	if (!currentDrink)
 		return (

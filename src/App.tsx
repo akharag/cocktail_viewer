@@ -33,10 +33,10 @@ function App() {
 						/>
 						<Filters />
 					</section>
-					<DrinkDetails />
 					<Suspense fallback={<p>Loading...</p>}>
 						<DrinksList />
 					</Suspense>
+					<DrinkDetails />
 				</main>
 			</div>
 		</DrinkListProvider>

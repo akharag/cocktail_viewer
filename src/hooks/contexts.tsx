@@ -38,7 +38,6 @@ export const DrinkListProvider: FC = ({ children }) => {
 	};
 
 	useEffect(() => {
-		console.log('change in current drink', currentDrink);
 		if (currentDrink === null) updateUrl('');
 		if (drinkList && currentDrink) updateUrl(currentDrink.strDrink);
 	}, [currentDrink, drinkList]);

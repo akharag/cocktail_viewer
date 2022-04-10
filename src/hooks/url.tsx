@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 const popStateEvent = new PopStateEvent('popstate', { state: null });
 
 export const updateUrl = (path: string, title?: string) => {
-	window.history.pushState(null, title ?? "Bartender's View", path);
+	window.history.pushState(null, '', path);
 	dispatchEvent(popStateEvent);
 };
 

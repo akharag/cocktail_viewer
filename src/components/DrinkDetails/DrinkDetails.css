@@ -3,10 +3,12 @@
 	top: 0;
 	bottom: 0;
 	right: 0;
-	background-color: rgb(3, 27, 48);
+	background-color: var(--neutral-100);
 	opacity: 98%;
 	overflow-x: hidden;
-	z-index: calc(var(--drink-index) +2);
+	z-index: var(--drink-detail-index);
+	-webkit-backdrop-filter: blur(5px);
+	backdrop-filter: blur(5px);
 }
 
 .drink-details button.close {
@@ -17,16 +19,22 @@
 	background: none;
 }
 
+.drink-details img {
+	margin-inline: auto;
+	aspect-ratio: 1 / 1;
+	width: 60%;
+}
+
 .drink-details.hide {
 	opacity: 0%;
 }
 
 .animate-enter {
-	animation: enter var(--animate-400) ease-out forwards;
+	animation: enter var(--animate-300) ease-out forwards;
 }
 
 .animate-exit {
-	animation: exit var(--animate-400) ease-out forwards;
+	animation: exit var(--animate-300) ease-out forwards;
 }
 
 @keyframes enter {
