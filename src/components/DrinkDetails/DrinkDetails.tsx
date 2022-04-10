@@ -12,6 +12,22 @@ function DrinkDetails() {
 	const path = useReactPath().split('/')[useReactPath().split('/').length - 1];
 	const icon = '\u2715';
 
+	const getTags = (): string[] => {
+		const t: string[] = [];
+		if (!currentDrink) return [];
+		if (currentDrink.strAlcoholic) {
+			t.push(currentDrink.strAlcoholic as string);
+		}
+		if (currentDrink.strGlass) {
+			t.push(currentDrink.strGlass as string);
+		}
+
+		if (currentDrink.strTags) {
+			(currentDrink.strTags as string).split(',').forEach((tag) => t.push(tag));
+		}
+		return t;
+	};
+
 	useEffect(() => {
 		if (path !== '') {
 			setHide(false);
@@ -65,6 +81,11 @@ function DrinkDetails() {
 					src={currentDrink.strDrinkThumb}
 					alt={`${currentDrink.strDrink} detail thumbnail`}
 				/>
+				<ul id='tags'>
+					{getTags().map((tag) => (
+						<li key={tag}>{tag}</li>
+					))}
+				</ul>
 				<button className='close' onClick={() => setHide(true)}>
 					{icon}
 				</button>

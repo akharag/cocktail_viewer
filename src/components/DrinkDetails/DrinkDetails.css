@@ -25,11 +25,28 @@
 	margin-inline: auto;
 	border-radius: var(--border-radius-lg);
 	aspect-ratio: 1 / 1;
-	width: 60%;
+	width: min(60%, 30em);
 }
 
 .drink-details.hide {
 	opacity: 0%;
+}
+
+.drink-details ul#tags {
+	display: flex;
+	justify-content: center;
+	margin-inline: auto;
+	width: 80%;
+}
+
+.drink-details ul#tags li {
+	display: inline;
+	font-size: 0.9em;
+	margin: 1em;
+	border-radius: 100vmax;
+	padding: 0.7em;
+	list-style: none;
+	background-color: var(--neutral-300);
 }
 
 .animate-enter {
@@ -42,20 +59,20 @@
 
 @keyframes enter {
 	from {
-		flex: 0 0 0;
+		flex-grow: 0;
 	}
 
 	to {
-		flex: 3 0 0;
+		flex-grow: 3;
 	}
 }
 
 @keyframes exit {
 	from {
-		flex: 3 0 0;
+		flex-grow: 3;
 	}
 
 	to {
-		flex: 0 0 0;
+		flex-grow: 0;
 	}
 }
