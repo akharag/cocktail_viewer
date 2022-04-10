@@ -47,8 +47,11 @@ function DrinkDetails() {
 	}, [currentDrink, path, setCurrentDrink]);
 
 	useEffect(() => {
-		if (hide) updateUrl('/');
-	}, [hide]);
+		if (hide) {
+			setCurrentDrink?.(null);
+			updateUrl('/');
+		}
+	}, [hide, setCurrentDrink]);
 
 	if (!currentDrink)
 		return (
