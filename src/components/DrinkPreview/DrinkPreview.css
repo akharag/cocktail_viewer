@@ -1,0 +1,50 @@
+.drink-details {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	background-color: rgb(3, 27, 48);
+	opacity: 98%;
+	overflow-x: hidden;
+	z-index: calc(var(--drink-index) +2);
+}
+
+.drink-details button.close {
+	position: absolute;
+	top: 1rem;
+	right: 1rem;
+	font-size: 1.3em;
+	background: none;
+}
+
+.drink-details.hide {
+	opacity: 0%;
+}
+
+.animate-enter {
+	animation: enter var(--animate-400) ease-out forwards;
+}
+
+.animate-exit {
+	animation: exit var(--animate-400) ease-out forwards;
+}
+
+@keyframes enter {
+	from {
+		width: 0;
+	}
+
+	to {
+		width: min(100%, 50rem);
+	}
+}
+
+@keyframes exit {
+	from {
+		width: min(100%, 50rem);
+	}
+
+	to {
+		width: 0;
+	}
+}

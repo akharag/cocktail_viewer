@@ -1,38 +1,39 @@
 .App {
-  text-align: center;
-  min-height: 100vh;
-  overflow-x: hidden;
+	text-align: center;
+	min-height: 100vh;
+	overflow-x: hidden;
+	z-index: var(--root-index);
 }
 
 .App-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	font-size: calc(10px + 2vmin);
 }
 
 section + section {
-  margin-block: 1rem;
+	margin-block: 1rem;
 }
 
 section#search_filters > div + div {
-  margin-top: 1rem;
+	margin-top: 1rem;
 }
 
 #filters > div {
-  margin: 0 auto;
-  padding: 0 2em;
+	margin: 0 auto;
+	padding: 0 2em;
 }
 
 #filters > div > span {
-  flex: 1;
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-items: flex-start;
+	flex: 1;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+	align-items: flex-start;
 }
 
 #filters > div#glass > span {
-  gap: 2rem;
+	gap: 2rem;
 }

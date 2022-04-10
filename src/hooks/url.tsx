@@ -1,25 +1,24 @@
 import { useEffect, useState } from 'react';
 
+const popStateEvent = new PopStateEvent('popstate', { state: null });
+
 export const updateUrl = (path: string, title?: string) => {
-  window.history.pushState(null, title ?? "Bartender's View", path);
-  console.log('URL UPDATE');
-  const popStateEvent = new PopStateEvent('popstate', { state: null });
-  dispatchEvent(popStateEvent);
-  console.log('EVENT DISPATCH');
+	window.history.pushState(null, title ?? "Bartender's View", path);
+	dispatchEvent(popStateEvent);
 };
 
 export const useReactPath = () => {
-  const [path, setPath] = useState(window.location.pathname);
+	const [path, setPath] = useState(window.location.pathname);
 
-  const listenToPopstate = () => {
-    const winPath = window.location.pathname;
-    setPath(winPath);
-  };
-  useEffect(() => {
-    window.addEventListener('popstate', listenToPopstate);
-    return () => {
-      window.removeEventListener('popstate', listenToPopstate);
-    };
-  }, []);
-  return path;
+	const listenToPopstate = () => {
+		const winPath = window.location.pathname;
+		setPath(winPath);
+	};
+	useEffect(() => {
+		window.addEventListener('popstate', listenToPopstate);
+		return () => {
+			window.removeEventListener('popstate', listenToPopstate);
+		};
+	}, []);
+	return path;
 };

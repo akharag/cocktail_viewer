@@ -1,22 +1,28 @@
+import { useContext, useEffect } from 'react';
+import { fetchDrinks } from '../../controllers/fetchData';
+import { DrinkListContext } from '../../hooks/contexts';
+import { DrinkType } from '../../utils/types';
 import Drink from '../Drinks/Drink';
 import './DrinkList.css';
 
-type DrinkListProps = {
-  drinks: Array<any>;
-};
-
 //TODO Move CSS Styles from App.css to DrinkList.css
 
-const DrinksList = ({ drinks }: DrinkListProps) => {
-  return (
-    <section id="list">
-      {drinks.length > 0 ? (
-        drinks.map((drink, i) => <Drink key={'drink' + i} drink={drink} />)
-      ) : (
-        <p>No Drink Found :(</p>
-      )}
-    </section>
-  );
+const DrinksList = () => {
+	const { drinkList, setDrinkList } = useContext(DrinkListContext);
+
+	useEffect(() => {
+		fetchDrinks().then((drinks) => setDrinkList?.(drinks));
+	}, []);
+
+	return (
+		<section id='list'>
+			{drinkList && drinkList.length > 0 ? (
+				drinkList.map((drink, i) => <Drink key={'drink' + i} drink={drink} />)
+			) : (
+				<p>No Drink Found :(</p>
+			)}
+		</section>
+	);
 };
 
 export default DrinksList;

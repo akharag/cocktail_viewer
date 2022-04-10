@@ -1,19 +1,33 @@
 * {
-  --neutral-100: hsl(220, 13%, 18%);
-  --neutral-200: hsl(220, 13%, 28%);
-  --neutral-300: hsl(220, 13%, 38%);
-  --neutral-400: hsl(220, 13%, 48%);
-  --neutral-500: hsl(220, 13%, 58%);
-  --neutral-600: hsl(220, 13%, 68%);
-  --neutral-700: hsl(220, 13%, 78%);
-  --neutral-800: hsl(220, 13%, 88%);
-  --neutral-900: hsl(220, 13%, 98%);
+	--neutral-100: hsl(220, 13%, 18%);
+	--neutral-200: hsl(220, 13%, 28%);
+	--neutral-300: hsl(220, 13%, 38%);
+	--neutral-400: hsl(220, 13%, 48%);
+	--neutral-500: hsl(220, 13%, 58%);
+	--neutral-600: hsl(220, 13%, 68%);
+	--neutral-700: hsl(220, 13%, 78%);
+	--neutral-800: hsl(220, 13%, 88%);
+	--neutral-900: hsl(220, 13%, 98%);
 
-  --clr-bg: var(--neutral-100);
-  --clr-txt: var(--neutral-800);
-  --clr-outline: var(--neutral-400);
-  --clr-button-bg: var(--neutral-300);
-  --border-radius-sm: 6px;
-  --border-radius-md: 10px;
-  --border-radius-lg: 16px;
+	--clr-bg: var(--neutral-100);
+	--clr-txt: var(--neutral-800);
+	--clr-outline: var(--neutral-400);
+	--clr-button-bg: var(--neutral-300);
+	--border-radius-sm: 6px;
+	--border-radius-md: 10px;
+	--border-radius-lg: 16px;
+
+	--root-index: 0;
+	--drink-index: calc(var(--root-index) + 1);
+	--drink-detail-index: calc(var(--root-index) + 2);
+
+	--animate-100: 100ms;
+	--animate-200: 200ms;
+	--animate-300: 300ms;
+	--animate-400: 400ms;
+	--animate-500: 500ms;
+	--animate-600: 600ms;
+	--animate-700: 700ms;
+	--animate-800: 800ms;
+	--animate-900: 900ms;
 }
