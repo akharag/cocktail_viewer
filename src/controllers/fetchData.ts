@@ -2,6 +2,21 @@ import { DrinkType } from '../utils/types';
 
 export const URL = 'https://www.thecocktaildb.com/api/json/v1/1/';
 
+export const fetchSingleDrink = async (
+	name: string
+): Promise<DrinkType | null> => {
+	try {
+		const response = await fetch(URL + `search.php?s=${name}`);
+		const data: { drinks: DrinkType[] } = await response.json();
+		if (data?.drinks) {
+			return data.drinks[0];
+		}
+		return null;
+	} catch {
+		return null;
+	}
+};
+
 export const fetchDrinks = async (): Promise<DrinkType[]> => {
 	try {
 		const response = await fetch(URL + 'search.php?s=j');

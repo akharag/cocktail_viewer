@@ -1,7 +1,6 @@
 import { useContext, useEffect } from 'react';
 import { fetchDrinks } from '../../controllers/fetchData';
 import { DrinkListContext } from '../../hooks/contexts';
-import { DrinkType } from '../../utils/types';
 import Drink from '../Drinks/Drink';
 import './DrinkList.css';
 
@@ -17,7 +16,9 @@ const DrinksList = () => {
 	return (
 		<section id='list'>
 			{drinkList && drinkList.length > 0 ? (
-				drinkList.map((drink, i) => <Drink key={'drink' + i} drink={drink} />)
+				drinkList.map((drink, i) => (
+					<Drink index={i} key={'drink' + i} drink={drink} />
+				))
 			) : (
 				<p>No Drink Found :(</p>
 			)}

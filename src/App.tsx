@@ -7,7 +7,7 @@ import { useReactPath } from './hooks/url';
 import DrinksList from './components/DrinksList/DrinksList';
 import Search from './components/Search/Search';
 import Filters from './components/Filters/Filters';
-import DrinkDetails from './components/DrinkPreview/DrinkPreview';
+import DrinkDetails from './components/DrinkDetails/DrinkDetails';
 import { DrinkListProvider } from './hooks/contexts';
 
 function App() {
@@ -33,7 +33,7 @@ function App() {
 						/>
 						<Filters />
 					</section>
-					{path !== '/' && path !== '' && <DrinkDetails title={path} />}
+					<DrinkDetails />
 					<Suspense fallback={<p>Loading...</p>}>
 						<DrinksList />
 					</Suspense>
