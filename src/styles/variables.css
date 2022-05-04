@@ -1,4 +1,5 @@
 * {
+	--neutral-black: hsl(220, 13%, 08%);
 	--neutral-100: hsl(220, 13%, 18%);
 	--neutral-200: hsl(220, 13%, 28%);
 	--neutral-300: hsl(220, 13%, 38%);
@@ -8,11 +9,12 @@
 	--neutral-700: hsl(220, 13%, 78%);
 	--neutral-800: hsl(220, 13%, 88%);
 	--neutral-900: hsl(220, 13%, 98%);
+	--neutral-white: hsl(220, 13%, 98%);
 
-	--clr-bg: var(--neutral-100);
-	--clr-txt: var(--neutral-800);
-	--clr-outline: var(--neutral-400);
-	--clr-button-bg: var(--neutral-300);
+	--clr-bg: var(--neutral-black);
+	--clr-txt: var(--neutral-white);
+	--clr-outline: var(--neutral-300);
+	--clr-button-bg: var(--neutral-600);
 	--border-radius-sm: 6px;
 	--border-radius-md: 10px;
 	--border-radius-lg: 16px;

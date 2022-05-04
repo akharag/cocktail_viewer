@@ -1,25 +1,23 @@
 .drink {
-	flex: 1 1 18em;
 	border-radius: 10px;
 	padding: 1em;
-	background: hsl(220, 13%, 23%);
-	aspect-ratio: 1/1;
+	background-color: hsl(220, 13%, 23%);
+	height: fit-content;
+	aspect-ratio: 1 / 1;
 	transition: transform ease-in 100ms;
-	z-index: var(--drink-index);
+}
+
+.drink:is(:hover, :focus-within) {
+	transform: scale(1.02);
+	outline: none;
+	box-shadow: 0 0 1rem white;
 }
 
 .drink h3 {
 	margin-top: 0;
 }
 
-.drink:is(:hover, :focus-within) {
-	transform: scale(1.05);
-	outline: none;
-	box-shadow: 0 0 1rem white;
-}
-
 .drink > img {
-	margin: 0 auto;
-	width: 100%;
 	border-radius: 10px;
+	margin: 0 auto;
 }

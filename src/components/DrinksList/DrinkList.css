@@ -1,7 +1,5 @@
 #list {
-	display: flex;
-	justify-content: center;
-	flex-wrap: wrap;
-	gap: 3rem;
-	margin-inline: 3rem;
+	display: grid;
+	grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+	gap: 1.2em;
 }

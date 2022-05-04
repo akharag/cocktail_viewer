@@ -1,7 +1,6 @@
 .App {
 	text-align: center;
 	min-height: 100vh;
-	overflow-x: hidden;
 	z-index: var(--root-index);
 }
 
@@ -43,10 +42,11 @@ section#search_filters > div + div {
 }
 
 section#drinks {
-	display: flex;
 	justify-content: space-between;
 	width: 97%;
+	height: 200vh;
 	margin-inline: auto;
+	gap: 3rem;
 }
 
 section#drinks > * {

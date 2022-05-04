@@ -1,28 +1,34 @@
 import { useContext, useEffect } from 'react';
 import { fetchDrinks } from '../../controllers/fetchData';
 import { DrinkListContext } from '../../hooks/contexts';
-import Drink from '../Drinks/Drink';
+import Drink from '../Drink/Drink';
 import './DrinkList.css';
+import data from '../../utils/data.json';
 
 //TODO Move CSS Styles from App.css to DrinkList.css
 
 const DrinksList = () => {
 	const { drinkList, setDrinkList } = useContext(DrinkListContext);
+	const arr = Object.values(data);
 
 	useEffect(() => {
-		fetchDrinks().then((drinks) => setDrinkList?.(drinks));
+		// fetchDrinks().then((drinks) =>
+		// 	setDrinkList?.(drinks || Object.values(data))
+		// );
+		// console.log(drinkList);
+		setDrinkList?.(arr as any);
 	}, [setDrinkList]);
 
 	return (
-		<section id='list'>
+		<div id='list'>
 			{drinkList && drinkList.length > 0 ? (
-				drinkList.map((drink, i) => (
-					<Drink index={i} key={'drink' + i} drink={drink} />
+				Object.values(data).map((drink, i) => (
+					<Drink key={'drink' + i} drink={drink as any} />
 				))
 			) : (
 				<p>No Drink Found :(</p>
 			)}
-		</section>
+		</div>
 	);
 };
 

@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import './DrinkDetails.css';
 import { fetchSingleDrink } from '../../controllers/fetchData';
 import { updateUrl, useReactPath } from '../../hooks/url';
@@ -55,44 +55,45 @@ function DrinkDetails() {
 
 	if (!currentDrink)
 		return (
-			<div
+			<dialog
+				style={{ display: 'none' }}
 				className={`drink-details ${hide ? 'animate-exit' : 'animate-enter'}`}>
 				<h1>Loading</h1>
 				<button className='close' onClick={() => setHide(!hide)}>
 					{icon}
 				</button>
-			</div>
+			</dialog>
 		);
 
 	if (error) {
 		return (
-			<div
+			<dialog
 				className={`drink-details ${hide ? 'animate-exit' : 'animate-enter'}`}>
 				<h1>Error loading drink</h1>
 				<button className='close' onClick={() => setHide(!hide)}>
 					{icon}
 				</button>
-			</div>
+			</dialog>
 		);
 	}
 
 	return (
 		<div className={`drink-details ${hide ? 'animate-exit' : 'animate-enter'}`}>
-			<div aria-hidden>
-				<h1>{currentDrink.strDrink}</h1>
-				<img
-					src={currentDrink.strDrinkThumb}
-					alt={`${currentDrink.strDrink} detail thumbnail`}
-				/>
-				<ul id='tags'>
-					{getTags().map((tag) => (
-						<li key={tag}>{tag}</li>
-					))}
-				</ul>
-				<button className='close' onClick={() => setHide(true)}>
-					{icon}
-				</button>
-			</div>
+			<h1>{currentDrink.strDrink || currentDrink.display_name}</h1>
+			<img
+				src={currentDrink.strDrinkThumb}
+				alt={`${
+					currentDrink.strDrink || currentDrink.display_name
+				} detail thumbnail`}
+			/>
+			<ul id='tags'>
+				{((currentDrink.tags as string[]) || getTags()).map((tag) => (
+					<li key={tag}>{tag}</li>
+				))}
+			</ul>
+			<button className='close' onClick={() => setHide(true)}>
+				{icon}
+			</button>
 		</div>
 	);
 }

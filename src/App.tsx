@@ -1,6 +1,7 @@
 import { Suspense } from 'react';
 import './App.css';
 import './styles/variables.css';
+import './styles/utils.css';
 
 import DrinksList from './components/DrinksList/DrinksList';
 import Search from './components/Search/Search';
