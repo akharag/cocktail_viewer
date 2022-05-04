@@ -46,9 +46,13 @@ section#drinks {
 	width: 97%;
 	height: 200vh;
 	margin-inline: auto;
-	gap: 3rem;
+	gap: 1rem;
 }
 
 section#drinks > * {
 	flex: 1 0 0;
+}
+
+section#drinks {
+	display: flex;
 }
