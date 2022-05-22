@@ -51,6 +51,7 @@
  */
 
 .drink-details {
+	flex: 0;
 	position: sticky;
 	top: 0;
 	background-color: var(--neutral-200);
@@ -106,13 +107,13 @@
 	}
 
 	to {
-		flex-grow: 1.5;
+		flex-grow: 1;
 	}
 }
 
 @keyframes exit {
 	from {
-		flex-grow: 1.5;
+		flex-grow: 1;
 	}
 
 	to {
