@@ -14,26 +14,25 @@ type useStateDispatch<T> = Dispatch<SetStateAction<T>>;
 export type useStateInContext<T> = [T, OptionalType<useStateDispatch<T>>];
 
 interface DrinkListContextInterface {
-	drinkList: useStateInContext<OptionalType<DrinkType[]>>;
+	drinkList: useStateInContext<DrinkType[]>;
 	currentDrink: useStateInContext<DrinkType | null>;
 }
 
-export const DrinkListContext = createContext<DrinkListContextInterface | null>(
-	null
-);
-
 export const DrinkListInitialContext: DrinkListContextInterface = {
-	drinkList: [undefined, undefined],
+	drinkList: [[], undefined],
 	currentDrink: [null, undefined]
 };
+
+export const DrinkListContext = createContext<DrinkListContextInterface>(
+	DrinkListInitialContext
+);
 
 export const DrinkListProvider: FC<{
 	children?: ReactNode;
 }> = ({ children }) => {
 	const [initialLoad, setIntialLoad] = useState(true);
 	const [currentDrink, setCurrentDrink] = useState<DrinkType | null>(null);
-	const [drinkList, setDrinkList] =
-		useState<OptionalType<DrinkType[]>>(undefined);
+	const [drinkList, setDrinkList] = useState<DrinkType[]>([]);
 
 	const value: DrinkListContextInterface = {
 		drinkList: [drinkList, setDrinkList],

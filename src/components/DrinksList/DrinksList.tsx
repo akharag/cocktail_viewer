@@ -8,10 +8,8 @@ import { DrinkType, OptionalType } from '../../utils/types';
 //TODO Move CSS Styles from App.css to DrinkList.css
 
 const DrinksList = () => {
-	const context = useContext(DrinkListContext);
-	const [drinkList, setDrinkList] = context?.drinkList as useStateInContext<
-		OptionalType<DrinkType[]>
-	>;
+	const [drinkList, setDrinkList] = useContext(DrinkListContext)
+		.drinkList as useStateInContext<OptionalType<DrinkType[]>>;
 	const setDrinkListCallback = useCallback(
 		(drinkList: DrinkType[]) => {
 			setDrinkList?.(drinkList);
@@ -19,21 +17,10 @@ const DrinksList = () => {
 		[setDrinkList]
 	);
 
-	// const arr = Object.values(data);
-
 	useEffect(() => {
 		console.log('Render');
 		fetchDrinks().then((drinks) => setDrinkListCallback?.(drinks));
-		// setDrinkList?.(arr as any);
 	}, [setDrinkListCallback]);
-
-	if (context === null) {
-		return (
-			<div>
-				<h1>Loading...</h1>
-			</div>
-		);
-	}
 
 	return (
 		<div id='list'>

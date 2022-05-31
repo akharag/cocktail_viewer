@@ -1,14 +1,21 @@
-import { useContext, useEffect, useState } from 'react';
+import { useCallback, useContext, useEffect, useState } from 'react';
 import './DrinkDetails.css';
 import { fetchSingleDrink } from '../../controllers/fetchData';
 import { updateUrl, useReactPath } from '../../hooks/url';
-import { DrinkListContext } from '../../hooks/contexts';
+import { DrinkListContext, useStateInContext } from '../../hooks/contexts';
 import { DrinkType } from '../../utils/types';
 
 function DrinkDetails() {
 	const [hide, setHide] = useState(true);
 	const [error, setError] = useState(false);
-	const { currentDrink, setCurrentDrink } = useContext(DrinkListContext);
+	const [currentDrink, setCurrentDrink] = useContext(DrinkListContext)
+		.currentDrink as useStateInContext<DrinkType | null>;
+	const setCurrentDrinkCallback = useCallback(
+		(currentDrink: DrinkType | null) => {
+			setCurrentDrink?.(currentDrink);
+		},
+		[setCurrentDrink]
+	);
 	const path = useReactPath().split('/')[useReactPath().split('/').length - 1];
 	const icon = '\u2715';
 
@@ -36,15 +43,15 @@ function DrinkDetails() {
 			const fetchDrink = async () => {
 				const drinkName = path;
 				const drink: DrinkType | null = await fetchSingleDrink(drinkName);
-				if (drink) setCurrentDrink?.({ ...drink });
+				if (drink) setCurrentDrinkCallback?.({ ...drink });
 				else {
 					setError(true);
-					setTimeout(() => setCurrentDrink?.(null), 2000);
+					setTimeout(() => setCurrentDrinkCallback?.(null), 2000);
 				}
 			};
 			fetchDrink();
 		}
-	}, [currentDrink, path, setCurrentDrink]);
+	}, [currentDrink, path, setCurrentDrinkCallback]);
 
 	useEffect(() => {
 		if (hide) {
