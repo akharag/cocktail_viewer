@@ -1,7 +1,8 @@
-import {
+import React, {
 	createContext,
 	Dispatch,
 	FC,
+	ReactNode,
 	SetStateAction,
 	useEffect,
 	useState
@@ -10,32 +11,33 @@ import { updateUrl } from '../hooks/url';
 import { OptionalType, DrinkType } from '../utils/types';
 
 type useStateDispatch<T> = Dispatch<SetStateAction<T>>;
+type useStateInContext<T> = [T, OptionalType<useStateDispatch<T>>];
 
-export const DrinkListContext = createContext<{
-	drinkList: OptionalType<DrinkType[]>;
-	setDrinkList: OptionalType<
-		Dispatch<SetStateAction<OptionalType<DrinkType[]>>>
-	>;
-	currentDrink: DrinkType | null;
-	setCurrentDrink: OptionalType<Dispatch<SetStateAction<DrinkType | null>>>;
-}>({
-	drinkList: undefined,
-	setDrinkList: undefined,
-	currentDrink: null,
-	setCurrentDrink: undefined
-});
+interface DrinkListContextInterface {
+	drinkList: useStateInContext<OptionalType<DrinkType[]>>;
+	currentDrink: useStateInContext<DrinkType | null>;
+}
 
-export const DrinkListProvider: FC = ({ children }) => {
+export const DrinkListContext = createContext<DrinkListContextInterface | null>(
+	null
+);
+
+export const DrinkListInitialContext: DrinkListContextInterface = {
+	drinkList: [undefined, undefined],
+	currentDrink: [null, undefined]
+};
+
+export const DrinkListProvider: FC<{
+	children?: ReactNode;
+}> = ({ children }) => {
 	const [initialLoad, setIntialLoad] = useState(true);
 	const [currentDrink, setCurrentDrink] = useState<DrinkType | null>(null);
 	const [drinkList, setDrinkList] =
 		useState<OptionalType<DrinkType[]>>(undefined);
 
-	const value = {
-		drinkList: drinkList,
-		currentDrink: currentDrink,
-		setDrinkList: setDrinkList,
-		setCurrentDrink: setCurrentDrink
+	const value: DrinkListContextInterface = {
+		drinkList: [drinkList, setDrinkList],
+		currentDrink: [currentDrink, setCurrentDrink]
 	};
 
 	useEffect(() => {

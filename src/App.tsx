@@ -1,13 +1,14 @@
-import { Suspense } from 'react';
+import { Suspense, lazy } from 'react';
 import './App.css';
 import './styles/variables.css';
 import './styles/utils.css';
 
-import DrinksList from './components/DrinksList/DrinksList';
+// import DrinksList from './components/DrinksList/DrinksList';
 import Search from './components/Search/Search';
 import Filters from './components/Filters/Filters';
 import DrinkDetails from './components/DrinkDetails/DrinkDetails';
 import { DrinkListProvider } from './hooks/contexts';
+const DrinksList = lazy(() => import('./components/DrinksList/DrinksList'));
 
 function App() {
 	return (
