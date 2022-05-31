@@ -11,7 +11,7 @@ import { updateUrl } from '../hooks/url';
 import { OptionalType, DrinkType } from '../utils/types';
 
 type useStateDispatch<T> = Dispatch<SetStateAction<T>>;
-type useStateInContext<T> = [T, OptionalType<useStateDispatch<T>>];
+export type useStateInContext<T> = [T, OptionalType<useStateDispatch<T>>];
 
 interface DrinkListContextInterface {
 	drinkList: useStateInContext<OptionalType<DrinkType[]>>;
