@@ -20,7 +20,6 @@ function App() {
 						<p>Looking to discover a new drink? See what options you have!</p>
 					</div>
 				</header>
-
 				<main>
 					<section id='search_filters'>
 						<Search
@@ -32,8 +31,8 @@ function App() {
 					<section id='drinks'>
 						<Suspense fallback={<p>Loading...</p>}>
 							<DrinksList />
+							<DrinkDetails />
 						</Suspense>
-						<DrinkDetails />
 					</section>
 				</main>
 			</div>

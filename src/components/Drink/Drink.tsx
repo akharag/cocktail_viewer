@@ -8,8 +8,7 @@ type DrinkProps = {
 };
 
 function Drink({ drink }: DrinkProps) {
-	const [currentDrink, setCurrentDrink] =
-		useContext(DrinkListContext).currentDrink;
+	const setCurrentDrink = useContext(DrinkListContext).currentDrink[1];
 	const { strDrink, strDrinkThumb } = drink;
 	return (
 		<button className='drink' onClick={() => setCurrentDrink?.(drink)}>

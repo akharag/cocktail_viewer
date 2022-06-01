@@ -18,9 +18,8 @@ const DrinksList = () => {
 	);
 
 	useEffect(() => {
-		console.log('Render');
 		fetchDrinks().then((drinks) => setDrinkListCallback?.(drinks));
-	}, [setDrinkListCallback]);
+	}, []);
 
 	return (
 		<div id='list'>

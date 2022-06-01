@@ -53,6 +53,7 @@ section#drinks > * {
 	flex: 1 0 0;
 }
 
-section#drinks {
+/* section#drinks {
 	display: flex;
-}
+	align-content: stretch;
+} */

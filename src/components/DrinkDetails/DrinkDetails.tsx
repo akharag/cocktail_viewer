@@ -1,5 +1,6 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import './DrinkDetails.css';
+import Modal from '../Modal';
 import { fetchSingleDrink } from '../../controllers/fetchData';
 import { updateUrl, useReactPath } from '../../hooks/url';
 import { DrinkListContext, useStateInContext } from '../../hooks/contexts';
@@ -62,30 +63,27 @@ function DrinkDetails() {
 
 	if (!currentDrink)
 		return (
-			<dialog
+			<Modal
 				style={{ display: 'none' }}
-				className={`drink-details ${hide ? 'animate-exit' : 'animate-enter'}`}>
+				className={`drink-details ${hide ? 'animate-exit' : 'animate-enter'}`}
+				onCloseCallback={() => setHide(!hide)}>
 				<h1>Loading</h1>
-				<button className='close' onClick={() => setHide(!hide)}>
-					{icon}
-				</button>
-			</dialog>
+			</Modal>
 		);
 
 	if (error) {
 		return (
-			<dialog
-				className={`drink-details ${hide ? 'animate-exit' : 'animate-enter'}`}>
+			<Modal
+				open
+				className={`drink-details ${hide ? 'animate-exit' : 'animate-enter'}`}
+				onCloseCallback={() => setHide(true)}>
 				<h1>Error loading drink</h1>
-				<button className='close' onClick={() => setHide(!hide)}>
-					{icon}
-				</button>
-			</dialog>
+			</Modal>
 		);
 	}
 
 	return (
-		<div className={`drink-details ${hide ? 'animate-exit' : 'animate-enter'}`}>
+		<Modal open onCloseCallback={() => setHide(true)} className='drink-details'>
 			<h1>{currentDrink.strDrink || currentDrink.display_name}</h1>
 			<img
 				src={currentDrink.strDrinkThumb}
@@ -98,10 +96,7 @@ function DrinkDetails() {
 					<li key={tag}>{tag}</li>
 				))}
 			</ul>
-			<button className='close' onClick={() => setHide(true)}>
-				{icon}
-			</button>
-		</div>
+		</Modal>
 	);
 }
 

@@ -1,96 +1,29 @@
-/* .drink-details {
-	position: sticky;
-	width: 100%;
-	height: fit-content;
-	z-index: var(--drink-detail-index);
-	aspect-ratio: 1/1;
-	background-color: var(--neutral-300);
-}
-
-.drink-details>div {
-	height: calc(100% - 2rem);
-	border-radius: var(--border-radius-sm);
-	box-shadow: inset 0 0 10px 0.3rem rgba(0, 0, 0, 0.391);
-}
-
-.drink-details button.close {
-	position: absolute;
-	top: 1rem;
-	right: 1rem;
-	font-size: 1.3em;
-	background: none;
-}
-
-.drink-details img {
-	margin-inline: auto;
-	border-radius: var(--border-radius-lg);
-	aspect-ratio: 1 / 1;
-	width: min(60%, 30em);
-}
-
-.drink-details.hide {
-	opacity: 0%;
-}
-
-.drink-details ul#tags {
-	display: flex;
-	justify-content: center;
-	margin-inline: auto;
-	width: 80%;
-}
-
-.drink-details ul#tags li {
-	display: inline;
-	font-size: 0.9em;
-	margin: 1em;
-	border-radius: 100vmax;
-	padding: 0.7em;
-	list-style: none;
-	background-color: var(--neutral-300);
-}
- */
-
 .drink-details {
-	flex: 0;
-	position: sticky;
-	top: 0;
-	background-color: var(--neutral-200);
-	height: fit-content;
-	width: fit-content;
-	/* aspect-ratio: 1 /1; */
-}
-
-.drink-details button.close {
-	position: absolute;
-	top: 1rem;
-	right: 1rem;
-	font-size: 1.3em;
-	background: none;
+	border-radius: var(--border-radius-lg);
+	background-color: var(--neutral-100);
+	padding: 1rem;
+	width: clamp(250px, 60%, 700px);
 }
 
 .drink-details img {
-	margin-inline: auto;
 	border-radius: var(--border-radius-lg);
-	aspect-ratio: 1 / 1;
-	width: min(60%, 30em);
-	background-color: red;
 }
 
 .drink-details ul#tags {
 	display: flex;
 	justify-content: center;
-	margin-inline: auto;
-	width: 80%;
+	align-items: center;
+	gap: 1rem;
+	padding: 0;
 }
 
 .drink-details ul#tags li {
 	display: inline;
 	font-size: 0.9em;
-	margin: 1em;
 	border-radius: 100vmax;
 	padding: 0.7em;
 	list-style: none;
-	background-color: var(--neutral-300);
+	background-color: var(--neutral-200);
 }
 
 .animate-enter {
