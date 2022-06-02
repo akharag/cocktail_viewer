@@ -2,7 +2,7 @@
 	border-radius: var(--border-radius-lg);
 	background-color: var(--neutral-100);
 	padding: 1rem;
-	width: clamp(250px, 60%, 700px);
+	width: clamp(250px, 70vw, 70vh);
 }
 
 .drink-details img {
