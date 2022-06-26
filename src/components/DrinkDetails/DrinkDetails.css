@@ -1,29 +1,114 @@
 .drink-details {
+	display: grid;
+	grid-template-areas:
+		'Header Header'
+		'Image Ingredients'
+		'Image Info'
+		'Image Tags';
+	--info-max-width: 50ch;
 	border-radius: var(--border-radius-lg);
 	background-color: var(--neutral-100);
 	padding: 1rem;
-	width: clamp(250px, 70vw, 70vh);
+	width: clamp(250px, 70vw, fit-content);
+}
+
+.drink-details h1 {
+	grid-area: Header;
 }
 
 .drink-details img {
-	border-radius: var(--border-radius-lg);
+	grid-area: Image;
 }
 
-.drink-details ul#tags {
+.drink-details #ingredients {
+	grid-area: Ingredients;
+}
+
+.drink-details p {
+	grid-area: Info;
+}
+
+.drink-details #tags {
+	grid-area: Tags;
+}
+
+.drink-details img {
+	box-shadow: 0 0 1px 1px var(--neutral-500);
+	margin-inline: auto;
+	border-radius: var(--border-radius-lg);
+	width: 100%;
+	max-height: var(--info-max-width);
+	max-width: var(--info-max-width);
+	object-fit: cover;
+}
+
+.drink-details ul {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	gap: 1rem;
+	flex-wrap: wrap;
+	margin: 0.5rem;
 	padding: 0;
+	gap: 1em;
 }
 
-.drink-details ul#tags li {
+.drink-details ul li {
 	display: inline;
-	font-size: 0.9em;
+	font-size: 0.8em;
 	border-radius: 100vmax;
 	padding: 0.7em;
 	list-style: none;
 	background-color: var(--neutral-200);
+}
+
+.drink-details h6 {
+	margin-block: 1.5em;
+}
+
+.drink-details #tags {
+	margin-inline: auto;
+}
+
+.drink-details #tags li {
+	font-size: 0.67em;
+}
+
+.drink-details p {
+	max-width: var(--info-max-width);
+	margin-inline: auto;
+}
+
+@media screen and (min-aspect-ratio: 4/3) and (max-width: 900px) {
+	.drink-details {
+		grid-template-areas:
+			'Header Ingredients Ingredients'
+			'Image Info Info'
+			'Image Tags Tags';
+	}
+
+	.drink-details img {
+		width: 100%;
+	}
+
+	.drink-details #drink-detail-content {
+		display: flex;
+		gap: 1rem;
+	}
+
+	.drink-details #info {
+		flex: 1;
+	}
+}
+
+@media screen and (max-aspect-ratio: 3/4) {
+	.drink-details {
+		grid-template-areas:
+			'Header'
+			'Image'
+			'Ingredients'
+			'Info'
+			'Tags';
+	}
 }
 
 .animate-enter {

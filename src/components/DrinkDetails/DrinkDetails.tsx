@@ -5,6 +5,7 @@ import { fetchSingleDrink } from '../../controllers/fetchData';
 import { updateUrl, useReactPath } from '../../hooks/url';
 import { DrinkListContext, useStateInContext } from '../../hooks/contexts';
 import { DrinkType } from '../../utils/types';
+import { ingredientsToArray } from '../../utils/functions';
 
 function DrinkDetails() {
 	const [hide, setHide] = useState(true);
@@ -18,7 +19,6 @@ function DrinkDetails() {
 		[setCurrentDrink]
 	);
 	const path = useReactPath().split('/')[useReactPath().split('/').length - 1];
-	const icon = '\u2715';
 
 	const getTags = (): string[] => {
 		const t: string[] = [];
@@ -91,11 +91,25 @@ function DrinkDetails() {
 					currentDrink.strDrink || currentDrink.display_name
 				} detail thumbnail`}
 			/>
-			<ul id='tags'>
-				{((currentDrink.tags as string[]) || getTags()).map((tag) => (
-					<li key={tag}>{tag}</li>
-				))}
-			</ul>
+			<div id='ingredients'>
+				<h4>Ingredients</h4>
+				<ul>
+					{ingredientsToArray(currentDrink).map((ingredient) => (
+						<li key={ingredient}>{ingredient}</li>
+					))}
+				</ul>
+			</div>
+			<p id='instructions' className='center'>
+				{currentDrink.strInstructions || 'Instruction'}
+			</p>
+			<div id='tags' className='center'>
+				<h6>Tags</h6>
+				<ul>
+					{((currentDrink.tags as string[]) || getTags()).map((tag) => (
+						<li key={tag}>{tag}</li>
+					))}
+				</ul>
+			</div>
 		</Modal>
 	);
 }
