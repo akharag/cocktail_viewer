@@ -94,9 +94,9 @@ function DrinkDetails() {
 			<div id='ingredients'>
 				<h4>Ingredients</h4>
 				<ul>
-					{ingredientsToArray(currentDrink).map((ingredient) => (
-						<li key={ingredient}>{ingredient}</li>
-					))}
+					{ingredientsToArray(currentDrink).map(
+						(ingredient) => ingredient && <li key={ingredient}>{ingredient}</li>
+					)}
 				</ul>
 			</div>
 			<p id='instructions' className='center'>
@@ -105,9 +105,9 @@ function DrinkDetails() {
 			<div id='tags' className='center'>
 				<h6>Tags</h6>
 				<ul>
-					{((currentDrink.tags as string[]) || getTags()).map((tag) => (
-						<li key={tag}>{tag}</li>
-					))}
+					{((currentDrink.tags as string[]) || getTags()).map(
+						(tag) => tag && <li key={tag}>{tag}</li>
+					)}
 				</ul>
 			</div>
 		</Modal>
