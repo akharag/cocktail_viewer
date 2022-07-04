@@ -49,6 +49,7 @@
 
 .drink-details #tags {
 	margin-inline: auto;
+	align-self: flex-end;
 }
 
 .drink-details #tags li {
@@ -115,33 +116,5 @@
 			'Info'
 			'Tags';
 		max-height: none;
-	}
-}
-
-.animate-enter {
-	animation: enter var(--animate-300) ease-out forwards;
-}
-
-.animate-exit {
-	animation: exit var(--animate-300) ease-out forwards;
-}
-
-@keyframes enter {
-	from {
-		flex-grow: 0;
-	}
-
-	to {
-		flex-grow: 1;
-	}
-}
-
-@keyframes exit {
-	from {
-		flex-grow: 1;
-	}
-
-	to {
-		flex-grow: 0;
 	}
 }
