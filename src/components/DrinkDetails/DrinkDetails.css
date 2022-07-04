@@ -47,6 +47,12 @@
 	margin-block: 1.5em;
 }
 
+.drink-details #instructions {
+	max-width: var(--info-max-width);
+	margin-inline: auto;
+	align-self: center;
+}
+
 .drink-details #tags {
 	margin-inline: auto;
 	align-self: flex-end;
@@ -54,11 +60,6 @@
 
 .drink-details #tags li {
 	font-size: 0.67em;
-}
-
-.drink-details p {
-	max-width: var(--info-max-width);
-	margin-inline: auto;
 }
 
 /* Grid Areas */
@@ -75,7 +76,7 @@
 	grid-area: Ingredients;
 }
 
-.drink-details p {
+.drink-details #instructions {
 	grid-area: Info;
 }
 
