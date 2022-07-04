@@ -5,7 +5,10 @@ import { fetchSingleDrink } from '../../controllers/fetchData';
 import { updateUrl, useReactPath } from '../../hooks/url';
 import { DrinkListContext, useStateInContext } from '../../hooks/contexts';
 import { DrinkType } from '../../utils/types';
-import { ingredientsToArray } from '../../utils/functions';
+import {
+	ingredientsToArray,
+	removeDuplicatesFromArray
+} from '../../utils/functions';
 
 function DrinkDetails() {
 	const [hide, setHide] = useState(true);
@@ -33,6 +36,7 @@ function DrinkDetails() {
 		if (currentDrink.strTags) {
 			(currentDrink.strTags as string).split(',').forEach((tag) => t.push(tag));
 		}
+
 		return t;
 	};
 
@@ -94,7 +98,7 @@ function DrinkDetails() {
 			<div id='ingredients'>
 				<h4>Ingredients</h4>
 				<ul>
-					{ingredientsToArray(currentDrink).map(
+					{removeDuplicatesFromArray(ingredientsToArray(currentDrink)).map(
 						(ingredient) => ingredient && <li key={ingredient}>{ingredient}</li>
 					)}
 				</ul>
@@ -105,7 +109,7 @@ function DrinkDetails() {
 			<div id='tags' className='center'>
 				<h6>Tags</h6>
 				<ul>
-					{((currentDrink.tags as string[]) || getTags()).map(
+					{removeDuplicatesFromArray(getTags()).map(
 						(tag) => tag && <li key={tag}>{tag}</li>
 					)}
 				</ul>

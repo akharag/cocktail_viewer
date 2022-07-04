@@ -9,3 +9,11 @@ export const ingredientsToArray = (drink: DrinkType) => {
 		.forEach(([_, value]) => arr.push(value));
 	return arr;
 };
+
+export const functionToSet = (arr: any[]) => {
+	return new Set(arr);
+};
+
+export const removeDuplicatesFromArray = (arr: any[]) => {
+	return Array.from(functionToSet(arr));
+};
