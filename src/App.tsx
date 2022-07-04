@@ -23,6 +23,7 @@ function App() {
 				<main>
 					<section id='search_filters'>
 						<Search
+							className='margin-inline-auto'
 							select={['Name', 'Alcohol', 'Ingredient']}
 							onSearch={() => console.log('Search')}
 						/>

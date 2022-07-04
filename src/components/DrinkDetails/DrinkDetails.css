@@ -12,26 +12,6 @@
 	width: clamp(250px, 70vw, fit-content);
 }
 
-.drink-details h1 {
-	grid-area: Header;
-}
-
-.drink-details img {
-	grid-area: Image;
-}
-
-.drink-details #ingredients {
-	grid-area: Ingredients;
-}
-
-.drink-details p {
-	grid-area: Info;
-}
-
-.drink-details #tags {
-	grid-area: Tags;
-}
-
 .drink-details img {
 	box-shadow: 0 0 1px 1px var(--neutral-500);
 	margin-inline: auto;
@@ -76,6 +56,28 @@
 .drink-details p {
 	max-width: var(--info-max-width);
 	margin-inline: auto;
+}
+
+/* Grid Areas */
+
+.drink-details h1 {
+	grid-area: Header;
+}
+
+.drink-details img {
+	grid-area: Image;
+}
+
+.drink-details #ingredients {
+	grid-area: Ingredients;
+}
+
+.drink-details p {
+	grid-area: Info;
+}
+
+.drink-details #tags {
+	grid-area: Tags;
 }
 
 @media screen and (min-aspect-ratio: 4/3) and (max-width: 900px) {
