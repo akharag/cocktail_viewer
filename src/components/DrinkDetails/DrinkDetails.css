@@ -1,4 +1,6 @@
 .drink-details {
+	justify-self: center;
+	align-self: flex-start;
 	display: grid;
 	grid-template-areas:
 		'Header Header'
@@ -11,6 +13,7 @@
 	background-color: var(--neutral-100);
 	padding: 1rem;
 	width: clamp(250px, 70vw, fit-content);
+	min-height: fit-content;
 	max-height: 100vh;
 }
 
@@ -48,6 +51,7 @@
 }
 
 .drink-details #instructions {
+	/* font-size: clamp(300px, 3vw, 500px); */
 	max-width: var(--info-max-width);
 	margin-inline: auto;
 	align-self: center;

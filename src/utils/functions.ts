@@ -17,3 +17,5 @@ export const functionToSet = (arr: any[]) => {
 export const removeDuplicatesFromArray = (arr: any[]) => {
 	return Array.from(functionToSet(arr));
 };
+
+export const resizeDynamicFont = () => {};
