@@ -18,8 +18,6 @@
 	max-height: 100vh;
 }
 
-/* TODO ADD DARK BACK */
-
 .drink-details * {
 	text-align: center;
 }
@@ -67,13 +65,16 @@
 	margin-block: 1.5em;
 }
 
-@media (prefer-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
 	.drink-details {
 		background-color: var(--neutral-100);
 	}
+
+	.drink-details ul li {
+		background-color: var(--neutral-200);
+	}
 }
 
-/* TODO: fix fonts at small sizes  */
 .drink-details #instructions {
 	align-self: center;
 	margin-inline: auto;
@@ -109,7 +110,7 @@
 	grid-area: Tags;
 }
 
-@media screen and (min-aspect-ratio: 4/3) and (max-width: 900px) {
+@media screen and (min-aspect-ratio: 4/3) and (max-width: 720px) {
 	.drink-details {
 		grid-template-areas:
 			'Header Ingredients Ingredients'

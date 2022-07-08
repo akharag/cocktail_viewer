@@ -10,16 +10,18 @@
 .drink:is(:hover, :focus-within) {
 	transform: scale(1.02);
 	outline: none;
-	box-shadow: 0 0 1rem var(--accent-300);
+	box-shadow: 0 0 0.4rem 0.2rem var(--accent-400);
 }
 
-/* TODO ADD DARK BACK */
-
-/* @media (prefers-color-scheme: dark) {
-	.drink:is(:hover, :focus-within) {
-		box-shadow: 0 0 1rem var(--accent-700);
+@media (prefers-color-scheme: dark) {
+	.drink {
+		background-color: var(--neutral-100);
 	}
-} */
+
+	.drink:is(:hover, :focus-within) {
+		box-shadow: 0 0 0.4rem 0.2rem var(--accent-600);
+	}
+}
 
 .drink h3 {
 	margin-top: 0;
@@ -29,9 +31,3 @@
 	border-radius: 10px;
 	margin: 0 auto;
 }
-
-/* @media (prefer-color-scheme: dark) {
-	.drink {
-		background-color: var(--neutral-200);
-	}
-} */

@@ -11,7 +11,7 @@
 	--neutral-900: hsl(220, 13%, 98%);
 	--neutral-white: hsl(220, 13%, 98%);
 
-	--accent-hue: 300;
+	--accent-hue: 250;
 	--accent-saturation: 53%;
 
 	--accent-100: hsl(var(--accent-hue), var(--accent-saturation), 10%);
@@ -47,15 +47,12 @@
 	--animate-900: 900ms;
 }
 
-/* TODO ADD DARK BACK */
-/* @media (prefers-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
 	* {
 		--clr-bg: var(--neutral-black);
 		--clr-txt: var(--neutral-white);
 
-		--clr-bg: var(--neutral-600);
-		--clr-txt: var(--neutral-black);
 		--clr-outline: var(--neutral-300);
 		--clr-button-bg: var(--neutral-600);
 	}
-} */
+}
