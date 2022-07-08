@@ -2,6 +2,7 @@
 	text-align: center;
 	min-height: 100vh;
 	z-index: var(--root-index);
+	color: var(--clr-txt);
 }
 
 .App-header {

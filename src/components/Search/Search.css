@@ -6,7 +6,7 @@
 .search {
 	display: flex;
 	--search-padding: 0.2em;
-	--search-border: 2px solid var(--neutral-400);
+	--search-border: 2px solid var(--neutral-300);
 	border: var(--search-border);
 	border-radius: 100vmax;
 	width: fit-content;
@@ -15,9 +15,19 @@
 .search * {
 	border: none;
 	height: calc(2em + var(--search-padding) * 2);
-	background-color: var(--neutral-300);
+	background-color: var(--neutral-800);
 	font-size: 1em;
 	z-index: 0;
+}
+
+@media (prefered-color-scheme: dark) {
+	.search {
+		--search-border: 2px solid var(--neutral-400);
+	}
+
+	.search * {
+		background-color: var(--neutral-300);
+	}
 }
 
 .search *:focus {
@@ -37,7 +47,7 @@
 .search button {
 	border-inline-start: var(--search-border);
 	border-radius: 0 100vmax 100vmax 0;
-	padding-inline-end: 0.5em;
+	padding-inline: 0.8em;
 }
 
 .search input {

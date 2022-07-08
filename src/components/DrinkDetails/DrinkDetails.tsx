@@ -96,7 +96,7 @@ function DrinkDetails() {
 				} detail thumbnail`}
 			/>
 			<div id='ingredients'>
-				<h4>Ingredients</h4>
+				<h2>Ingredients</h2>
 				<ul>
 					{removeDuplicatesFromArray(ingredientsToArray(currentDrink)).map(
 						(ingredient) => ingredient && <li key={ingredient}>{ingredient}</li>

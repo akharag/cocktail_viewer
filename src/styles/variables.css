@@ -11,10 +11,23 @@
 	--neutral-900: hsl(220, 13%, 98%);
 	--neutral-white: hsl(220, 13%, 98%);
 
-	--clr-bg: var(--neutral-black);
-	--clr-txt: var(--neutral-white);
+	--accent-hue: 300;
+	--accent-saturation: 53%;
+
+	--accent-100: hsl(var(--accent-hue), var(--accent-saturation), 10%);
+	--accent-200: hsl(var(--accent-hue), var(--accent-saturation), 20%);
+	--accent-300: hsl(var(--accent-hue), var(--accent-saturation), 30%);
+	--accent-400: hsl(var(--accent-hue), var(--accent-saturation), 40%);
+	--accent-500: hsl(var(--accent-hue), var(--accent-saturation), 50%);
+	--accent-600: hsl(var(--accent-hue), var(--accent-saturation), 60%);
+	--accent-700: hsl(var(--accent-hue), var(--accent-saturation), 70%);
+	--accent-800: hsl(var(--accent-hue), var(--accent-saturation), 80%);
+	--accent-900: hsl(var(--accent-hue), var(--accent-saturation), 90%);
+
+	--clr-bg: var(--neutral-600);
+	--clr-txt: var(--neutral-black);
 	--clr-outline: var(--neutral-300);
-	--clr-button-bg: var(--neutral-600);
+	--clr-button-bg: var(--neutral-800);
 	--border-radius-sm: 6px;
 	--border-radius-md: 10px;
 	--border-radius-lg: 16px;
@@ -33,3 +46,16 @@
 	--animate-800: 800ms;
 	--animate-900: 900ms;
 }
+
+/* TODO ADD DARK BACK */
+/* @media (prefers-color-scheme: dark) {
+	* {
+		--clr-bg: var(--neutral-black);
+		--clr-txt: var(--neutral-white);
+
+		--clr-bg: var(--neutral-600);
+		--clr-txt: var(--neutral-black);
+		--clr-outline: var(--neutral-300);
+		--clr-button-bg: var(--neutral-600);
+	}
+} */
