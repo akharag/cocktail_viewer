@@ -16,17 +16,18 @@
 	border: none;
 	height: calc(2em + var(--search-padding) * 2);
 	background-color: var(--neutral-800);
+	color: inherit;
 	font-size: 1em;
 	z-index: 0;
 }
 
-@media (prefered-color-scheme: dark) {
+@media (prefers-color-scheme: dark) {
 	.search {
 		--search-border: 2px solid var(--neutral-400);
 	}
 
 	.search * {
-		background-color: var(--neutral-300);
+		background-color: var(--neutral-200);
 	}
 }
 
