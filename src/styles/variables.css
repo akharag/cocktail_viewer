@@ -1,18 +1,21 @@
 * {
-	--neutral-black: hsl(220, 13%, 08%);
-	--neutral-100: hsl(220, 13%, 18%);
-	--neutral-200: hsl(220, 13%, 28%);
-	--neutral-300: hsl(220, 13%, 38%);
-	--neutral-400: hsl(220, 13%, 48%);
-	--neutral-500: hsl(220, 13%, 58%);
-	--neutral-600: hsl(220, 13%, 68%);
-	--neutral-700: hsl(220, 13%, 78%);
-	--neutral-800: hsl(220, 13%, 88%);
-	--neutral-900: hsl(220, 13%, 98%);
-	--neutral-white: hsl(220, 13%, 98%);
+	--neutral-hue: 220;
+	--neutral-saturation: 5%;
 
-	--accent-hue: 250;
-	--accent-saturation: 53%;
+	--neutral-black: hsl(var(--neutral-hue), var(--neutral-saturation), 08%);
+	--neutral-100: hsl(var(--neutral-hue), var(--neutral-saturation), 18%);
+	--neutral-200: hsl(var(--neutral-hue), var(--neutral-saturation), 28%);
+	--neutral-300: hsl(var(--neutral-hue), var(--neutral-saturation), 38%);
+	--neutral-400: hsl(var(--neutral-hue), var(--neutral-saturation), 48%);
+	--neutral-500: hsl(var(--neutral-hue), var(--neutral-saturation), 58%);
+	--neutral-600: hsl(var(--neutral-hue), var(--neutral-saturation), 68%);
+	--neutral-700: hsl(var(--neutral-hue), var(--neutral-saturation), 78%);
+	--neutral-800: hsl(var(--neutral-hue), var(--neutral-saturation), 88%);
+	--neutral-900: hsl(var(--neutral-hue), var(--neutral-saturation), 98%);
+	--neutral-white: hsl(var(--neutral-hue), var(--neutral-saturation), 98%);
+
+	--accent-hue: 220;
+	--accent-saturation: 15%;
 
 	--accent-100: hsl(var(--accent-hue), var(--accent-saturation), 10%);
 	--accent-200: hsl(var(--accent-hue), var(--accent-saturation), 20%);

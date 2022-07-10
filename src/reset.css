@@ -10,7 +10,7 @@ body {
 		sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	background-color: var(--clr-bg);
+	background-color: var(--clr-bg, white);
 	min-height: 100vh;
 	text-rendering: optimizeSpeed;
 }
