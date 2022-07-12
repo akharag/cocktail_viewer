@@ -1,4 +1,4 @@
-import { CSSProperties, FC, ReactElement, ReactNode } from 'react';
+import { CSSProperties, FC, ReactElement, ReactNode, useEffect } from 'react';
 import './Drawer.css';
 
 const Drawer: FC<{
@@ -9,6 +9,16 @@ const Drawer: FC<{
 	onCloseCallback?: () => void;
 }> = ({ style, className, children, open, onCloseCallback }) => {
 	const closeIcon = '\u2715';
+	const body = document.querySelector('body')!;
+
+	useEffect(() => {
+		if (open) {
+			body.style.setProperty('overflow', 'clip');
+		}
+		return () => {
+			body.style.removeProperty('overflow');
+		};
+	}, [body.style, open]);
 
 	const onClose = () => {
 		onCloseCallback?.();

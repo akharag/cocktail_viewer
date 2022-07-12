@@ -1,11 +1,11 @@
 .drink-details {
-	color: red;
 	display: grid;
 	grid-template-areas:
-		'Header Header'
-		'Image Ingredients'
-		'Image Info'
-		'Image Tags';
+		'Header Header  Header'
+		'Image Image Ingredients'
+		'Image Image Info'
+		'Image Image Info'
+		'Tags Tags Tags';
 	gap: 0.2em;
 	--info-max-width: 50ch;
 	border-radius: var(--border-radius-lg);
@@ -14,8 +14,8 @@
 	align-self: stretch;
 	padding: 1rem;
 	width: clamp(250px, 70vw, fit-content);
-	min-height: fit-content;
-	max-height: 100vh;
+	min-height: calc(100vh - 3em);
+	height: fit-content;
 }
 
 .drink-details * {
@@ -40,7 +40,7 @@
 	max-height: var(--info-max-width);
 	max-width: var(--info-max-width);
 	object-fit: cover;
-	align-self: center;
+	align-self: flex-start;
 }
 
 .drink-details ul {
@@ -54,7 +54,7 @@
 
 .drink-details ul li {
 	display: inline;
-	font-size: clamp(12px, 0.5em, 20px);
+	font-size: clamp(12px, 0.9em, 32px);
 	border-radius: 100vmax;
 	padding-block: 0.5em;
 	padding-inline: 0.8em;
@@ -76,12 +76,19 @@
 	}
 }
 
+.drink-details #ingredients h2 {
+	margin: 0;
+}
+
 .drink-details #instructions {
-	align-self: center;
 	margin-inline: auto;
-	padding-inline: 1.5em;
+	padding-bottom: 1.5em;
 	max-width: var(--info-max-width);
 	font-size: clamp(16px, 2vw, 32px);
+}
+
+.drink-details :is(#ingredients, #instructions) {
+	width: 88%;
 }
 
 .drink-details #tags {
@@ -111,7 +118,31 @@
 	grid-area: Tags;
 }
 
-@media screen and (min-aspect-ratio: 4/3) and (max-width: 720px) {
+@media screen and (max-width: 900px) and (orientation: portrait) {
+	.drink-details {
+		grid-template-areas:
+			'Header'
+			'Image'
+			'Ingredients'
+			'Info'
+			'Tags';
+	}
+
+	.drink-details #ingredients h2 {
+		padding-block: 0.7em;
+	}
+
+	.drink-details img {
+		height: 100%;
+	}
+
+	.drink-details #instructions {
+		align-self: center;
+		padding-bottom: 0;
+	}
+}
+
+@media screen and (max-width: 770px) and (orientation: landscape) {
 	.drink-details {
 		grid-template-areas:
 			'Header Ingredients Ingredients'
@@ -120,29 +151,17 @@
 			'Image Tags Tags';
 	}
 
+	.drink-details * {
+		padding: 0;
+		justify-self: center;
+		align-self: center;
+	}
+
+	.drink-details #instructions {
+		padding-bottom: 0;
+	}
+
 	.drink-details img {
-		width: 100%;
-		height: 70vh;
-	}
-
-	.drink-details #drink-detail-content {
-		display: flex;
-		gap: 1rem;
-	}
-
-	.drink-details #info {
-		flex: 1;
-	}
-}
-
-@media screen and (max-aspect-ratio: 3/4) {
-	.drink-details {
-		grid-template-areas:
-			'Header'
-			'Image'
-			'Ingredients'
-			'Info'
-			'Tags';
-		max-height: none;
+		max-width: 200px;
 	}
 }

@@ -101,9 +101,7 @@ function DrinkDetails() {
 						)}
 					</ul>
 				</div>
-				<p id='instructions' className='center'>
-					{currentDrink.strInstructions || 'Instruction'}
-				</p>
+				<p id='instructions'>{currentDrink.strInstructions || 'Instruction'}</p>
 				<div id='tags' className='center'>
 					<h6>Tags</h6>
 					<ul>
