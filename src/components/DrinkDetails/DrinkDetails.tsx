@@ -1,6 +1,7 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import './DrinkDetails.css';
-import Modal from '../Modal';
+// import Modal from '../Modal';
+import Drawer from '../Drawer';
 import { fetchSingleDrink } from '../../controllers/fetchData';
 import { updateUrl, useReactPath } from '../../hooks/url';
 import { DrinkListContext, useStateInContext } from '../../hooks/contexts';
@@ -65,29 +66,24 @@ function DrinkDetails() {
 		}
 	}, [hide, setCurrentDrink]);
 
-	if (!currentDrink)
+	if (!currentDrink) {
 		return (
-			<Modal
-				style={{ display: 'none' }}
-				className={`drink-details ${hide ? 'animate-exit' : 'animate-enter'}`}
-				onCloseCallback={() => setHide(!hide)}>
-				<h1>Loading</h1>
-			</Modal>
+			<Drawer>
+				<h1>Loading...</h1>
+			</Drawer>
 		);
+	}
 
 	if (error) {
 		return (
-			<Modal
-				open
-				className={`drink-details ${hide ? 'animate-exit' : 'animate-enter'}`}
-				onCloseCallback={() => setHide(true)}>
-				<h1>Error loading drink</h1>
-			</Modal>
+			<Drawer>
+				<h1>There was an error loading </h1>
+			</Drawer>
 		);
 	}
 
 	return (
-		<Modal open onCloseCallback={() => setHide(true)} className='drink-details'>
+		<Drawer open={true}>
 			<h1>{currentDrink.strDrink || currentDrink.display_name}</h1>
 			<img
 				src={currentDrink.strDrinkThumb}
@@ -114,7 +110,7 @@ function DrinkDetails() {
 					)}
 				</ul>
 			</div>
-		</Modal>
+		</Drawer>
 	);
 }
 

@@ -1,0 +1,41 @@
+.drawer {
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	left: 0;
+	background-color: rgba(0, 0, 0, 0.8);
+	backdrop-filter: blur(2px) saturate(50%);
+	z-index: 1;
+}
+
+.drawer-content {
+	padding-top: 2.3em;
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	width: 70vw;
+	background-color: var(--neutral-500);
+}
+
+.drawer .close {
+	position: absolute;
+	top: 0.5em;
+	right: 0.5em;
+	background: none;
+	font-size: 1.3em;
+	line-height: 1.3em;
+}
+
+@media (prefers-color-scheme: dark) {
+	.drawer-content {
+		background-color: var(--neutral-100);
+	}
+}
+
+@media screen and (max-width: 800px) {
+	.drawer-content {
+		width: 100vw;
+	}
+}
