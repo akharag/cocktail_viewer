@@ -1,12 +1,28 @@
 .drawer {
+	--animate-drawer-time: var(--animate-300);
 	position: fixed;
 	top: 0;
 	bottom: 0;
 	right: 0;
 	left: 0;
-	background-color: rgba(0, 0, 0, 0.8);
+	background-color: hsla(0, 0%, 0%, 0.8);
 	backdrop-filter: blur(2px) saturate(50%);
-	z-index: 1;
+	z-index: 100;
+}
+
+.drawer.hide {
+	left: 100vw;
+	backdrop-filter: none;
+	background-color: hsla(0, 0%, 0%, 0);
+}
+
+.drawer.show .drawer-content {
+	animation: open-from-side ease-out var(--animate-drawer-time) forwards;
+}
+
+.drawer.hide .drawer-content {
+	width: 0;
+	animation: close-from-side ease-in var(--animate-drawer-time) backwards;
 }
 
 .drawer-content {
@@ -15,17 +31,22 @@
 	top: 0;
 	bottom: 0;
 	right: 0;
-	width: 70vw;
+	width: min(55rem, 100vw);
 	background-color: var(--neutral-500);
 }
 
-.drawer .close {
+.drawer.show .close {
 	position: absolute;
 	top: 0.5em;
-	right: 0.5em;
+	right: 0.8em;
 	background: none;
 	font-size: 1.3em;
 	line-height: 1.3em;
+	opacity: 100%;
+}
+
+.drawer.hide .close {
+	opacity: 0;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -34,8 +55,40 @@
 	}
 }
 
-@media screen and (max-width: 800px) {
-	.drawer-content {
-		width: 100vw;
+/* @media screen and (max-width: 800px) {
+    .drawer-content {
+        width: 100vw;
+    }
+} */
+
+@keyframes appear {
+	from {
+		background-color: hsla(0, 0%, 0%, 0);
+	}
+
+	to {
+		background-color: hsla(0, 0%, 0%, 0.8);
+	}
+}
+
+@keyframes open-from-side {
+	from {
+		width: 0;
+	}
+
+	to {
+		width: min(55rem, 100vw);
+	}
+}
+
+@keyframes close-from-side {
+	from {
+		display: initial;
+		width: min(55rem, 100vw);
+	}
+
+	to {
+		display: none;
+		width: 0;
 	}
 }

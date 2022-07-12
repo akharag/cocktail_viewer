@@ -1,7 +1,5 @@
 .drink-details {
-	justify-self: center;
-	align-self: flex-start;
-	align-content: center;
+	color: red;
 	display: grid;
 	grid-template-areas:
 		'Header Header'
@@ -12,6 +10,8 @@
 	--info-max-width: 50ch;
 	border-radius: var(--border-radius-lg);
 	background-color: var(--neutral-700);
+	justify-items: center;
+	align-self: stretch;
 	padding: 1rem;
 	width: clamp(250px, 70vw, fit-content);
 	min-height: fit-content;
@@ -24,10 +24,11 @@
 
 .drink-details h1 {
 	margin-bottom: 1rem;
+	font-size: 2.3em;
 }
 
 .drink-details h2 {
-	font-size: large;
+	font-size: 1.8em;
 	margin-block: 1rem;
 }
 

@@ -15,7 +15,9 @@ const Drawer: FC<{
 	};
 
 	return (
-		<div style={style} className={`drawer ${className || ''}`}>
+		<div
+			style={style}
+			className={`drawer ${open ? 'show' : 'hide'} ${className || ''}`}>
 			<div className='drawer-content'>
 				<button className='close' onClick={onClose}>
 					{closeIcon}

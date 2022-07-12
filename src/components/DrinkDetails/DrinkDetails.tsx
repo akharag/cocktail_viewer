@@ -68,7 +68,7 @@ function DrinkDetails() {
 
 	if (!currentDrink) {
 		return (
-			<Drawer>
+			<Drawer open={!hide} onCloseCallback={() => setHide(true)}>
 				<h1>Loading...</h1>
 			</Drawer>
 		);
@@ -76,39 +76,42 @@ function DrinkDetails() {
 
 	if (error) {
 		return (
-			<Drawer>
+			<Drawer open={!hide} onCloseCallback={() => setHide(true)}>
 				<h1>There was an error loading </h1>
 			</Drawer>
 		);
 	}
 
 	return (
-		<Drawer open={true}>
-			<h1>{currentDrink.strDrink || currentDrink.display_name}</h1>
-			<img
-				src={currentDrink.strDrinkThumb}
-				alt={`${
-					currentDrink.strDrink || currentDrink.display_name
-				} detail thumbnail`}
-			/>
-			<div id='ingredients'>
-				<h2>Ingredients</h2>
-				<ul>
-					{removeDuplicatesFromArray(ingredientsToArray(currentDrink)).map(
-						(ingredient) => ingredient && <li key={ingredient}>{ingredient}</li>
-					)}
-				</ul>
-			</div>
-			<p id='instructions' className='center'>
-				{currentDrink.strInstructions || 'Instruction'}
-			</p>
-			<div id='tags' className='center'>
-				<h6>Tags</h6>
-				<ul>
-					{removeDuplicatesFromArray(getTags()).map(
-						(tag) => tag && <li key={tag}>{tag}</li>
-					)}
-				</ul>
+		<Drawer open={!hide} onCloseCallback={() => setHide(true)}>
+			<div className='drink-details'>
+				<h1>{currentDrink.strDrink || currentDrink.display_name}</h1>
+				<img
+					src={currentDrink.strDrinkThumb}
+					alt={`${
+						currentDrink.strDrink || currentDrink.display_name
+					} detail thumbnail`}
+				/>
+				<div id='ingredients'>
+					<h2>Ingredients</h2>
+					<ul>
+						{removeDuplicatesFromArray(ingredientsToArray(currentDrink)).map(
+							(ingredient) =>
+								ingredient && <li key={ingredient}>{ingredient}</li>
+						)}
+					</ul>
+				</div>
+				<p id='instructions' className='center'>
+					{currentDrink.strInstructions || 'Instruction'}
+				</p>
+				<div id='tags' className='center'>
+					<h6>Tags</h6>
+					<ul>
+						{removeDuplicatesFromArray(getTags()).map(
+							(tag) => tag && <li key={tag}>{tag}</li>
+						)}
+					</ul>
+				</div>
 			</div>
 		</Drawer>
 	);
