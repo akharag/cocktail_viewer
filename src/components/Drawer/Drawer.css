@@ -1,44 +1,48 @@
 .drawer {
-	--animate-drawer-time: var(--animate-200);
+	--content-width: min(55rem, 100vw);
+	--transition-drawer-time: var(--animate-100);
 	position: fixed;
 	top: 0;
 	bottom: 0;
-	right: 0;
+	right: 100vw;
 	left: 0;
-	background-color: hsla(0, 0%, 0%, 0.8);
+	background-color: hsla(0, 0%, 0%, 0.5);
 	backdrop-filter: blur(2px) saturate(50%);
 	z-index: 100;
-	overflow-y: auto;
+	overflow-x: hidden;
+	transition: right 0s linear;
+	transition-delay: var(--transition-drawer-time);
 }
 
-.drawer.hide {
-	left: 100vw;
-	backdrop-filter: none;
-	background-color: hsla(0, 0%, 0%, 0);
+.drawer.show {
+	right: 0;
+	transition-delay: 0ms;
+}
+
+@keyframes hide-container {
+	from {
+		opacity: 100%;
+	}
+
+	to {
+		opacity: 0%;
+	}
 }
 
 .drawer .drawer-content {
-	min-height: 100vh;
-	height: fit-content;
-}
-
-.drawer.show .drawer-content {
-	animation: open-from-side ease-out var(--animate-drawer-time) forwards;
-}
-
-.drawer.hide .drawer-content {
-	width: 0;
-	animation: close-from-side ease-in var(--animate-drawer-time) backwards;
-}
-
-.drawer-content {
-	padding-top: 2.3em;
-	position: fixed;
+	position: absolute;
 	top: 0;
 	bottom: 0;
 	right: 0;
-	width: min(55rem, 100vw);
-	background-color: var(--neutral-500);
+	left: calc(100vw - var(--content-width));
+	min-height: 100vh;
+	height: fit-content;
+	transform: translateX(var(--content-width));
+	transition: transform var(--transition-drawer-time) ease-out;
+}
+
+.drawer.show .drawer-content {
+	transform: translateX(0);
 }
 
 .drawer.show .close {
@@ -49,46 +53,4 @@
 	font-size: 1.3em;
 	line-height: 1.3em;
 	opacity: 100%;
-}
-
-.drawer.hide .close {
-	opacity: 0;
-}
-
-@media (prefers-color-scheme: dark) {
-	.drawer-content {
-		background-color: var(--neutral-100);
-	}
-}
-
-@keyframes appear {
-	from {
-		background-color: hsla(0, 0%, 0%, 0);
-	}
-
-	to {
-		background-color: hsla(0, 0%, 0%, 0.8);
-	}
-}
-
-@keyframes open-from-side {
-	from {
-		width: 0;
-	}
-
-	to {
-		width: min(55rem, 100vw);
-	}
-}
-
-@keyframes close-from-side {
-	from {
-		display: initial;
-		width: min(55rem, 100vw);
-	}
-
-	to {
-		display: none;
-		width: 0;
-	}
 }
