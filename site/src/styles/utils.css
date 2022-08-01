@@ -1,0 +1,8 @@
+.margin-inline-auto {
+	margin-inline: auto;
+}
+
+.center-children {
+	display: grid;
+	place-content: center;
+}

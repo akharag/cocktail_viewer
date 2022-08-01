@@ -1,0 +1,33 @@
+.drink {
+	border-radius: 10px;
+	padding: 1em;
+	background-color: var(--neutral-800);
+	height: fit-content;
+	aspect-ratio: 1 / 1;
+	transition: transform ease-in 100ms;
+}
+
+.drink:is(:hover, :focus-within) {
+	transform: scale(1.02);
+	outline: none;
+	box-shadow: 0 0 0.8rem var(--accent-200);
+}
+
+@media (prefers-color-scheme: dark) {
+	.drink {
+		background-color: var(--neutral-100);
+	}
+
+	.drink:is(:hover, :focus-within) {
+		box-shadow: 0 0 0.4rem 0.2rem var(--accent-800);
+	}
+}
+
+.drink h3 {
+	margin-top: 0;
+}
+
+.drink > img {
+	border-radius: 10px;
+	margin: 0 auto;
+}

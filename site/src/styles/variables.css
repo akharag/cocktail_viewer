@@ -1,0 +1,61 @@
+* {
+	--neutral-hue: 220;
+	--neutral-saturation: 5%;
+
+	--neutral-black: hsl(var(--neutral-hue), var(--neutral-saturation), 08%);
+	--neutral-100: hsl(var(--neutral-hue), var(--neutral-saturation), 18%);
+	--neutral-200: hsl(var(--neutral-hue), var(--neutral-saturation), 28%);
+	--neutral-300: hsl(var(--neutral-hue), var(--neutral-saturation), 38%);
+	--neutral-400: hsl(var(--neutral-hue), var(--neutral-saturation), 48%);
+	--neutral-500: hsl(var(--neutral-hue), var(--neutral-saturation), 58%);
+	--neutral-600: hsl(var(--neutral-hue), var(--neutral-saturation), 68%);
+	--neutral-700: hsl(var(--neutral-hue), var(--neutral-saturation), 78%);
+	--neutral-800: hsl(var(--neutral-hue), var(--neutral-saturation), 88%);
+	--neutral-900: hsl(var(--neutral-hue), var(--neutral-saturation), 98%);
+	--neutral-white: hsl(var(--neutral-hue), var(--neutral-saturation), 98%);
+
+	--accent-hue: 220;
+	--accent-saturation: 15%;
+
+	--accent-100: hsl(var(--accent-hue), var(--accent-saturation), 10%);
+	--accent-200: hsl(var(--accent-hue), var(--accent-saturation), 20%);
+	--accent-300: hsl(var(--accent-hue), var(--accent-saturation), 30%);
+	--accent-400: hsl(var(--accent-hue), var(--accent-saturation), 40%);
+	--accent-500: hsl(var(--accent-hue), var(--accent-saturation), 50%);
+	--accent-600: hsl(var(--accent-hue), var(--accent-saturation), 60%);
+	--accent-700: hsl(var(--accent-hue), var(--accent-saturation), 70%);
+	--accent-800: hsl(var(--accent-hue), var(--accent-saturation), 80%);
+	--accent-900: hsl(var(--accent-hue), var(--accent-saturation), 90%);
+
+	--clr-bg: var(--neutral-600);
+	--clr-txt: var(--neutral-black);
+	--clr-outline: var(--neutral-300);
+	--clr-button-bg: var(--neutral-800);
+	--border-radius-sm: 6px;
+	--border-radius-md: 10px;
+	--border-radius-lg: 16px;
+
+	--root-index: 0;
+	--drink-index: calc(var(--root-index) + 1);
+	--drink-detail-index: calc(var(--root-index) + 2);
+
+	--animate-100: 100ms;
+	--animate-200: 200ms;
+	--animate-300: 300ms;
+	--animate-400: 400ms;
+	--animate-500: 500ms;
+	--animate-600: 600ms;
+	--animate-700: 700ms;
+	--animate-800: 800ms;
+	--animate-900: 900ms;
+}
+
+@media (prefers-color-scheme: dark) {
+	* {
+		--clr-bg: var(--neutral-black);
+		--clr-txt: var(--neutral-white);
+
+		--clr-outline: var(--neutral-300);
+		--clr-button-bg: var(--neutral-600);
+	}
+}
