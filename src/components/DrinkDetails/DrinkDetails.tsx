@@ -1,18 +1,16 @@
 import { useCallback, useContext, useEffect, useState } from 'react';
 import './DrinkDetails.css';
 // import Modal from '../Modal';
-import Drawer from '../Drawer';
-import { fetchSingleDrink } from '../../controllers/fetchData';
-import { updateUrl, useReactPath } from '../../hooks/url';
-import { DrinkListContext, useStateInContext } from '../../hooks/contexts';
-import { DrinkType } from '../../utils/types';
-import {
-	ingredientsToArray,
-	removeDuplicatesFromArray
-} from '../../utils/functions';
+import Drawer from 'components/Drawer';
+import { fetchSingleDrink } from 'controllers/fetchData';
+import { updateUrl, useAutoUpdateReactPath } from 'hooks/url';
+import { DrinkListContext, useStateInContext } from 'hooks/contexts';
+import { DrinkType } from 'utils/types';
+import { ingredientsToArray, removeDuplicatesFromArray } from 'utils/functions';
 
 function DrinkDetails() {
-	const [hide, setHide] = useState(true);
+	const transitionTiming = 150;
+	const [show, setShow] = useState(true);
 	const [error, setError] = useState(false);
 	const [currentDrink, setCurrentDrink] = useContext(DrinkListContext)
 		.currentDrink as useStateInContext<DrinkType | null>;
@@ -22,7 +20,7 @@ function DrinkDetails() {
 		},
 		[setCurrentDrink]
 	);
-	const path = useReactPath().split('/')[useReactPath().split('/').length - 1];
+	const path = useAutoUpdateReactPath();
 
 	const getTags = (): string[] => {
 		const t: string[] = [];
@@ -42,9 +40,9 @@ function DrinkDetails() {
 	};
 
 	useEffect(() => {
-		if (path !== '') {
-			setHide(false);
-		}
+		console.log(path);
+		// If loading from page with url/drink, need to fetch drink
+		if (path !== '') setShow(true);
 		if (currentDrink === null && path !== '') {
 			const fetchDrink = async () => {
 				const drinkName = path;
@@ -52,7 +50,7 @@ function DrinkDetails() {
 				if (drink) setCurrentDrinkCallback?.({ ...drink });
 				else {
 					setError(true);
-					setTimeout(() => setCurrentDrinkCallback?.(null), 2000);
+					// setTimeout(() => setCurrentDrinkCallback?.(null), 2000);
 				}
 			};
 			fetchDrink();
@@ -60,15 +58,18 @@ function DrinkDetails() {
 	}, [currentDrink, path, setCurrentDrinkCallback]);
 
 	useEffect(() => {
-		if (hide) {
-			setCurrentDrink?.(null);
+		if (!show) {
 			updateUrl('/');
+			setTimeout(() => setCurrentDrink?.(null), transitionTiming);
 		}
-	}, [hide, setCurrentDrink]);
+	}, [setCurrentDrink, show]);
 
 	if (!currentDrink) {
 		return (
-			<Drawer open={!hide} onCloseCallback={() => setHide(true)}>
+			<Drawer
+				show={show}
+				transitionTiming={transitionTiming}
+				onClose={() => setShow(false)}>
 				<h1>Loading...</h1>
 			</Drawer>
 		);
@@ -76,40 +77,46 @@ function DrinkDetails() {
 
 	if (error) {
 		return (
-			<Drawer open={!hide} onCloseCallback={() => setHide(true)}>
+			<Drawer
+				show={show}
+				transitionTiming={transitionTiming}
+				onClose={() => setShow(false)}>
 				<h1>There was an error loading </h1>
 			</Drawer>
 		);
 	}
 
 	return (
-		<Drawer open={!hide} onCloseCallback={() => setHide(true)}>
-			<div className='drink-details'>
-				<h1>{currentDrink.strDrink || currentDrink.display_name}</h1>
-				<img
-					src={currentDrink.strDrinkThumb}
-					alt={`${
-						currentDrink.strDrink || currentDrink.display_name
-					} detail thumbnail`}
-				/>
-				<div id='ingredients'>
-					<h2>Ingredients</h2>
-					<ul>
-						{removeDuplicatesFromArray(ingredientsToArray(currentDrink)).map(
-							(ingredient) =>
-								ingredient && <li key={ingredient}>{ingredient}</li>
-						)}
-					</ul>
-				</div>
-				<p id='instructions'>{currentDrink.strInstructions || 'Instruction'}</p>
-				<div id='tags' className='center'>
-					<h6>Tags</h6>
-					<ul>
-						{removeDuplicatesFromArray(getTags()).map(
-							(tag) => tag && <li key={tag}>{tag}</li>
-						)}
-					</ul>
-				</div>
+		<Drawer
+			className='drink-details'
+			show={show}
+			transitionTiming={transitionTiming}
+			onClose={() => {
+				setShow(false);
+			}}>
+			<h1>{currentDrink.strDrink || currentDrink.display_name}</h1>
+			<img
+				src={currentDrink.strDrinkThumb}
+				alt={`${
+					currentDrink.strDrink || currentDrink.display_name
+				} detail thumbnail`}
+			/>
+			<div id='ingredients'>
+				<h2>Ingredients</h2>
+				<ul>
+					{removeDuplicatesFromArray(ingredientsToArray(currentDrink)).map(
+						(ingredient) => ingredient && <li key={ingredient}>{ingredient}</li>
+					)}
+				</ul>
+			</div>
+			<p id='instructions'>{currentDrink.strInstructions || 'Instruction'}</p>
+			<div id='tags' className='center'>
+				<h6>Tags</h6>
+				<ul>
+					{removeDuplicatesFromArray(getTags()).map(
+						(tag) => tag && <li key={tag}>{tag}</li>
+					)}
+				</ul>
 			</div>
 		</Drawer>
 	);

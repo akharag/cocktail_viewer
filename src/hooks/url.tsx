@@ -7,12 +7,13 @@ export const updateUrl = (path: string, title?: string) => {
 	dispatchEvent(popStateEvent);
 };
 
-export const useReactPath = () => {
-	const [path, setPath] = useState(window.location.pathname);
+export const useAutoUpdateReactPath = () => {
+	const [path, setPath] = useState(
+		window.location.pathname.slice(1, window.location.pathname.length)
+	);
 
 	const listenToPopstate = () => {
-		const winPath = window.location.pathname;
-		setPath(winPath);
+		setPath(window.location.pathname.slice(1, window.location.pathname.length));
 	};
 	useEffect(() => {
 		window.addEventListener('popstate', listenToPopstate);
@@ -21,4 +22,17 @@ export const useReactPath = () => {
 		};
 	}, []);
 	return path;
+};
+
+export const useReactPath = (): [
+	path: string,
+	setPath: React.Dispatch<React.SetStateAction<string>>
+] => {
+	const [path, setPath] = useState(window.location.pathname);
+
+	useEffect(() => {
+		window.history.pushState(path, '');
+	}, [path]);
+
+	return [path, setPath];
 };
