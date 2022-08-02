@@ -4,7 +4,7 @@ import './DrinkDetails.css';
 import Drawer from 'components/Drawer';
 import { fetchSingleDrink } from 'controllers/fetchData';
 import { updateUrl, useAutoUpdateReactPath } from 'hooks/url';
-import { DrinkListContext, useStateInContext } from 'hooks/contexts';
+import { DrinkListContext } from 'hooks/contexts';
 import { DrinkType } from 'utils/types';
 import { ingredientsToArray, removeDuplicatesFromArray } from 'utils/functions';
 
@@ -12,8 +12,8 @@ function DrinkDetails() {
 	const transitionTiming = 150;
 	const [show, setShow] = useState(false);
 	const [error, setError] = useState(false);
-	const [currentDrink, setCurrentDrink] = useContext(DrinkListContext)
-		.currentDrink as useStateInContext<DrinkType | null>;
+	const [currentDrink, setCurrentDrink] =
+		useContext(DrinkListContext).currentDrink;
 	const setCurrentDrinkCallback = useCallback(
 		(currentDrink: DrinkType | null) => {
 			setCurrentDrink?.(currentDrink);
