@@ -10,7 +10,7 @@ import { ingredientsToArray, removeDuplicatesFromArray } from 'utils/functions';
 
 function DrinkDetails() {
 	const transitionTiming = 150;
-	const [show, setShow] = useState(true);
+	const [show, setShow] = useState(false);
 	const [error, setError] = useState(false);
 	const [currentDrink, setCurrentDrink] = useContext(DrinkListContext)
 		.currentDrink as useStateInContext<DrinkType | null>;
@@ -40,9 +40,8 @@ function DrinkDetails() {
 	};
 
 	useEffect(() => {
-		console.log(path);
-		// If loading from page with url/drink, need to fetch drink
 		if (path !== '') setShow(true);
+		// If loading from page with url/drink, need to fetch drink
 		if (currentDrink === null && path !== '') {
 			const fetchDrink = async () => {
 				const drinkName = path;
@@ -50,26 +49,23 @@ function DrinkDetails() {
 				if (drink) setCurrentDrinkCallback?.({ ...drink });
 				else {
 					setError(true);
-					// setTimeout(() => setCurrentDrinkCallback?.(null), 2000);
 				}
+				console.log(currentDrink);
 			};
 			fetchDrink();
 		}
 	}, [currentDrink, path, setCurrentDrinkCallback]);
 
-	useEffect(() => {
-		if (!show) {
-			updateUrl('/');
-			setTimeout(() => setCurrentDrink?.(null), transitionTiming);
-		}
-	}, [setCurrentDrink, show]);
+	const onClose = () => {
+		console.log('close');
+		setShow(false);
+		updateUrl('/');
+		setTimeout(() => setCurrentDrinkCallback(null), transitionTiming);
+	};
 
 	if (!currentDrink) {
 		return (
-			<Drawer
-				show={show}
-				transitionTiming={transitionTiming}
-				onClose={() => setShow(false)}>
+			<Drawer show={show} transitionTiming={transitionTiming} onClose={onClose}>
 				<h1>Loading...</h1>
 			</Drawer>
 		);
@@ -77,10 +73,7 @@ function DrinkDetails() {
 
 	if (error) {
 		return (
-			<Drawer
-				show={show}
-				transitionTiming={transitionTiming}
-				onClose={() => setShow(false)}>
+			<Drawer show={show} transitionTiming={transitionTiming} onClose={onClose}>
 				<h1>There was an error loading </h1>
 			</Drawer>
 		);
@@ -91,9 +84,7 @@ function DrinkDetails() {
 			className='drink-details'
 			show={show}
 			transitionTiming={transitionTiming}
-			onClose={() => {
-				setShow(false);
-			}}>
+			onClose={onClose}>
 			<h1>{currentDrink.strDrink || currentDrink.display_name}</h1>
 			<img
 				src={currentDrink.strDrinkThumb}
