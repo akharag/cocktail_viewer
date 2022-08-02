@@ -15,7 +15,7 @@
 
 @media (prefers-color-scheme: dark) {
 	.drink {
-		background-color: var(--neutral-100);
+		background-color: var(--neutral-black);
 	}
 
 	.drink:is(:hover, :focus-within) {

@@ -6,7 +6,7 @@
 .search {
 	display: flex;
 	--search-padding: 0.2em;
-	--search-border: 2px solid var(--neutral-300);
+	--search-border: 2px solid var(--clr-outline);
 	border: var(--search-border);
 	border-radius: 100vmax;
 	width: fit-content;
@@ -23,11 +23,11 @@
 
 @media (prefers-color-scheme: dark) {
 	.search {
-		--search-border: 2px solid var(--neutral-400);
+		--search-border: 2px solid var(--clr-outline);
 	}
 
 	.search * {
-		background-color: var(--neutral-200);
+		background-color: var(--clr-button-bg);
 	}
 }
 
