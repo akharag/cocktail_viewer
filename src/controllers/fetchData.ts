@@ -1,12 +1,12 @@
 import { DrinkType } from '../utils/types';
 
-export const URL = 'https://www.thecocktaildb.com/api/json/v1/1/';
+export const DB_URL = 'https://www.thecocktaildb.com/api/json/v1/1/';
 
 export const fetchSingleDrink = async (
 	name: string
 ): Promise<DrinkType | null> => {
 	try {
-		const response = await fetch(URL + `search.php?s=${name}`);
+		const response = await fetch(DB_URL + `search.php?s=${name}`);
 		const data: { drinks: DrinkType[] } = await response.json();
 		if (data?.drinks) {
 			return data.drinks[0];
@@ -19,7 +19,7 @@ export const fetchSingleDrink = async (
 
 export const fetchDrinks = async (): Promise<DrinkType[]> => {
 	try {
-		const response = await fetch(URL + 'search.php?s=w');
+		const response = await fetch(DB_URL + 'search.php?s=w');
 		const data = await response.json();
 		if (data?.drinks) {
 			return data.drinks;
@@ -32,7 +32,7 @@ export const fetchDrinks = async (): Promise<DrinkType[]> => {
 
 export const fetchGlasses = async () => {
 	let g: Array<string> = [];
-	const response = await fetch(URL + 'list.php?g=list');
+	const response = await fetch(DB_URL + 'list.php?g=list');
 	const data: { drinks: [{ strGlass: string }] } = await response.json();
 	data.drinks.forEach((entry) =>
 		g.push(entry.strGlass.replace('glass', '').replace('Glass', ''))

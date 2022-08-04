@@ -1,31 +1,19 @@
-import { useCallback, useContext, useEffect } from 'react';
-import { fetchDrinks } from '../../controllers/fetchData';
-import { DrinkListContext, useStateInContext } from '../../hooks/contexts';
+import { useContext } from 'react';
+import { DrinkListContext } from 'hooks/contexts/DrinkListContext';
 import Drink from '../Drink/Drink';
 import './DrinkList.css';
-import { DrinkType, OptionalType } from '../../utils/types';
+import { DrinkType } from 'utils/types';
 
 //TODO Move CSS Styles from App.css to DrinkList.css
 
 const DrinksList = () => {
-	const [drinkList, setDrinkList] = useContext(DrinkListContext)
-		.drinkList as useStateInContext<OptionalType<DrinkType[]>>;
-	const setDrinkListCallback = useCallback(
-		(drinkList: DrinkType[]) => {
-			setDrinkList?.(drinkList);
-		},
-		[setDrinkList]
-	);
-
-	useEffect(() => {
-		fetchDrinks().then((drinks) => setDrinkListCallback?.(drinks));
-	}, [setDrinkListCallback]);
+	const { drinkList } = useContext(DrinkListContext);
 
 	return (
 		<div id='list'>
 			{drinkList && drinkList.length > 0 ? (
-				Object.values(drinkList).map((drink, i) => (
-					<Drink key={'drink' + i} drink={drink as any} />
+				drinkList.map((drink: DrinkType, i) => (
+					<Drink key={'drink' + i} index={i} drink={drink} />
 				))
 			) : (
 				<p>No Drink Found :(</p>

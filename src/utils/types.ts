@@ -1,3 +1,8 @@
+import { Dispatch, SetStateAction } from 'react';
+
+export type useStateDispatch<T> = Dispatch<SetStateAction<T>>;
+export type useStateType<T> = [T, OptionalType<useStateDispatch<T>>];
+
 export type OptionalType<T> = T | undefined;
 
 export type DrinkType = {

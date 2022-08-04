@@ -1,26 +1,15 @@
-import { useCallback, useContext, useEffect, useState } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import './DrinkDetails.css';
-// import Modal from '../Modal';
 import Drawer from 'components/Drawer';
-import { fetchSingleDrink } from 'controllers/fetchData';
-import { updateUrl, useAutoUpdateReactPath } from 'hooks/url';
-import { DrinkListContext } from 'hooks/contexts';
-import { DrinkType } from 'utils/types';
+import { useReactPath } from 'hooks/url';
+import { DrinkListContext } from 'hooks/contexts/DrinkListContext';
 import { ingredientsToArray, removeDuplicatesFromArray } from 'utils/functions';
 
 function DrinkDetails() {
 	const transitionTiming = 150;
 	const [show, setShow] = useState(false);
-	const [error, setError] = useState(false);
-	const [currentDrink, setCurrentDrink] =
-		useContext(DrinkListContext).currentDrink;
-	const setCurrentDrinkCallback = useCallback(
-		(currentDrink: DrinkType | null) => {
-			setCurrentDrink?.(currentDrink);
-		},
-		[setCurrentDrink]
-	);
-	const path = useAutoUpdateReactPath();
+	const [error] = useState(false);
+	const { currentDrink, setDrinkIndex } = useContext(DrinkListContext);
 
 	const getTags = (): string[] => {
 		const t: string[] = [];
@@ -39,29 +28,17 @@ function DrinkDetails() {
 		return t;
 	};
 
-	useEffect(() => {
-		if (path !== '') setShow(true);
-		// If loading from page with url/drink, need to fetch drink
-		if (currentDrink === null && path !== '') {
-			const fetchDrink = async () => {
-				const drinkName = path;
-				const drink: DrinkType | null = await fetchSingleDrink(drinkName);
-				if (drink) setCurrentDrinkCallback?.({ ...drink });
-				else {
-					setError(true);
-				}
-				console.log(currentDrink);
-			};
-			fetchDrink();
-		}
-	}, [currentDrink, path, setCurrentDrinkCallback]);
-
 	const onClose = () => {
-		console.log('close');
 		setShow(false);
-		updateUrl('/');
-		setTimeout(() => setCurrentDrinkCallback(null), transitionTiming);
+
+		setTimeout(() => {
+			setDrinkIndex?.(-1);
+		}, transitionTiming);
 	};
+
+	useEffect(() => {
+		if (currentDrink) setShow(true);
+	}, [currentDrink]);
 
 	if (!currentDrink) {
 		return (
