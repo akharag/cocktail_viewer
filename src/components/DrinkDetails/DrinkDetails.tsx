@@ -1,12 +1,13 @@
 import { useState, useEffect, useContext } from 'react';
 import './DrinkDetails.css';
 import Drawer from 'components/Drawer';
-import { useReactPath } from 'hooks/url';
+import { useReactPath } from 'hooks/useReactPath';
 import { DrinkListContext } from 'hooks/contexts/DrinkListContext';
 import { ingredientsToArray, removeDuplicatesFromArray } from 'utils/functions';
 
 function DrinkDetails() {
 	const transitionTiming = 150;
+	const [, setPath] = useReactPath();
 	const [show, setShow] = useState(false);
 	const [error] = useState(false);
 	const { currentDrink, setDrinkIndex } = useContext(DrinkListContext);
@@ -30,6 +31,7 @@ function DrinkDetails() {
 
 	const onClose = () => {
 		setShow(false);
+		setPath('');
 
 		setTimeout(() => {
 			setDrinkIndex?.(-1);

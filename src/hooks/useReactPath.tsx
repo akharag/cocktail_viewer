@@ -9,8 +9,7 @@ export const useReactPath = (): [
 	);
 
 	useEffect(() => {
-		console.log(path);
-		window.history.replaceState(null, '', path);
+		window.history.pushState(null, '', '/' + path);
 	}, [path]);
 
 	return [path, setPath];

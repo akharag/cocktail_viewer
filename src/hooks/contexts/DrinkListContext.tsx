@@ -7,7 +7,7 @@ import React, {
 	useMemo
 } from 'react';
 import { DrinkType, useStateDispatch } from 'utils/types';
-import { useReactPath } from 'hooks/url';
+import { useReactPath } from 'hooks/useReactPath';
 import { useFetch } from 'hooks/fetchState';
 import { DB_URL } from 'controllers/fetchData';
 import { useLocalStorage } from 'hooks/useLocalStoage';
@@ -65,29 +65,25 @@ export const DrinkListProvider: FC<{
 		setDrinkList(data?.drinks ?? []);
 	}, [data, setDrinkList]);
 
-	// change path when current drink is changed (only do this after initial load)
-	useEffect(() => {
-		if (!loading && currentDrink) setPath(currentDrink.strDrink ?? '');
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [loading]);
-
 	//On initial load, if there is a drink in the path set the index
 	useEffect(() => {
 		console.log(!loading, path, drinkList.length > 0);
-		if (!loading && path && drinkList.length > 0) {
+		if (path && drinkList && drinkList.length > 0) {
 			const index = drinkList.findIndex((drink) => drink.strDrink === path);
 			console.log(index);
 			setDrinkIndex(index);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [loading, drinkList]);
+	}, [drinkList]);
 
+	//when the page is already loaded, if the current drink changes, update the url
 	useEffect(() => {
-		if (!loading) {
-			if (currentDrink) setPath(currentDrink.strDrink);
+		// check if data is loaded
+		if (drinkList && drinkList.length > 0) {
+			if (currentDrink) setPath(currentDrink?.strDrink);
 			else setPath('');
 		}
-	}, [loading, currentDrink]);
+	}, [drinkList, currentDrink, setPath]);
 
 	return (
 		<DrinkListContext.Provider value={value}>
