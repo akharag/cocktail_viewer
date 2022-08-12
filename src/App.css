@@ -17,15 +17,19 @@ body {
 	font-size: calc(10px + 2vmin);
 }
 
+.App-header > div > * {
+	margin-block: 1.5rem;
+}
+
 section + section {
 	margin-block: 1rem;
 }
 
-section#search_filters {
+section#search-filters {
 	margin-bottom: 3rem;
 }
 
-section#search_filters > div + div {
+section#search-filters > div + div {
 	margin-top: 1rem;
 }
 

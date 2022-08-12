@@ -6,11 +6,11 @@ import './styles/utils.css';
 // import DrinksList from './components/DrinksList/DrinksList';
 import Search from './components/Search/Search';
 import Filters from './components/Filters/Filters';
-// import DrinkDetails from './components/DrinkDetails/DrinkDetails';
+import DrinkDetails from './components/DrinkDetails/DrinkDetails';
 import { useContext } from 'react';
 import { DrinkListContext } from 'hooks/contexts/DrinkListContext';
 const DrinksList = lazy(() => import('components/DrinksList/DrinksList'));
-const DrinkDetails = lazy(() => import('components/DrinkDetails/DrinkDetails'));
+// const DrinkDetails = lazy(() => import('components/DrinkDetails/DrinkDetails'));
 
 const App = () => {
 	const { loading } = useContext(DrinkListContext);
@@ -23,7 +23,7 @@ const App = () => {
 				</div>
 			</header>
 			<main>
-				<section id='search_filters'>
+				<section id='search-filters'>
 					<Search
 						className='margin-inline-auto'
 						select={['Name', 'Alcohol', 'Ingredient']}
@@ -31,13 +31,15 @@ const App = () => {
 					/>
 					<Filters />
 				</section>
-				<section id='drinks'>
+				<section id='drink-list'>
 					{!loading && (
 						<Suspense fallback={<p>Loading...</p>}>
 							<DrinksList />
-							<DrinkDetails />
 						</Suspense>
 					)}
+				</section>
+				<section id='selected-drink'>
+					<DrinkDetails />
 				</section>
 			</main>
 		</div>

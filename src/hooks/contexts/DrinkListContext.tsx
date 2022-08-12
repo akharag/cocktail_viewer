@@ -41,10 +41,7 @@ export const DrinkListProvider: FC<{
 	const [data, error, loading] = useFetch<{ drinks: DrinkType[] }>(
 		DB_URL + 'search.php?f=a'
 	);
-	const [drinkList, setDrinkList] = useLocalStorage<DrinkType[]>(
-		'drinkList',
-		[]
-	);
+	const [drinkList, setDrinkList] = useLocalStorage<DrinkType[]>('drinkList');
 
 	const currentDrink = useMemo(
 		() => (drinkList && drinkIndex > -1 ? drinkList[drinkIndex] : null),
@@ -67,10 +64,8 @@ export const DrinkListProvider: FC<{
 
 	//On initial load, if there is a drink in the path set the index
 	useEffect(() => {
-		console.log(!loading, path, drinkList.length > 0);
-		if (path && drinkList && drinkList.length > 0) {
+		if (path && drinkList !== null && drinkList.length > 0) {
 			const index = drinkList.findIndex((drink) => drink.strDrink === path);
-			console.log(index);
 			setDrinkIndex(index);
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps

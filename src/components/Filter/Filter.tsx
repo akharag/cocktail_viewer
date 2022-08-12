@@ -1,20 +1,32 @@
-import { useState } from 'react';
+import { FilterListContext } from 'hooks/contexts/FiltersContext';
+import { useContext, useState } from 'react';
 import './Filter.css';
 
 export type FilterProps = {
-	id: string;
+	type: string; // the category for the filter
+	id: string; // the specific filter
 	name?: string;
 	src?: string;
 	alt?: string;
-	SelectFilter?: () => void;
 };
 
-const Fitler = ({ id, name, src, alt, SelectFilter }: FilterProps) => {
+const Fitler = ({ id, type, name, src, alt }: FilterProps) => {
 	const [selected, setSelected] = useState(false);
+	const { filtersDispatch } = useContext(FilterListContext);
 
 	const ClickHandler = () => {
-		setSelected(!selected);
-		if (SelectFilter) SelectFilter();
+		if (!selected) {
+			filtersDispatch?.({
+				type: 'add',
+				payload: [type, id]
+			});
+		} else {
+			filtersDispatch?.({
+				type: 'remove',
+				payload: [type, id]
+			});
+		}
+		setSelected((prevState) => !prevState);
 	};
 
 	const CapitalFirstLetter = (str: string): string => {

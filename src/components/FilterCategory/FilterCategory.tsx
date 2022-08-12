@@ -1,29 +1,31 @@
-import Filter, { FilterProps } from "../Filter/Filter";
-
+import Filter, { FilterProps } from '../Filter/Filter';
 
 type FilterCategoryProps = {
-    id: string;
-    name?: string;
-    filters: Array<FilterProps>
-}
+	type: string;
+	id: string;
+	name?: string;
+	filters: Array<FilterProps>;
+};
 
-const FilterCategory = ({ id, name, filters }: FilterCategoryProps) => {
-    return (
-        <div id={id} className="filter-category">
-            <h2>{name || id}</h2>
-            <span>
-                {filters.map(filter => {
-                    return <Filter
-                        id={filter.id}
-                        name={filter.name}
-                        src={filter.src}
-                        alt={filter.alt}
-                        SelectFilter={filter.SelectFilter}
-                    />
-                })}
-            </span>
-        </div>
-    );
-}
+const FilterCategory = ({ type, id, name, filters }: FilterCategoryProps) => {
+	return (
+		<div id={id} className='filter-category'>
+			<h2>{name || id}</h2>
+			<span>
+				{filters.map((filter) => {
+					return (
+						<Filter
+							id={filter.id}
+							type={type}
+							name={filter.name}
+							src={filter.src}
+							alt={filter.alt}
+						/>
+					);
+				})}
+			</span>
+		</div>
+	);
+};
 
 export default FilterCategory;
