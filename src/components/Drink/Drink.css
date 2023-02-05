@@ -1,7 +1,7 @@
 .drink {
 	border-radius: 10px;
 	padding: 1em;
-	background-color: var(--neutral-800);
+	background-color: var(--accent-800);
 	height: fit-content;
 	aspect-ratio: 1 / 1;
 	transition: transform ease-in 100ms;
@@ -15,7 +15,7 @@
 
 @media (prefers-color-scheme: dark) {
 	.drink {
-		background-color: var(--neutral-black);
+		background-color: var(--neutral-100);
 	}
 
 	.drink:is(:hover, :focus-within) {
