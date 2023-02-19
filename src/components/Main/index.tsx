@@ -1,9 +1,10 @@
-import { Suspense, useState } from 'react';
+import { Suspense } from 'react';
 import { useQuery } from 'react-query';
 import { DB_URL } from 'controllers/fetchData';
 import DrinksList from 'components/DrinksList';
 import Filters from 'components/Filters/Filters';
 import Search from 'components/Search/Search';
+import DrinkDetails from 'components/DrinkDetails/DrinkDetails';
 import './Main.css';
 
 function Main() {
@@ -37,9 +38,9 @@ function Main() {
 					)}
 				</>
 			</section>
-			{/* <section id='selected-drink'>
-        <DrinkDetails />
-    </section> */}
+			<section id='selected-drink'>
+				<DrinkDetails />
+			</section>
 		</main>
 	);
 }

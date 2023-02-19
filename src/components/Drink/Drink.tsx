@@ -1,7 +1,6 @@
 import './Drink.css';
 import { DrinkType } from '../../utils/types';
-import { useContext } from 'react';
-import { DrinkListContext } from 'hooks/contexts/DrinkListContext';
+import { useDrinkListContext } from 'hooks/contexts/DrinkListContext';
 import { useReactPath } from 'hooks/useReactPath';
 
 type DrinkProps = {
@@ -10,7 +9,7 @@ type DrinkProps = {
 };
 
 function Drink({ index, drink }: DrinkProps) {
-	const { setCurrentDrink } = useContext(DrinkListContext);
+	const { setCurrentDrink } = useDrinkListContext();
 	const [, setPath] = useReactPath();
 	const { strDrink, strDrinkThumb } = drink;
 	return (

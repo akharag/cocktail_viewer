@@ -1,22 +1,14 @@
-import { useState, useEffect, useContext } from 'react';
 import './DrinkDetails.css';
 import Drawer from 'components/Drawer';
 import { useReactPath } from 'hooks/useReactPath';
-import { DrinkListContext } from 'hooks/contexts/DrinkListContext';
+import { useDrinkListContext } from 'hooks/contexts/DrinkListContext';
 import { ingredientsToArray, removeDuplicatesFromArray } from 'utils/functions';
-import { useCurrentDrink } from 'hooks/useCurrentDrink';
-
-interface DrinkDetailProps {
-	drinkId: string;
-	transitionTiming: number;
-}
 
 function DrinkDetails() {
-	const transitionTiming = 150;
-	const [currentDrink, setCurrentDrink] = useCurrentDrink();
+	const { currentDrink, setCurrentDrink } = useDrinkListContext();
 	const [, setPath] = useReactPath();
-	const [show, setShow] = useState(false);
-	const [error] = useState(false);
+
+	const transitionTiming = 150;
 
 	const getTags = (): string[] => {
 		const t: string[] = [];
@@ -36,30 +28,14 @@ function DrinkDetails() {
 	};
 
 	const onClose = () => {
-		setShow(false);
+		setCurrentDrink?.(null);
 		setPath('');
-
-		setTimeout(() => {
-			setDrinkIndex?.(-1);
-		}, transitionTiming);
 	};
 
-	useEffect(() => {
-		if (currentDrink) setShow(true);
-	}, [currentDrink]);
-
-	if (!currentDrink) {
+	if (currentDrink === null) {
 		return (
-			<Drawer show={show} transitionTiming={transitionTiming} onClose={onClose}>
+			<Drawer show={false} transitionTiming={transitionTiming}>
 				<h1>Loading...</h1>
-			</Drawer>
-		);
-	}
-
-	if (error) {
-		return (
-			<Drawer show={show} transitionTiming={transitionTiming} onClose={onClose}>
-				<h1>There was an error loading </h1>
 			</Drawer>
 		);
 	}
@@ -67,7 +43,7 @@ function DrinkDetails() {
 	return (
 		<Drawer
 			className='drink-details'
-			show={show}
+			show={true}
 			transitionTiming={transitionTiming}
 			onClose={onClose}>
 			<h1>{currentDrink.strDrink || currentDrink.display_name}</h1>
