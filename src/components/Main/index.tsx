@@ -1,4 +1,4 @@
-import { Suspense } from 'react';
+import { Suspense, useState } from 'react';
 import { useQuery } from 'react-query';
 import { DB_URL } from 'controllers/fetchData';
 import DrinksList from 'components/DrinksList';
@@ -12,7 +12,6 @@ function Main() {
 			process.env.REACT_APP_COCKTAIL_DB_URL ?? DB_URL + `search.php?s=w`
 		).then((res) => res.json())
 	);
-
 	return (
 		<main>
 			<section id='search-filters'>

@@ -4,13 +4,19 @@ import Drawer from 'components/Drawer';
 import { useReactPath } from 'hooks/useReactPath';
 import { DrinkListContext } from 'hooks/contexts/DrinkListContext';
 import { ingredientsToArray, removeDuplicatesFromArray } from 'utils/functions';
+import { useCurrentDrink } from 'hooks/useCurrentDrink';
+
+interface DrinkDetailProps {
+	drinkId: string;
+	transitionTiming: number;
+}
 
 function DrinkDetails() {
 	const transitionTiming = 150;
+	const [currentDrink, setCurrentDrink] = useCurrentDrink();
 	const [, setPath] = useReactPath();
 	const [show, setShow] = useState(false);
 	const [error] = useState(false);
-	const { currentDrink, setDrinkIndex } = useContext(DrinkListContext);
 
 	const getTags = (): string[] => {
 		const t: string[] = [];

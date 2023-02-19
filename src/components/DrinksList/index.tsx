@@ -9,7 +9,7 @@ const DrinksList = ({ data }: { data: any[] }) => {
 		<div id='list'>
 			{data && data.length > 0 ? (
 				data.map((drink: DrinkType, i) => (
-					<Drink key={'drink' + i} index={i} drink={drink} />
+					<Drink key={drink.idDrink} index={i} drink={drink} />
 				))
 			) : (
 				<p>No Drink Found :(</p>
