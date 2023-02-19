@@ -1,12 +1,10 @@
-import { useReactPath } from 'hooks/useReactPath';
 import React, {
 	createContext,
 	FC,
 	ReactNode,
 	useState,
 	useMemo,
-	useContext,
-	useEffect
+	useContext
 } from 'react';
 import { DrinkType, useStateDispatch } from 'utils/types';
 
@@ -30,8 +28,6 @@ export const useDrinkListContext = () => {
 export const DrinkListProvider: FC<{
 	children?: ReactNode;
 }> = ({ children }) => {
-	const [path] = useReactPath();
-
 	const [currentDrink, setCurrentDrink] = useState<DrinkType | null>(null);
 	const memoizedCurrentDrink = useMemo(() => currentDrink, [currentDrink]);
 

@@ -15,9 +15,3 @@ export const useLocalStorage = <T,>(
 
 	return [state, setState];
 };
-
-// export const useLocalStorageList = <T,>(
-// 	key: string,
-// 	defaultValue: T[],
-// 	options?: Partial<{ maxLength: number }>
-// ) => {};

@@ -3,12 +3,32 @@ import Drawer from 'components/Drawer';
 import { useReactPath } from 'hooks/useReactPath';
 import { useDrinkListContext } from 'hooks/contexts/DrinkListContext';
 import { ingredientsToArray, removeDuplicatesFromArray } from 'utils/functions';
+import { useEffect } from 'react';
+import { DrinkType } from 'utils/types';
+import { DB_URL } from 'controllers/fetchData';
 
 function DrinkDetails() {
 	const { currentDrink, setCurrentDrink } = useDrinkListContext();
-	const [, setPath] = useReactPath();
+	const [path, setPath] = useReactPath();
 
 	const transitionTiming = 150;
+
+	useEffect(() => {
+		if (path !== '' && currentDrink === null) {
+			fetch(
+				process.env.REACT_APP_COCKTAIL_DB_URL ?? DB_URL + `search.php?s=${path}`
+			)
+				.then((res) => res.json())
+				.then((data) => {
+					if (data.drinks.length > 0) setCurrentDrink?.(data.drinks[0]);
+				})
+				.catch((err) => {
+					console.log(err);
+					setPath('');
+				});
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	const getTags = (): string[] => {
 		const t: string[] = [];
