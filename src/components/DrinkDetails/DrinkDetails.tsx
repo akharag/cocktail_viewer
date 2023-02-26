@@ -1,34 +1,32 @@
 import './DrinkDetails.css';
 import Drawer from 'components/Drawer';
-import { useReactPath } from 'hooks/useReactPath';
+import { useWindowPath } from 'hooks/useWindowPath';
 import { useDrinkListContext } from 'hooks/contexts/DrinkListContext';
 import { ingredientsToArray, removeDuplicatesFromArray } from 'utils/functions';
-import { useEffect } from 'react';
-import { DrinkType } from 'utils/types';
 import { DB_URL } from 'controllers/fetchData';
+import { useQuery } from 'react-query';
+import { DrinkType } from 'utils/types';
+
+const transitionTiming = 1000;
 
 function DrinkDetails() {
 	const { currentDrink, setCurrentDrink } = useDrinkListContext();
-	const [path, setPath] = useReactPath();
-
-	const transitionTiming = 150;
-
-	useEffect(() => {
-		if (path !== '' && currentDrink === null) {
+	const [path, setPath] = useWindowPath();
+	const { isLoading, error } = useQuery(
+		'data',
+		() =>
 			fetch(
 				process.env.REACT_APP_COCKTAIL_DB_URL ?? DB_URL + `search.php?s=${path}`
 			)
 				.then((res) => res.json())
 				.then((data) => {
-					if (data.drinks.length > 0) setCurrentDrink?.(data.drinks[0]);
-				})
-				.catch((err) => {
-					console.log(err);
-					setPath('');
-				});
+					if (data.drinks.length > 0)
+						setCurrentDrink?.(data.drinks[0] as DrinkType);
+				}),
+		{
+			enabled: path !== '' && currentDrink === null
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	);
 
 	const getTags = (): string[] => {
 		const t: string[] = [];
@@ -48,50 +46,69 @@ function DrinkDetails() {
 	};
 
 	const onClose = () => {
-		setCurrentDrink?.(null);
+		console.log('close drawer');
 		setPath('');
+		setTimeout(() => setCurrentDrink?.(null), transitionTiming + 20);
 	};
 
-	if (currentDrink === null) {
+	if (isLoading) {
 		return (
-			<Drawer show={false} transitionTiming={transitionTiming}>
+			<Drawer
+				className='drink-details'
+				show={true}
+				transitionTiming={transitionTiming}>
 				<h1>Loading...</h1>
 			</Drawer>
 		);
 	}
 
-	return (
-		<Drawer
-			className='drink-details'
-			show={true}
-			transitionTiming={transitionTiming}
-			onClose={onClose}>
-			<h1>{currentDrink.strDrink || currentDrink.display_name}</h1>
-			<img
-				src={currentDrink.strDrinkThumb}
-				alt={`${
-					currentDrink.strDrink || currentDrink.display_name
-				} detail thumbnail`}
-			/>
-			<div id='ingredients'>
-				<h2>Ingredients</h2>
-				<ul>
-					{removeDuplicatesFromArray(ingredientsToArray(currentDrink)).map(
-						(ingredient) => ingredient && <li key={ingredient}>{ingredient}</li>
-					)}
-				</ul>
-			</div>
-			<p id='instructions'>{currentDrink.strInstructions || 'Instruction'}</p>
-			<div id='tags' className='center'>
-				<h6>Tags</h6>
-				<ul>
-					{removeDuplicatesFromArray(getTags()).map(
-						(tag) => tag && <li key={tag}>{tag}</li>
-					)}
-				</ul>
-			</div>
-		</Drawer>
-	);
+	if (error) {
+		return (
+			<Drawer
+				className='drink-details'
+				show={true}
+				transitionTiming={transitionTiming}>
+				<h1>Error while trying to fetch your drink</h1>
+			</Drawer>
+		);
+	}
+
+	if (currentDrink !== null) {
+		return (
+			<Drawer
+				className='drink-details'
+				show={true}
+				transitionTiming={transitionTiming}
+				onClose={onClose}>
+				<h1>{currentDrink.strDrink || currentDrink.display_name}</h1>
+				<img
+					src={currentDrink.strDrinkThumb}
+					alt={`${
+						currentDrink.strDrink || currentDrink.display_name
+					} detail thumbnail`}
+				/>
+				<div id='ingredients'>
+					<h2>Ingredients</h2>
+					<ul>
+						{removeDuplicatesFromArray(ingredientsToArray(currentDrink)).map(
+							(ingredient) =>
+								ingredient && <li key={ingredient}>{ingredient}</li>
+						)}
+					</ul>
+				</div>
+				<p id='instructions'>{currentDrink.strInstructions || 'Instruction'}</p>
+				<div id='tags' className='center'>
+					<h6>Tags</h6>
+					<ul>
+						{removeDuplicatesFromArray(getTags()).map(
+							(tag) => tag && <li key={tag}>{tag}</li>
+						)}
+					</ul>
+				</div>
+			</Drawer>
+		);
+	}
+	return <></>;
 }
 
 export default DrinkDetails;

@@ -38,9 +38,9 @@ function Main() {
 					)}
 				</>
 			</section>
-			<section id='selected-drink'>
+			<aside id='selected-drink'>
 				<DrinkDetails />
-			</section>
+			</aside>
 		</main>
 	);
 }

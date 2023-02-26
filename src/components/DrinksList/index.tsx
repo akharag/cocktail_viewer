@@ -8,8 +8,8 @@ const DrinksList = ({ data }: { data: any[] }) => {
 	return (
 		<div id='list'>
 			{data && data.length > 0 ? (
-				data.map((drink: DrinkType, i) => (
-					<Drink key={drink.idDrink} index={i} drink={drink} />
+				data.map((drink: DrinkType) => (
+					<Drink key={drink.idDrink} drink={drink} />
 				))
 			) : (
 				<p>No Drink Found :(</p>

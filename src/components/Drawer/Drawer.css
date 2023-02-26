@@ -2,50 +2,29 @@
 	--content-width: min(55rem, 100vw);
 	--transition-drawer-time: var(--animate-100);
 	position: fixed;
-	top: 0;
-	bottom: 0;
-	right: 100vw;
-	left: 0;
-	background-color: hsla(0, 0%, 0%, 0.5);
+	inset: 0 100vw 0 0;
+	background-color: hsl(0 0% 0% / 0.5);
 	backdrop-filter: blur(2px) saturate(50%);
-	z-index: 100;
-	overflow-x: hidden;
-	transition: right 0s linear;
-	transition-delay: var(--transition-drawer-time);
+	overflow: initial;
 }
 
 .drawer.show {
 	right: 0;
-	transition-delay: 0ms;
+	overflow: clip;
 }
 
-@keyframes hide-container {
-	from {
-		opacity: 100%;
-	}
-
-	to {
-		opacity: 0%;
-	}
-}
-
-.drawer .drawer-content {
+.drawer-content {
 	position: absolute;
-	top: 0;
-	bottom: 0;
-	right: 0;
-	left: calc(100vw - var(--content-width));
-	min-height: 100vh;
-	height: fit-content;
-	transform: translateX(var(--content-width));
-	transition: transform var(--transition-drawer-time) ease-out;
+	inset: 0 1rem 0 100vw;
+	width: var(--content-width);
+	/* transition: left var(--transition-drawer-time) ease-out; */
 }
 
 .drawer.show .drawer-content {
-	transform: translateX(0);
+	left: calc(100vw - var(--content-width) -1rem);
 }
 
-.drawer.show .close {
+.drawer.show button.close {
 	position: absolute;
 	top: 0.5em;
 	right: 0.8em;
@@ -54,3 +33,44 @@
 	line-height: 1.3em;
 	opacity: 100%;
 }
+/* .drawer {
+	--content-width: min(55rem, 100vw);
+	--transition-drawer-time: var(--animate-100);
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	right: 100vw;
+	left: 0;
+	background-color: hsla(0, 0%, 0%, 0.5);
+	backdrop-filter: blur(2px) saturate(50%);
+	z-index: 100;
+	overflow-x: hidden;
+	transition: right 0 calc(var(--transition-drawer-time)+1ms);
+}
+
+.drawer.show {
+	right: 0;
+}
+
+.drawer-content {
+	position: absolute;
+	inset: 0 1rem 0 100vw;
+	width: var(--content-width);
+	margin-block: auto;
+	height: fit-content;
+	transition: left var(--transition-drawer-time) ease-out;
+}
+
+.drawer.show .drawer-content {
+	left: calc(100vw - var(--content-width) - 1rem);
+}
+
+.drawer.show button.close {
+	position: absolute;
+	top: 0.5em;
+	right: 0.8em;
+	background: none;
+	font-size: 1.3em;
+	line-height: 1.3em;
+	opacity: 100%;
+} */
