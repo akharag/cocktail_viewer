@@ -1,18 +1,20 @@
 import './Drink.css';
 import { DrinkType } from '../../utils/types';
-import { useDrinkListContext } from 'hooks/contexts/DrinkListContext';
+import { useDrinkContext } from 'hooks/contexts/DrinkContext';
+import { useWindowPath } from 'hooks/useWindowPath';
 
 type DrinkProps = {
 	drink: DrinkType;
 };
 
 function Drink({ drink }: DrinkProps) {
-	const { setCurrentDrink } = useDrinkListContext();
+	const { setCurrentDrink } = useDrinkContext();
+	const [, setPath] = useWindowPath();
 	const { strDrink, strDrinkThumb } = drink;
 
 	const onClick = () => {
 		setCurrentDrink?.(drink);
-		// setPath(drink.strDrink);
+		setPath(drink.strDrink);
 	};
 
 	return (

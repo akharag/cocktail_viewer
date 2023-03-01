@@ -8,24 +8,23 @@ import {
 } from 'react';
 import { DrinkType, useStateDispatch } from 'utils/types';
 
-interface DrinkListContextInterface {
+interface DrinkContextInterface {
 	currentDrink: DrinkType | null;
 	setCurrentDrink?: useStateDispatch<DrinkType | null>;
 }
 
-export const DrinkListInitialContext: DrinkListContextInterface = {
+export const DrinkInitialContext: DrinkContextInterface = {
 	currentDrink: null
 };
 
-export const DrinkListContext = createContext<DrinkListContextInterface>(
-	DrinkListInitialContext
-);
+export const DrinkContext =
+	createContext<DrinkContextInterface>(DrinkInitialContext);
 
-export const useDrinkListContext = () => {
-	return useContext(DrinkListContext);
+export const useDrinkContext = () => {
+	return useContext(DrinkContext);
 };
 
-export const DrinkListProvider: FC<{
+export const DrinkProvider: FC<{
 	children?: ReactNode;
 }> = ({ children }) => {
 	const [currentDrink, setCurrentDrink] = useState<DrinkType | null>(null);
@@ -34,8 +33,6 @@ export const DrinkListProvider: FC<{
 	const value = { currentDrink: memoizedCurrentDrink, setCurrentDrink };
 
 	return (
-		<DrinkListContext.Provider value={value}>
-			{children}
-		</DrinkListContext.Provider>
+		<DrinkContext.Provider value={value}>{children}</DrinkContext.Provider>
 	);
 };

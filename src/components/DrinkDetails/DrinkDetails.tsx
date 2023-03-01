@@ -1,7 +1,7 @@
 import './DrinkDetails.css';
 import Drawer from 'components/Drawer';
 import { useWindowPath } from 'hooks/useWindowPath';
-import { useDrinkListContext } from 'hooks/contexts/DrinkListContext';
+import { useDrinkContext } from 'hooks/contexts/DrinkContext';
 import { ingredientsToArray, removeDuplicatesFromArray } from 'utils/functions';
 import { DB_URL } from 'controllers/fetchData';
 import { useQuery } from 'react-query';
@@ -10,7 +10,7 @@ import { DrinkType } from 'utils/types';
 const transitionTiming = 1000;
 
 function DrinkDetails() {
-	const { currentDrink, setCurrentDrink } = useDrinkListContext();
+	const { currentDrink, setCurrentDrink } = useDrinkContext();
 	const [path, setPath] = useWindowPath();
 	const { isLoading, error } = useQuery(
 		'data',

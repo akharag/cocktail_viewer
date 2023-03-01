@@ -3,24 +3,20 @@ import './App.css';
 import './styles/variables.css';
 import './styles/utils.css';
 import Main from 'components/Main';
-import { DrinkListProvider } from 'hooks/contexts/DrinkListContext';
+import { DrinkProvider } from 'hooks/contexts/DrinkContext';
+import Header from 'components/Header/Header';
 
 const App = () => {
 	const queryClient = new QueryClient();
 
 	return (
 		<QueryClientProvider client={queryClient}>
-			<DrinkListProvider>
+			<DrinkProvider>
 				<div className='App'>
-					<header className='App-header'>
-						<div>
-							<h1>Bartender's Viewer</h1>
-							<p>Looking to discover a new drink? See what options you have!</p>
-						</div>
-					</header>
+					<Header />
 					<Main />
 				</div>
-			</DrinkListProvider>
+			</DrinkProvider>
 		</QueryClientProvider>
 	);
 };

@@ -1,4 +1,4 @@
-import { useEffect, useState, Dispatch, SetStateAction } from 'react';
+import { useState } from 'react';
 
 let currentPath = window.location.pathname.slice(
 	1,
@@ -7,17 +7,17 @@ let currentPath = window.location.pathname.slice(
 
 export const useWindowPath = (): [
 	path: string,
-	setPath: Dispatch<SetStateAction<string>>
+	setPath: (newPath: string) => void
 ] => {
 	const [path, setPath] = useState(currentPath);
-	useEffect(() => {
-		if (path !== currentPath) {
-			window.history.replaceState(null, '', '/' + path);
-			currentPath = window.location.pathname.slice(
-				1,
-				window.location.pathname.length
-			);
+
+	const setNewPath = (newPath: string) => {
+		if (path !== newPath) {
+			console.log('change', newPath);
+			setPath(newPath);
+			window.history.replaceState(null, '', '/' + newPath);
 		}
-	}, [path]);
-	return [path, setPath];
+	};
+
+	return [path, setNewPath];
 };

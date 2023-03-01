@@ -4,15 +4,22 @@ import { DB_URL } from 'controllers/fetchData';
 import DrinksList from 'components/DrinksList';
 import Filters from 'components/Filters/Filters';
 import Search from 'components/Search/Search';
-import DrinkDetails from 'components/DrinkDetails/DrinkDetails';
+// import DrinkDetails from 'components/DrinkDetails/DrinkDetails';
 import './Main.css';
+import { useDrinkContext } from 'hooks/contexts/DrinkContext';
 
-function Main() {
-	const { isLoading, error, data } = useQuery('data', () =>
+const useSearchCocktails = (query: string) => {
+	return useQuery('data', () =>
 		fetch(
-			process.env.REACT_APP_COCKTAIL_DB_URL ?? DB_URL + `search.php?s=w`
+			process.env.REACT_APP_COCKTAIL_DB_URL ?? DB_URL + `search.php?s=${query}`
 		).then((res) => res.json())
 	);
+};
+
+function Main() {
+	const { data, isLoading, error } = useSearchCocktails('w');
+	const { currentDrink } = useDrinkContext();
+
 	return (
 		<main>
 			<section id='search-filters'>
@@ -25,22 +32,21 @@ function Main() {
 			</section>
 			<section id='drink-list'>
 				<>
-					{!isLoading && (
-						<Suspense fallback={<p>Loading...</p>}>
-							{error ? (
-								<div>
-									<>Error Loading Drinks {error}</>
-								</div>
-							) : (
-								<DrinksList data={data.drinks} />
-							)}
-						</Suspense>
+					{isLoading ? (
+						<p>Loading...</p>
+					) : error ? (
+						<p>Error Loading Drink List</p>
+					) : (
+						<>
+							<h2>{currentDrink?.strDrink || 'None Selected'}</h2>
+							<DrinksList data={data.drinks} />
+						</>
 					)}
 				</>
 			</section>
-			<aside id='selected-drink'>
+			{/* <aside id='selected-drink'>
 				<DrinkDetails />
-			</aside>
+			</aside> */}
 		</main>
 	);
 }
