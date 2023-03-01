@@ -1,17 +1,20 @@
 import './DrinkDetails.css';
 import Drawer from 'components/Drawer';
-import { useWindowPath } from 'hooks/useWindowPath';
 import { useDrinkContext } from 'hooks/contexts/DrinkContext';
-import { ingredientsToArray, removeDuplicatesFromArray } from 'utils/functions';
+import { ingredientsToArray, removeDuplicatesFromArray } from 'utils/utils';
 import { DB_URL } from 'controllers/fetchData';
 import { useQuery } from 'react-query';
 import { DrinkType } from 'utils/types';
+import {
+	changeWindowPath,
+	getWindowPath
+} from 'utils/functions/windowFunctions';
 
 const transitionTiming = 1000;
 
 function DrinkDetails() {
+	const path = getWindowPath();
 	const { currentDrink, setCurrentDrink } = useDrinkContext();
-	const [path, setPath] = useWindowPath();
 	const { isLoading, error } = useQuery(
 		'data',
 		() =>
@@ -47,7 +50,7 @@ function DrinkDetails() {
 
 	const onClose = () => {
 		console.log('close drawer');
-		setPath('');
+		changeWindowPath('');
 		setTimeout(() => setCurrentDrink?.(null), transitionTiming + 20);
 	};
 
