@@ -1,4 +1,3 @@
-import { Suspense } from 'react';
 import { useQuery } from 'react-query';
 import { DB_URL } from 'controllers/fetchData';
 import DrinksList from 'components/DrinksList';
