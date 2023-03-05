@@ -2,20 +2,18 @@ import './DrinkDetails.css';
 import Drawer from 'components/Drawer';
 import { useDrinkContext } from 'hooks/contexts/DrinkContext';
 import { ingredientsToArray, removeDuplicatesFromArray } from 'utils/utils';
-import { DB_URL, fetchSearchDrinks } from 'controllers/fetchData';
-import { useQuery } from 'react-query';
-import { DrinkType } from 'utils/types';
 import {
 	ChangeWindowPath,
 	GetWindowPath as getWindowPath
 } from 'utils/functions/windowFunctions';
+import { useSearchCocktails } from 'hooks/useSearchCocktails';
 
 const transitionTiming = 1000;
 
 function DrinkDetails() {
 	const path = getWindowPath();
 	const { currentDrink, setCurrentDrink } = useDrinkContext();
-	const { isLoading, error } = useQuery('data', () => fetchSearchDrinks(path), {
+	const { isLoading, error } = useSearchCocktails(path, {
 		enabled: path !== '' && currentDrink === null
 	});
 

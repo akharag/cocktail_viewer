@@ -16,13 +16,11 @@ export const fetchDrinks = async (): Promise<DrinkType[]> => {
 	}
 };
 
-export const fetchSearchDrinks = async (query: string) => {
-	// fetch(
-	// 	process.env.REACT_APP_COCKTAIL_DB_URL ?? DB_URL + `search.php?s=${query}`
-	// )
-	// 	.then((res) => res.json())
-	// 	.then((data) => data.drinks);
-	const response = await fetch(url + `search.php?s=${query}`);
+export const fetchSearchDrinks = async (
+	query: string,
+	options?: { [key: string]: any }
+) => {
+	const response = await fetch(url + `search.php?s=${query}`, options);
 	const data: { drinks: DrinkType[] } = await response.json();
 	return data.drinks;
 };
