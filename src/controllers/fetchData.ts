@@ -16,11 +16,8 @@ export const fetchDrinks = async (): Promise<DrinkType[]> => {
 	}
 };
 
-export const fetchSearchDrinks = async (
-	query: string,
-	options?: { [key: string]: any }
-) => {
-	const response = await fetch(url + `search.php?s=${query}`, options);
+export const fetchSearchDrinks = async (query: string) => {
+	const response = await fetch(url + `search.php?s=${query}`);
 	const data: { drinks: DrinkType[] } = await response.json();
 	return data.drinks;
 };

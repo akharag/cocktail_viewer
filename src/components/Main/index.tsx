@@ -4,11 +4,8 @@ import Search from 'components/Search/Search';
 import DrinkDetails from 'components/DrinkDetails/DrinkDetails';
 import './Main.css';
 import { useDrinkContext } from 'hooks/contexts/DrinkContext';
-import { useSearchCocktails } from 'hooks/useSearchCocktails';
 
 function Main() {
-	const { currentDrink } = useDrinkContext();
-
 	return (
 		<main>
 			<section id='search-filters'>
@@ -22,11 +19,9 @@ function Main() {
 			<section id='drink-list'>
 				<DrinksList />
 			</section>
-			{currentDrink !== null && (
-				<aside id='selected-drink'>
-					<DrinkDetails />
-				</aside>
-			)}
+			<aside id='selected-drink'>
+				<DrinkDetails />
+			</aside>
 		</main>
 	);
 }

@@ -5,8 +5,5 @@ export const useSearchCocktails = (
 	query: string,
 	options?: { [key: string]: any }
 ) => {
-	return useQuery({
-		queryKey: 'data',
-		queryFn: () => fetchSearchDrinks(query, options)
-	});
+	return useQuery(query, () => fetchSearchDrinks(query), { ...options });
 };

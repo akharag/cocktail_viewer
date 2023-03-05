@@ -8,13 +8,14 @@ import {
 } from 'utils/functions/windowFunctions';
 import { useSearchCocktails } from 'hooks/useSearchCocktails';
 
-const transitionTiming = 1000;
+const transitionTiming = 300;
 
 function DrinkDetails() {
 	const path = getWindowPath();
 	const { currentDrink, setCurrentDrink } = useDrinkContext();
 	const { isLoading, error } = useSearchCocktails(path, {
-		enabled: path !== '' && currentDrink === null
+		enabled: path !== '' && currentDrink === null,
+		onSuccess: (data: any) => setCurrentDrink?.(data[0])
 	});
 
 	const getTags = (): string[] => {
