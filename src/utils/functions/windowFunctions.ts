@@ -1,8 +1,8 @@
-export const getWindowPath = () => {
+export const GetWindowPath = () => {
 	return window.location.pathname.slice(1, window.location.pathname.length);
 };
 
-export const changeWindowPath = (
+export const ChangeWindowPath = (
 	newPath: string,
 	options?: { reload?: boolean; historyKeep?: boolean }
 ) => {

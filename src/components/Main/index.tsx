@@ -3,7 +3,7 @@ import { DB_URL } from 'controllers/fetchData';
 import DrinksList from 'components/DrinksList';
 import Filters from 'components/Filters/Filters';
 import Search from 'components/Search/Search';
-// import DrinkDetails from 'components/DrinkDetails/DrinkDetails';
+import DrinkDetails from 'components/DrinkDetails/DrinkDetails';
 import './Main.css';
 import { useDrinkContext } from 'hooks/contexts/DrinkContext';
 
@@ -36,16 +36,15 @@ function Main() {
 					) : error ? (
 						<p>Error Loading Drink List</p>
 					) : (
-						<>
-							<h2>{currentDrink?.strDrink || 'None Selected'}</h2>
-							<DrinksList data={data.drinks} />
-						</>
+						<DrinksList data={data.drinks} />
 					)}
 				</>
 			</section>
-			{/* <aside id='selected-drink'>
-				<DrinkDetails />
-			</aside> */}
+			{currentDrink !== null && (
+				<aside id='selected-drink'>
+					<DrinkDetails />
+				</aside>
+			)}
 		</main>
 	);
 }

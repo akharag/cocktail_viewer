@@ -1,21 +1,7 @@
 import { DrinkType } from '../utils/types';
 
 export const DB_URL = 'https://www.thecocktaildb.com/api/json/v1/1/';
-
-export const fetchSingleDrink = async (
-	name: string
-): Promise<DrinkType | null> => {
-	try {
-		const response = await fetch(DB_URL + `search.php?s=${name}`);
-		const data: { drinks: DrinkType[] } = await response.json();
-		if (data?.drinks) {
-			return data.drinks[0];
-		}
-		return null;
-	} catch {
-		return null;
-	}
-};
+const url = process.env.REACT_APP_COCKTAIL_DB_URL ?? DB_URL;
 
 export const fetchDrinks = async (): Promise<DrinkType[]> => {
 	try {
@@ -28,6 +14,16 @@ export const fetchDrinks = async (): Promise<DrinkType[]> => {
 	} catch (e) {
 		return [];
 	}
+};
+
+export const fetchSearchDrinks = async (query: string) => {
+	fetch(
+		process.env.REACT_APP_COCKTAIL_DB_URL ?? DB_URL + `search.php?s=${query}`
+	)
+		.then((res) => res.json())
+		.then((data) => {
+			if (data.drinks.length > 0) return data.DrinksList;
+		});
 };
 
 export const fetchGlasses = async () => {

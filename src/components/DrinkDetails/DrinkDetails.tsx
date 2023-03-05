@@ -2,12 +2,12 @@ import './DrinkDetails.css';
 import Drawer from 'components/Drawer';
 import { useDrinkContext } from 'hooks/contexts/DrinkContext';
 import { ingredientsToArray, removeDuplicatesFromArray } from 'utils/utils';
-import { DB_URL } from 'controllers/fetchData';
+import { DB_URL, fetchSearchDrinks } from 'controllers/fetchData';
 import { useQuery } from 'react-query';
 import { DrinkType } from 'utils/types';
 import {
-	changeWindowPath,
-	getWindowPath
+	ChangeWindowPath,
+	GetWindowPath as getWindowPath
 } from 'utils/functions/windowFunctions';
 
 const transitionTiming = 1000;
@@ -15,21 +15,9 @@ const transitionTiming = 1000;
 function DrinkDetails() {
 	const path = getWindowPath();
 	const { currentDrink, setCurrentDrink } = useDrinkContext();
-	const { isLoading, error } = useQuery(
-		'data',
-		() =>
-			fetch(
-				process.env.REACT_APP_COCKTAIL_DB_URL ?? DB_URL + `search.php?s=${path}`
-			)
-				.then((res) => res.json())
-				.then((data) => {
-					if (data.drinks.length > 0)
-						setCurrentDrink?.(data.drinks[0] as DrinkType);
-				}),
-		{
-			enabled: path !== '' && currentDrink === null
-		}
-	);
+	const { isLoading, error } = useQuery('data', () => fetchSearchDrinks(path), {
+		enabled: path !== '' && currentDrink === null
+	});
 
 	const getTags = (): string[] => {
 		const t: string[] = [];
@@ -50,7 +38,7 @@ function DrinkDetails() {
 
 	const onClose = () => {
 		console.log('close drawer');
-		changeWindowPath('');
+		ChangeWindowPath('');
 		setTimeout(() => setCurrentDrink?.(null), transitionTiming + 20);
 	};
 

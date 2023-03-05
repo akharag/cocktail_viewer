@@ -1,7 +1,7 @@
 import './Drink.css';
 import { DrinkType } from '../../utils/types';
 import { useDrinkContext } from 'hooks/contexts/DrinkContext';
-import { changeWindowPath } from 'utils/functions/windowFunctions';
+import { ChangeWindowPath } from 'utils/functions/windowFunctions';
 
 type DrinkProps = {
 	drink: DrinkType;
@@ -13,7 +13,7 @@ function Drink({ drink }: DrinkProps) {
 
 	const onClick = () => {
 		setCurrentDrink?.(drink);
-		changeWindowPath(drink.strDrink);
+		ChangeWindowPath(drink.strDrink);
 	};
 
 	return (
