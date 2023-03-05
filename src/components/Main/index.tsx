@@ -1,22 +1,13 @@
-import { useQuery } from 'react-query';
-import { DB_URL } from 'controllers/fetchData';
 import DrinksList from 'components/DrinksList';
 import Filters from 'components/Filters/Filters';
 import Search from 'components/Search/Search';
 import DrinkDetails from 'components/DrinkDetails/DrinkDetails';
 import './Main.css';
 import { useDrinkContext } from 'hooks/contexts/DrinkContext';
-
-const useSearchCocktails = (query: string) => {
-	return useQuery('data', () =>
-		fetch(
-			process.env.REACT_APP_COCKTAIL_DB_URL ?? DB_URL + `search.php?s=${query}`
-		).then((res) => res.json())
-	);
-};
+import { useSearchCocktails } from 'hooks/useSearchCocktails';
 
 function Main() {
-	const { data, isLoading, error } = useSearchCocktails('w');
+	const { data, isLoading, error } = useSearchCocktails('l');
 	const { currentDrink } = useDrinkContext();
 
 	return (
@@ -36,7 +27,7 @@ function Main() {
 					) : error ? (
 						<p>Error Loading Drink List</p>
 					) : (
-						<DrinksList data={data.drinks} />
+						<DrinksList data={data!} />
 					)}
 				</>
 			</section>
