@@ -7,7 +7,6 @@ import { useDrinkContext } from 'hooks/contexts/DrinkContext';
 import { useSearchCocktails } from 'hooks/useSearchCocktails';
 
 function Main() {
-	const { data, isLoading, error } = useSearchCocktails('l');
 	const { currentDrink } = useDrinkContext();
 
 	return (
@@ -21,15 +20,7 @@ function Main() {
 				<Filters />
 			</section>
 			<section id='drink-list'>
-				<>
-					{isLoading ? (
-						<p>Loading...</p>
-					) : error ? (
-						<p>Error Loading Drink List</p>
-					) : (
-						<DrinksList data={data!} />
-					)}
-				</>
+				<DrinksList />
 			</section>
 			{currentDrink !== null && (
 				<aside id='selected-drink'>
