@@ -1,12 +1,12 @@
 import Drink from '../Drink/Drink';
 import './DrinkList.css';
 import { DrinkType } from 'utils/types';
-import { useSearchCocktails } from 'hooks/useSearchCocktails';
+import { useSearchByCocktails } from 'hooks/useSearchCocktails';
 
 //TODO Move CSS Styles from App.css to DrinkList.css
 
 const DrinksList = () => {
-	const { data, isLoading, error } = useSearchCocktails('l');
+	const { data, isLoading, error } = useSearchByCocktails('l', 'drinks');
 
 	if (isLoading) {
 		<p>Loading...</p>;

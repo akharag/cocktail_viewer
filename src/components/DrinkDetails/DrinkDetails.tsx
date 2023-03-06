@@ -6,14 +6,14 @@ import {
 	ChangeWindowPath,
 	GetWindowPath as getWindowPath
 } from 'utils/functions/windowFunctions';
-import { useSearchCocktails } from 'hooks/useSearchCocktails';
+import { useSearchByCocktails } from 'hooks/useSearchCocktails';
 
 const transitionTiming = 300;
 
 function DrinkDetails() {
 	const path = getWindowPath();
 	const { currentDrink, setCurrentDrink } = useDrinkContext();
-	const { isLoading, error } = useSearchCocktails(path, {
+	const { isLoading, error } = useSearchByCocktails(path, undefined, {
 		enabled: path !== '' && currentDrink === null,
 		onSuccess: (data: any) => setCurrentDrink?.(data[0])
 	});

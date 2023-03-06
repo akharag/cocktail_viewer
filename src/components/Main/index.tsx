@@ -3,7 +3,12 @@ import Filters from 'components/Filters/Filters';
 import Search from 'components/Search/Search';
 import DrinkDetails from 'components/DrinkDetails/DrinkDetails';
 import './Main.css';
-import { useDrinkContext } from 'hooks/contexts/DrinkContext';
+import {
+	fetchDrinksByIngredient,
+	fetchDrinksByName
+} from 'controllers/fetchData';
+// import { useSearchByCocktails } from 'hooks/useSearchCocktails';
+// import { useSearchByIngredients } from 'hooks/useSearchIngredients';
 
 function Main() {
 	return (
@@ -11,8 +16,8 @@ function Main() {
 			<section id='search-filters'>
 				<Search
 					className='margin-inline-auto'
-					select={['Name', 'Alcohol', 'Ingredient']}
-					onSearch={() => console.log('Search')}
+					select={['Name', 'Ingredient']}
+					onSearch={[fetchDrinksByName, fetchDrinksByIngredient]}
 				/>
 				<Filters />
 			</section>

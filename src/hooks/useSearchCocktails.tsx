@@ -1,9 +1,12 @@
-import { fetchSearchDrinks } from 'controllers/fetchData';
+import { fetchDrinksByName } from 'controllers/fetchData';
 import { useQuery } from 'react-query';
 
-export const useSearchCocktails = (
+export const useSearchByCocktails = (
 	query: string,
+	queryName?: string,
 	options?: { [key: string]: any }
 ) => {
-	return useQuery(query, () => fetchSearchDrinks(query), { ...options });
+	return useQuery(queryName ?? query, () => fetchDrinksByName(query), {
+		...options
+	});
 };
