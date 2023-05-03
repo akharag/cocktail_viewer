@@ -2,17 +2,70 @@
 // learn more about it in the docs: https://pris.ly/d/prisma-schema
 
 generator client {
-    provider = "prisma-client-js"
+  provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "mysql"
-  url      = env("DATABASE_URL")
+  provider     = "mysql"
+  url          = env("DATABASE_URL")
   relationMode = "prisma"
 }
 
-model Example {
-    id        String   @id @default(cuid())
-    createdAt DateTime @default(now())
-    updatedAt DateTime @updatedAt
+model Drink {
+  name         String            @id @unique
+  instructions String
+  img          String?           @db.Text
+  description  String?           @db.Text
+  ingredients  DrinkIngredient[]
+  // tags         Tag[]
 }
+
+model DrinkIngredient {
+  id       Int      @id @default(autoincrement())
+  parts    Float
+  measure  String?
+  optional Boolean?
+
+  ingredientName String     @map("ingredientId")
+  ingredient     Ingredient @relation(fields: [ingredientName], references: [name])
+
+  drinkName String @map("drinkId")
+  Drink     Drink  @relation(fields: [drinkName], references: [name])
+
+  @@index([drinkName])
+  @@index([ingredientName])
+}
+
+model Ingredient {
+  name            String            @id @unique
+  description     String?
+  color           String?
+  // tags            Tag[]
+  // replacement     Replacement[]
+  DrinkIngredient DrinkIngredient[]
+  // Replacement     Replacement[]
+}
+
+// model Replacement {
+//   name           String @id @unique
+//   relatedPercent String
+
+//   ingredientId String
+//   ingredient   Ingredient @relation(fields: [ingredientId], references: [name])
+
+//   @@index([ingredientId])
+// }
+
+// model Tag {
+//   tag   String  @id @unique
+//   color String?
+
+//   drinkId String?
+//   Drink   Drink?  @relation(fields: [drinkId], references: [name])
+
+//   ingredientId String?
+//   Ingredient   Ingredient? @relation(fields: [ingredientId], references: [name])
+
+//   @@index([drinkId])
+//   @@index([ingredientId])
+// }

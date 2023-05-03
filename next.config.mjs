@@ -18,5 +18,8 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+  images: {
+    domains: ["www.liquor.com"],
+  },
 };
 export default config;

@@ -2,6 +2,12 @@
 @tailwind components;
 @tailwind utilities;
 
+@layer base {
+  body {
+    @apply bg-slate-900;
+  }
+}
+
 /*
   1. Use a more-intuitive box-sizing model.
 */
@@ -29,6 +35,7 @@ body {
     5. Improve text rendering
   */
 body {
+  background-color: ;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }
