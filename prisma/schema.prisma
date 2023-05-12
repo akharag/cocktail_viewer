@@ -17,7 +17,7 @@ model Drink {
   img          String?           @db.Text
   description  String?           @db.Text
   ingredients  DrinkIngredient[]
-  // tags         Tag[]
+  tags         Tag[]
 }
 
 model DrinkIngredient {
@@ -38,12 +38,26 @@ model DrinkIngredient {
 
 model Ingredient {
   name            String            @id @unique
+  abv             String?
   description     String?
   color           String?
-  // tags            Tag[]
+  tags            Tag[]
   // replacement     Replacement[]
   DrinkIngredient DrinkIngredient[]
-  // Replacement     Replacement[]
+}
+
+model Tag {
+  name        String  @id @unique
+  description String? @db.Text
+  color       String?
+
+  Drink          Drink?      @relation(fields: [drinkName], references: [name])
+  drinkName      String?
+  Ingredient     Ingredient? @relation(fields: [ingredientName], references: [name])
+  ingredientName String?
+
+  @@index([drinkName])
+  @@index([ingredientName])
 }
 
 // model Replacement {
