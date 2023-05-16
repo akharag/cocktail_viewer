@@ -1,0 +1,7 @@
+id,name,description,types?,replacememts?
+[WhiskeyId],Whiskey,A grain distilled spirit that is aged in oak barrels.,[WhiskeyTypesId],,
+[LemonJuiceId],Lemon Juice,Juice of a lemon.,,[LemonJuiceReplacementsId],
+[SimpleSyrupId],Simple Syrup,A mix of 1 part water and 1 part sugar. Used to allow the mixing of sugar into a drink easier,[SimpleSyrupTypesId],[SimpleSyrupReplacementsId],
+[SweetVermouthId],Sweet Vermouth,The sweet version of a fortified wine.,,[SweetVermouthReplacementsId],
+[AngustoraBittersId],Angustora Bitters,A bitters used for many classic cocktails,,[AngustoraBittersReplacementsId],
+

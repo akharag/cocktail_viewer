@@ -1,13 +1,23 @@
-import { useState } from "react";
+import { useState, useRef, useEffect, useCallback } from "react";
 import { type AppType } from "next/app";
 
 import { api } from "~/utils/api";
 
 import "~/styles/globals.css";
 import Head from "next/head";
+import { drinksRouter } from "~/server/api/routers/drinks";
+import Link from "next/link";
+import { Drink } from "@prisma/client";
+import { Spinner } from "~/components/Spinner";
+import useDebounce from "~/utils/hooks/debounce";
 
 const MyApp: AppType = ({ Component, pageProps }) => {
   const [query, setQuery] = useState("");
+  const debounceQuery = useDebounce(query, 200);
+  const inputRef = useRef<HTMLInputElement>(null);
+  const [focused, setFocused] = useState(false);
+  const { data: found, isLoading } =
+    api.drinksRouter.getByQuery.useQuery(debounceQuery);
 
   return (
     <>
@@ -19,14 +29,17 @@ const MyApp: AppType = ({ Component, pageProps }) => {
 
       <header className="text-center text-slate-200">
         <h1 className="p-3 text-lg">Behind the Bar</h1>
-        <div className="relative border-2 border-green-300">
-          <span className="min-w-3 ps-6.5 mx-auto flex max-w-xl justify-between gap-2 rounded-full border-2 border-green-300 bg-slate-600 py-2 pe-2 ps-5 text-lg font-thin">
+        <div className="relative">
+          <span className="min-w-3 ps-6.5 mx-auto flex max-w-xl justify-between gap-2 rounded-full bg-slate-600 py-2 pe-2 ps-5 text-lg font-thin">
             <input
               type="text"
               placeholder="Search Drinks"
               className="flex-1 bg-transparent"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
+              ref={inputRef}
+              onFocus={() => setFocused(true)}
+              onBlur={() => setFocused(false)}
             />
             <button className="aspect-square w-10 rounded-full bg-slate-400 p-1.5">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 50 50">
@@ -34,11 +47,21 @@ const MyApp: AppType = ({ Component, pageProps }) => {
               </svg>
             </button>
           </span>
-          <div className="ps-6.5 absolute left-0 right-0 z-10 m-2 mx-auto max-w-xl rounded-3xl border-2 border-green-300 bg-slate-200 px-3 py-1 text-black">
-            <ul>
-              <li>No Items Found</li>
-            </ul>
-          </div>
+          {query !== "" && focused && (
+            <div className="ps-6.5 absolute left-0 right-0 z-10 m-2 mx-auto max-w-xl rounded-3xl bg-slate-200 px-3 py-1 text-black shadow-sm">
+              {isLoading ? (
+                <Spinner />
+              ) : found && found.length > 0 ? (
+                <ul>
+                  {found?.map((drink) => (
+                    <li key={drink.name}>{drink.name}</li>
+                  ))}
+                </ul>
+              ) : (
+                <li>No Items Found</li>
+              )}
+            </div>
+          )}
         </div>
       </header>
       <main className="mx-auto min-h-screen max-w-screen-2xl bg-slate-900 p-2 text-center text-slate-200">

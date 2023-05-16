@@ -1,0 +1,9 @@
+drinkId,ingredientId,name,parts,measure?
+
+[WhiskeySourId],[WhiskeyId],Whiskey,2,,
+[WhiskeySourId],[LemonJuiceId],Lemon Juice,1,,
+[WhiskeySourId],[SimpleSyrupId],Simple Syrup,0.5,dashes,
+
+[ManhattanId],[WhiskeyId],Whiskey,2,,
+[ManhattanId],[SweetVermouthId],SweetVermouthId,1,,
+[ManhattanId],[Angustora Bitters],Angustora Bitters,2,dashes,
