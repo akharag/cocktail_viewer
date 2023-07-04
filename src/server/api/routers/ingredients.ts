@@ -1,7 +1,7 @@
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
-export const ingredientsRouter = createTRPCRouter({
+export const ingredients = createTRPCRouter({
   getAll: publicProcedure.query(async ({ ctx }) => {
     const ingredients = await ctx.prisma.ingredient.findMany({
       take: 100,

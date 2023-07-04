@@ -2,7 +2,7 @@ import { TRPCError } from "@trpc/server";
 import { z } from "zod";
 import { createTRPCRouter, publicProcedure } from "~/server/api/trpc";
 
-export const drinksRouter = createTRPCRouter({
+export const drinks = createTRPCRouter({
   getAll: publicProcedure.query(async ({ ctx }) => {
     const drinks = await ctx.prisma.drink.findMany({
       take: 100,
