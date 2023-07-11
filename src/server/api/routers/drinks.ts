@@ -42,9 +42,9 @@ export const drinks = createTRPCRouter({
     return drink;
   }),
   getByQuery: publicProcedure
-    .input(z.string().nonempty())
+    .input(z.string())
     .query(async ({ ctx, input }) => {
-      console.log(input);
+      if (input.length < 1) return;
       const drinks = await ctx.prisma.drink.findMany({
         take: 5,
         where: {

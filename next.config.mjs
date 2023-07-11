@@ -19,7 +19,7 @@ const config = {
     defaultLocale: "en",
   },
   images: {
-    domains: ["www.liquor.com"],
+    domains: ["www.liquor.com", "cdn.shopify.com", "preppykitchen.com"],
   },
 };
 export default config;
