@@ -42,7 +42,6 @@ export default function Drink(props: { id: string }) {
       <div className="mx-auto w-fit max-w-full rounded-md bg-slate-950 py-4 md:px-4">
         <h2 className="mb-4 text-3xl leading-none">{drink && drink.name}</h2>
         <div className="grid justify-center gap-2 md:grid-cols-2">
-          <div className=""></div>
           {drink.img && (
             <div className="relative ml-auto aspect-square w-full overflow-clip rounded pb-2 md:max-w-[600px]">
               <Image
