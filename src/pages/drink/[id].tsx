@@ -39,36 +39,45 @@ export default function Drink(props: { id: string }) {
       >
         Home
       </Link>
-      <div className="mx-auto w-fit rounded-md bg-slate-950 py-4 md:px-4">
+      <div className="mx-auto w-fit max-w-full rounded-md bg-slate-950 py-4 md:px-4">
         <h2 className="mb-4 text-3xl leading-none">{drink && drink.name}</h2>
         <div className="grid justify-center gap-2 md:grid-cols-2">
+          <div className=""></div>
           {drink.img && (
-            <div className="relative ml-auto aspect-square w-full max-w-[600px] overflow-clip rounded pb-2">
-              <Image src={drink.img} alt="" fill={true} />
+            <div className="relative ml-auto aspect-square w-full overflow-clip rounded pb-2 md:max-w-[600px]">
+              <Image
+                src={drink.img}
+                alt=""
+                fill={true}
+                className="object-contain"
+              />
             </div>
           )}
-          <div className="grid w-96 gap-2">
+          <div className="grid gap-2 md:w-96">
             {drink.ingredients !== undefined &&
               drink.ingredients.length > 0 && (
-                <div>
+                <div className="w-full">
                   <h2 className="mb-2 leading-none">Ingredients</h2>
-                  <ul className="mx-auto flex w-max flex-col gap-2">
+                  <ul className="flex w-full flex-col gap-2 px-4">
                     {drink?.ingredients.map((ingredient) => (
                       <li
                         key={ingredient.id}
                         className={`
-                  text-md
-                  flex
-                  justify-between 
-                  gap-6
-                  rounded-full
-                  px-4
-                  py-1
-                  bg-${
-                    ingredient.ingredient.color
-                      ? ingredient.ingredient.color
-                      : "slate-700"
-                  } ${
+                        text-md
+                        mx-auto 
+                        flex
+                        w-full
+                        justify-between
+                        gap-6
+                        rounded-full
+                        px-4
+                        py-1
+                        md:w-3/5
+                        bg-${
+                          ingredient.ingredient.color
+                            ? ingredient.ingredient.color
+                            : "slate-700"
+                        } ${
                           ingredient.ingredient.color &&
                           +ingredient.ingredient.color.replace(/\D/g, "") <= 400
                             ? "text-black"
