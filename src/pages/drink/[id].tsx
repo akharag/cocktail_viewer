@@ -52,7 +52,7 @@ export default function Drink(props: { id: string }) {
               />
             </div>
           )}
-          <div className="grid gap-2 md:w-96">
+          <div className="flex flex-col items-start gap-2 md:w-96">
             {drink.ingredients !== undefined &&
               drink.ingredients.length > 0 && (
                 <div className="w-full">
@@ -71,7 +71,7 @@ export default function Drink(props: { id: string }) {
                         rounded-full
                         px-4
                         py-1
-                        md:w-3/5
+                        lg:w-4/5
                         bg-${
                           ingredient.ingredient.color
                             ? ingredient.ingredient.color
