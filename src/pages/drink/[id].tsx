@@ -32,14 +32,17 @@ export default function Drink(props: { id: string }) {
   }
 
   return (
-    <div className="relative">
+    <div className="relative grid justify-evenly ">
       <Link
         className="absolute left-2 top-2 rounded-full bg-slate-600 p-2 text-slate-200 opacity-70"
         href="/"
       >
         Home
       </Link>
-      <div className="mx-auto w-fit max-w-full rounded-md bg-slate-950 py-4 md:px-4">
+      <div
+        id="drink"
+        className="mx-auto mb-2 w-fit rounded-md bg-slate-950 py-4 md:px-4"
+      >
         <h2 className="mb-4 text-3xl leading-none">{drink && drink.name}</h2>
         <div className="grid justify-center gap-2 md:grid-cols-2">
           {drink.img && (
@@ -48,7 +51,7 @@ export default function Drink(props: { id: string }) {
                 src={drink.img}
                 alt=""
                 fill={true}
-                className="object-contain"
+                className="object-cover"
               />
             </div>
           )}
@@ -71,7 +74,7 @@ export default function Drink(props: { id: string }) {
                         rounded-full
                         px-4
                         py-1
-                        lg:w-4/5
+                        lg:w-5/6
                         bg-${
                           ingredient.ingredient.color
                             ? ingredient.ingredient.color
@@ -137,6 +140,25 @@ export default function Drink(props: { id: string }) {
               </ul>
             </div>
           )}
+        </div>
+      </div>
+      <h2 className="mb-2">Related Drinks</h2>
+      <div
+        id="related-drinks"
+        className="grid w-full grid-flow-col justify-start gap-4"
+      >
+        <div className="aspect-square w-48 rounded bg-slate-950 p-2">
+          <h3>Drink</h3>
+          <div className="relative aspect-square w-full overflow-clip rounded pb-2">
+            {drink.img && (
+              <Image
+                src={drink.img}
+                alt=""
+                fill={true}
+                className="object-cover"
+              />
+            )}
+          </div>
         </div>
       </div>
     </div>

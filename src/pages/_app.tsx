@@ -17,7 +17,7 @@ const MyApp: AppType = ({ Component, pageProps }) => {
       </Head>
 
       <Header />
-      <main className="relative mx-auto min-h-screen w-full max-w-screen-2xl bg-slate-900 px-2 py-4 text-center text-slate-200">
+      <main className="relative mx-auto min-h-screen w-full max-w-screen-2xl px-2 py-4 text-center text-slate-200">
         <Component {...pageProps} />
       </main>
     </>
