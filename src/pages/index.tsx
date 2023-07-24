@@ -21,7 +21,7 @@ const Home: NextPage = () => {
 
   if (drinks !== null && drinks !== undefined && drinks.length > 0) {
     return (
-      <div className="flex flex-wrap justify-center gap-3 p-4">
+      <div className="flex flex-wrap justify-center gap-3">
         {drinks.map((drink: Drink) => (
           <Card key={drink.name} {...drink} />
         ))}

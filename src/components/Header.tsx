@@ -2,6 +2,9 @@ import { useState, useRef } from "react";
 import { api } from "~/utils/api";
 import Spinner from "~/components/Spinner";
 import useDebounce from "~/utils/hooks/useDebounce";
+import Link from "next/link";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHouse } from "@fortawesome/free-solid-svg-icons";
 
 export const Header = () => {
   const [query, setQuery] = useState("");
@@ -16,7 +19,12 @@ export const Header = () => {
 
   return (
     <header className="w-full text-center text-slate-200">
-      <h1 className="py-4 text-lg">Behind the Bar</h1>
+      <div className="mx-auto flex items-center md:w-3/4">
+        <Link href="/">
+          <FontAwesomeIcon icon={faHouse} />
+        </Link>
+        <h1 className="mx-auto py-4 text-lg">Behind the Bar</h1>
+      </div>
       <div className="ps-6.5 mx-auto inline-flex w-10/12 max-w-xl justify-between gap-2 rounded-full bg-slate-600 py-2 pe-2 ps-5 text-lg font-thin">
         <input
           type="text"

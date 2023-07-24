@@ -5,6 +5,7 @@
 @layer base {
   body {
     @apply bg-slate-800;
+    @apply px-4;
   }
 }
 
@@ -35,7 +36,6 @@ body {
     5. Improve text rendering
   */
 body {
-  background-color: ;
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
 }

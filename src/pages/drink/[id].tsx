@@ -32,13 +32,7 @@ export default function Drink(props: { id: string }) {
   }
 
   return (
-    <div className="relative grid justify-evenly ">
-      <Link
-        className="absolute left-2 top-2 rounded-full bg-slate-600 p-2 text-slate-200 opacity-70"
-        href="/"
-      >
-        Home
-      </Link>
+    <div className="grid justify-evenly ">
       <div
         id="drink"
         className="mx-auto mb-2 w-fit rounded-md bg-slate-950 py-4 md:px-4"
